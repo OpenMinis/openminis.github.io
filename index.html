@@ -91,6 +91,30 @@
             footer a:hover { color: #2997ff; }
         }
 
+        /* FAQ */
+        .faq { margin-top: 24px; }
+        .faq-category { margin-bottom: 32px; }
+        .faq-category h3 { font-size: 20px; margin-bottom: 16px; border-bottom: 1px solid #e5e5e5; padding-bottom: 8px; }
+        .faq-item { margin-bottom: 20px; }
+        .faq-item summary {
+            font-size: 16px; font-weight: 600; cursor: pointer;
+            padding: 12px 0; list-style: none;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::before { content: "+ "; color: #0066cc; font-weight: 700; margin-right: 4px; }
+        .faq-item[open] summary::before { content: "- "; }
+        .faq-item .answer { padding: 0 0 12px 20px; font-size: 15px; color: #6e6e73; }
+        .faq-item .answer p { margin-bottom: 8px; font-size: 15px; color: inherit; }
+        .faq-item .answer ul { padding-left: 20px; margin-bottom: 8px; }
+        .faq-item .answer li { font-size: 15px; color: inherit; margin-bottom: 4px; }
+        .faq-item .answer table { font-size: 14px; }
+
+        @media (prefers-color-scheme: dark) {
+            .faq-category h3 { border-color: #3a3a3c; }
+            .faq-item summary::before { color: #2997ff; }
+            .faq-item .answer { color: #a1a1a6; }
+        }
+
         @media (max-width: 600px) {
             .hero h1 { font-size: 36px; }
             .features { grid-template-columns: 1fr; }
@@ -265,6 +289,253 @@
         <li><strong>Alarms</strong> — "Set an alarm for 7am."</li>
         <li><strong>Device</strong> — "What's my battery level?"</li>
     </ul>
+</section>
+
+<!-- FAQ -->
+<section class="container">
+    <h2>FAQ</h2>
+    <div class="faq">
+
+        <!-- API & Network -->
+        <div class="faq-category">
+            <h3>API Configuration & Network</h3>
+
+            <details class="faq-item">
+                <summary>Why does my API key show "Invalid" or fail to authenticate?</summary>
+                <div class="answer">
+                    <ul>
+                        <li><strong>Google Gemini OAuth</strong> has strict third-party restrictions and may block access. We strongly recommend using an <strong>API Key</strong> instead of OAuth for Gemini.</li>
+                        <li><strong>Check your balance</strong> — make sure your API account has credits or is within the free tier quota.</li>
+                        <li><strong>Network stability</strong> — Agent mode requires a stable connection. If you use a proxy or VPN, assign a fixed node for Open Minis traffic to avoid IP changes that trigger rate limits.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>How do I add OpenAI-compatible providers (e.g. Qwen, MiniMax, DeepSeek)?</summary>
+                <div class="answer">
+                    <p>Most third-party models support OpenAI-compatible endpoints. In Provider settings, choose <strong>Custom (OpenAI-compatible)</strong>, enter the base URL (without the trailing <code>/v1/...</code> path) and your API key. If the model list doesn't auto-populate, manually type the model ID (e.g. <code>qwen-turbo</code>, <code>deepseek-chat</code>).</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>How do I configure a third-party API proxy / relay?</summary>
+                <div class="answer">
+                    <ul>
+                        <li>Check your relay's documentation to determine if it's OpenAI-compatible or Anthropic-compatible.</li>
+                        <li>In Provider settings, select the matching type, enter the <strong>base URL only</strong> (strip any trailing path like <code>/v1/chat/completions</code>) and your API key.</li>
+                        <li>If models don't appear automatically, enter the model ID manually.</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+
+        <!-- Model Selection -->
+        <div class="faq-category">
+            <h3>Model Selection & Usage</h3>
+
+            <details class="faq-item">
+                <summary>Which AI model works best for agent tasks?</summary>
+                <div class="answer">
+                    <table>
+                        <tr><th>Use Case</th><th>Recommended</th></tr>
+                        <tr><td>General agent tasks</td><td><strong>Claude Sonnet / Opus</strong> (most stable tool calling)</td></tr>
+                        <tr><td>Long conversation stability</td><td><strong>GPT-5.4 / Codex</strong></td></tr>
+                        <tr><td>Budget-friendly / backup</td><td><strong>Kimi-k2.5, MiniMax, Qwen3.5</strong></td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>What is "Enhanced Cache" and when should I enable it?</summary>
+                <div class="answer">
+                    <p>This feature currently works with <strong>Anthropic (Claude) models only</strong>:</p>
+                    <ul>
+                        <li>It activates a 1-hour prompt cache — cached input tokens cost <strong>1/10</strong> of the standard price.</li>
+                        <li>Best for long, multi-turn complex tasks where you'll reuse the same context.</li>
+                        <li>The first request costs <strong>2x</strong> the standard input price (to create the cache), so short sessions may cost more with it enabled.</li>
+                        <li>The default 5-13 minute cache already covers 90%+ of typical agent tasks.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Why is the model stuck on "thinking" for a long time?</summary>
+                <div class="answer">
+                    <p>Some models (e.g. DeepSeek R1) have extended reasoning modes that can take a while. Open Minis doesn't currently override model-level thinking behavior. If you prefer faster responses, switch to a non-reasoning model like Claude Sonnet or GPT-4o.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Skills -->
+        <div class="faq-category">
+            <h3>Skills</h3>
+
+            <details class="faq-item">
+                <summary>How do I install new skills?</summary>
+                <div class="answer">
+                    <ul>
+                        <li><strong>Browse & install</strong> — go to Settings and browse the official skill repository.</li>
+                        <li><strong>Send a link</strong> — paste a GitHub URL of a SKILL.md file into a conversation, and the agent will install it.</li>
+                        <li><strong>Let the agent create one</strong> — describe what you need in plain language, and a capable model (e.g. Claude) can write and install a skill for you.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>I installed a skill but its script files are missing?</summary>
+                <div class="answer">
+                    <p>Installing from a GitHub URL currently downloads only the <code>SKILL.md</code> file. If the skill depends on additional scripts (e.g. a <code>scripts/</code> directory), ask the agent to download the full repository, or have it regenerate the scripts based on the SKILL.md description.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>A skill I just created doesn't appear in Settings?</summary>
+                <div class="answer">
+                    <p>Skills created during a conversation may not immediately appear in the Settings page. Try leaving and re-entering the Settings screen to refresh.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Files & Storage -->
+        <div class="faq-category">
+            <h3>Files & Storage</h3>
+
+            <details class="faq-item">
+                <summary>Are files isolated between conversations? How do I share files across sessions?</summary>
+                <div class="answer">
+                    <ul>
+                        <li><code>/var/minis/workspace/</code> — <strong>per-session</strong>, isolated between conversations.</li>
+                        <li><code>/var/minis/memory/</code> — <strong>shared</strong> across all conversations.</li>
+                        <li><code>/var/minis/skills/</code> — <strong>shared</strong> globally.</li>
+                    </ul>
+                    <p>To share data between sessions, ask the agent to save it to the Memory or Skills directory.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>How do I import files from the iOS Files app into a session?</summary>
+                <div class="answer">
+                    <p>Due to iOS sandboxing, the app's internal directories aren't visible in the Files app. Workarounds:</p>
+                    <ul>
+                        <li>Paste file content into a conversation and ask the agent to save it.</li>
+                        <li>Upload to iCloud Drive first, then ask the agent to read from the iCloud path.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Does "Clear Chat" delete workspace files?</summary>
+                <div class="answer">
+                    <p>Yes. Clearing a chat also removes that session's workspace files. If you have important files, ask the agent to copy them to the Memory or Skills directory before clearing.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Terminal -->
+        <div class="faq-category">
+            <h3>Terminal & Linux Environment</h3>
+
+            <details class="faq-item">
+                <summary>What languages and tools does the built-in terminal support?</summary>
+                <div class="answer">
+                    <table>
+                        <tr><th>Environment</th><th>Status</th></tr>
+                        <tr><td>Python</td><td>Fully supported. Use <code>uv</code> for dependency management.</td></tr>
+                        <tr><td>Node.js</td><td>Partially supported. Small packages work fine; large packages may have issues.</td></tr>
+                        <tr><td>Go / Rust</td><td>Supported.</td></tr>
+                        <tr><td>FFmpeg</td><td>Built-in with hardware acceleration.</td></tr>
+                    </table>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Do installed packages persist across conversations?</summary>
+                <div class="answer">
+                    <p>Yes. Packages installed via <code>apk</code> or <code>pip</code> persist in the Alpine Linux filesystem across all conversations, as long as you don't perform a <strong>Reset Rootfs</strong>.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>The <code>tar</code> command hangs / GitHub CLI (<code>gh</code>) crashes?</summary>
+                <div class="answer">
+                    <ul>
+                        <li><strong>tar hanging</strong> — the bundled BusyBox tar has a known issue. Run <code>apk add tar</code> to install the standalone version.</li>
+                        <li><strong>gh CLI</strong> — has compatibility issues under iSH. Use the GitHub API with a <code>GITHUB_TOKEN</code> environment variable as a workaround.</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+
+        <!-- Automation -->
+        <div class="faq-category">
+            <h3>Automation & Background Tasks</h3>
+
+            <details class="faq-item">
+                <summary>How do I keep the agent running in the background?</summary>
+                <div class="answer">
+                    <p>Enable <strong>"Background Audio Keep-Alive"</strong> in Settings. This plays silent audio to prevent iOS from suspending the app. It stops automatically when the task finishes and doesn't interfere with other audio playback.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can I set up scheduled / automated tasks?</summary>
+                <div class="answer">
+                    <p>Yes, via <strong>iOS Shortcuts</strong>. Open Minis provides Shortcuts actions — create an automation in the Shortcuts app and set it to run on a schedule. Note: <code>cron</code> inside the Linux environment won't persist due to iOS sandbox restrictions.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Data & Privacy -->
+        <div class="faq-category">
+            <h3>Data & Privacy</h3>
+
+            <details class="faq-item">
+                <summary>Where is my chat history stored?</summary>
+                <div class="answer">
+                    <p>All chat history is stored <strong>locally on your device</strong>. Nothing is uploaded to any cloud service. Switching your Apple ID does not affect local data.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Is multi-device sync supported?</summary>
+                <div class="answer">
+                    <p>Not yet. Conversations and workspace files are local only. iCloud sync is under development for future releases.</p>
+                </div>
+            </details>
+        </div>
+
+        <!-- Other -->
+        <div class="faq-category">
+            <h3>Other</h3>
+
+            <details class="faq-item">
+                <summary>How do I handle long conversations that become slow?</summary>
+                <div class="answer">
+                    <p>When context exceeds ~80k tokens (especially with images or large documents), rendering may lag. Solutions:</p>
+                    <ul>
+                        <li>Ask the agent to <strong>summarize the conversation into a memory file</strong>.</li>
+                        <li>Start a new session and instruct it to read the summary file to continue.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Where do I find alarms I created through the agent?</summary>
+                <div class="answer">
+                    <p>Alarms created via the agent won't appear in the iOS Clock app (system API limitation). View them by tapping the <strong>alarm icon</strong> on the Open Minis home screen, or ask the agent to list your alarms.</p>
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>Can the agent open other iOS apps?</summary>
+                <div class="answer">
+                    <p>The agent can open apps that support <strong>URL Schemes</strong> (e.g. Maps, Settings, Safari). However, it cannot control or interact with other apps' UI due to iOS sandboxing.</p>
+                </div>
+            </details>
+        </div>
+
+    </div>
 </section>
 
 <!-- Footer -->
