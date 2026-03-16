@@ -3,33 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenMinis</title>
+    <title>Open Minis — Your Private On-Device AI Agent</title>
+    <meta name="description" content="Open Minis is an on-device AI agent for iPhone, iPad, Mac and Vision Pro. Browse the web, manage your schedule, control smart home, and automate tasks — all privately on your device.">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; margin: 0;
             background: #fff; color: #1d1d1f;
+            line-height: 1.6;
         }
-        .center { text-align: center; }
-        h1 { font-size: 36px; font-weight: 700; margin-bottom: 16px; }
-        a { color: #0066cc; text-decoration: none; font-size: 17px; }
+        a { color: #0066cc; text-decoration: none; }
         a:hover { text-decoration: underline; }
-        .links { margin-top: 24px; }
-        .links a { display: block; margin: 8px 0; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 24px 48px;
+        }
+        .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 12px; }
+        .hero .subtitle { font-size: 21px; color: #6e6e73; margin-bottom: 32px; }
+        .hero .desc { font-size: 17px; max-width: 600px; margin: 0 auto 36px; color: #1d1d1f; }
+        .badge { display: inline-block; }
+        .badge img { height: 54px; }
+
+        /* Sections */
+        section { padding: 48px 0; }
+        section h2 { font-size: 28px; font-weight: 700; margin-bottom: 24px; }
+        section h3 { font-size: 20px; font-weight: 600; margin: 24px 0 8px; }
+        section p, section li { font-size: 16px; color: #1d1d1f; }
+        section ul { padding-left: 20px; margin-bottom: 16px; }
+        section li { margin-bottom: 6px; }
+
+        /* Feature grid */
+        .features { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px; }
+        .feature-card { padding: 24px; border-radius: 12px; background: #f5f5f7; }
+        .feature-card h3 { margin-top: 0; font-size: 18px; }
+        .feature-card p { font-size: 15px; color: #6e6e73; }
+
+        /* Getting started steps */
+        .steps { counter-reset: step; margin-top: 16px; }
+        .step { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+        .step-num {
+            counter-increment: step;
+            flex-shrink: 0; width: 32px; height: 32px;
+            background: #0066cc; color: #fff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 15px;
+        }
+        .step-content h3 { margin: 0 0 4px; font-size: 17px; }
+        .step-content p { font-size: 15px; color: #6e6e73; }
+
+        /* Provider table */
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+        th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e5e5e5; }
+        th { font-weight: 600; background: #f5f5f7; }
+
+        /* Code block */
+        code { background: #f5f5f7; padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+        pre { background: #f5f5f7; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 12px 0; }
+        pre code { background: none; padding: 0; }
+
+        /* Footer */
+        footer {
+            text-align: center; padding: 32px 24px;
+            font-size: 14px; color: #6e6e73;
+            border-top: 1px solid #e5e5e5;
+        }
+        footer a { color: #6e6e73; margin: 0 12px; }
+        footer a:hover { color: #0066cc; }
+
+        /* Dark mode */
         @media (prefers-color-scheme: dark) {
             body { background: #1c1c1e; color: #f5f5f7; }
             a { color: #2997ff; }
+            .hero .desc, section p, section li { color: #f5f5f7; }
+            .hero .subtitle { color: #a1a1a6; }
+            .feature-card { background: #2c2c2e; }
+            .feature-card p { color: #a1a1a6; }
+            .step-num { background: #2997ff; }
+            .step-content p { color: #a1a1a6; }
+            th { background: #2c2c2e; }
+            th, td { border-color: #3a3a3c; }
+            code, pre { background: #2c2c2e; }
+            footer { border-color: #3a3a3c; color: #a1a1a6; }
+            footer a { color: #a1a1a6; }
+            footer a:hover { color: #2997ff; }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 36px; }
+            .features { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="center">
-        <h1>Minis</h1>
-        <p>AI agent on your device.</p>
-        <div class="links">
-            <a href="/privacy-policy.html">Privacy Policy</a>
+
+<!-- Hero -->
+<div class="hero">
+    <h1>Open Minis</h1>
+    <p class="subtitle">Your Private On-Device AI Agent</p>
+    <p class="desc">
+        An on-device AI agent that goes beyond chat. It takes action — browsing the web, accessing your health data,
+        managing your schedule, controlling your smart home, and automating complex tasks. All privately on your device.
+    </p>
+    <a class="badge" href="https://apps.apple.com/us/app/open-minis/id6759188481">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+    </a>
+</div>
+
+<!-- Features -->
+<section class="container">
+    <h2>Features</h2>
+    <div class="features">
+        <div class="feature-card">
+            <h3>Multi-Model AI</h3>
+            <p>Connect to Anthropic Claude, OpenAI GPT, Google Gemini, OpenRouter, or any OpenAI-compatible endpoint. Switch models per conversation.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Built-in Linux Shell</h3>
+            <p>A full Alpine Linux environment runs on-device. The agent writes and executes scripts, installs packages, and processes data — no server needed.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Deep iOS Integration</h3>
+            <p>Native access to HealthKit, Calendar, Reminders, HomeKit, Contacts, Bluetooth, Location, Photos, Speech, and more.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Web Browser</h3>
+            <p>The agent browses the web, fills forms, extracts content, and takes screenshots — all within the app.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Custom Skills</h3>
+            <p>Import or create AI skills to extend the agent's capabilities. Compatible with SKILL.md format.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Privacy by Design</h3>
+            <p>API keys stay in your device Keychain. No data collected. No third-party analytics. Your conversations are yours.</p>
         </div>
     </div>
+</section>
+
+<!-- Getting Started -->
+<section class="container">
+    <h2>Getting Started</h2>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h3>Download & Install</h3>
+                <p>Get Open Minis from the <a href="https://apps.apple.com/us/app/open-minis/id6759188481">App Store</a>. Requires iOS 16+, iPadOS 16+, macOS 13+ (Apple Silicon), or visionOS 1.0+.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h3>Add an AI Provider</h3>
+                <p>On first launch, you'll be guided to add your AI provider. Choose from the supported providers below and enter your API key.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h3>Select a Model</h3>
+                <p>Pick a model from your provider. You can add multiple providers and switch models per conversation.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h3>Start a Conversation</h3>
+                <p>Create a new session and start chatting. The agent can execute commands, browse the web, read your calendar, and much more.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Provider Configuration -->
+<section class="container">
+    <h2>Supported AI Providers</h2>
+    <p>Open Minis supports multiple AI providers. You need at least one API key to get started.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Provider</th>
+                <th>Models</th>
+                <th>Get API Key</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Anthropic</td>
+                <td>Claude Opus 4.6, Sonnet 4.6, Haiku 4.5</td>
+                <td><a href="https://console.anthropic.com/">console.anthropic.com</a></td>
+            </tr>
+            <tr>
+                <td>OpenAI</td>
+                <td>GPT-4o, o-series</td>
+                <td><a href="https://platform.openai.com/api-keys">platform.openai.com</a></td>
+            </tr>
+            <tr>
+                <td>Google Gemini</td>
+                <td>Gemini 2.5 Pro/Flash, 3 Pro/Flash</td>
+                <td><a href="https://aistudio.google.com/apikey">aistudio.google.com</a></td>
+            </tr>
+            <tr>
+                <td>OpenRouter</td>
+                <td>Multi-provider routing</td>
+                <td><a href="https://openrouter.ai/keys">openrouter.ai</a></td>
+            </tr>
+            <tr>
+                <td>Custom</td>
+                <td>Any OpenAI-compatible API</td>
+                <td>Your provider's dashboard</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Advanced Configuration -->
+<section class="container">
+    <h2>Advanced Configuration</h2>
+
+    <h3>Model Groups</h3>
+    <p>Group multiple models together with routing strategies:</p>
+    <ul>
+        <li><strong>Fallback</strong> — tries models in order; if one fails, the next is used automatically.</li>
+        <li><strong>Load Balance</strong> — distributes conversations across models evenly.</li>
+    </ul>
+
+    <h3>Agent Loop Models</h3>
+    <p>Configure a separate pool of models that the AI agent can use when it needs to delegate sub-tasks or reason through complex operations.</p>
+
+    <h3>Skills</h3>
+    <p>Extend the agent with custom skills. Import a <code>SKILL.md</code> file from a URL or your file system, or let the agent create one during a conversation. Skills can be enabled or disabled per session.</p>
+
+    <h3>Session File System</h3>
+    <p>Each conversation session has an isolated file system mounted at <code>/var/minis/</code> inside the Linux environment. Files are organized into namespaces:</p>
+    <ul>
+        <li><code>minis://workspace/</code> — working files, scripts, data</li>
+        <li><code>minis://attachments/</code> — images, audio, video</li>
+        <li><code>minis://browser/</code> — browser screenshots and extracts</li>
+        <li><code>minis://offloads/</code> — large tool outputs</li>
+    </ul>
+</section>
+
+<!-- Native Capabilities -->
+<section class="container">
+    <h2>Native iOS Capabilities</h2>
+    <p>The agent has access to iOS frameworks through native offloads. Just ask naturally:</p>
+    <ul>
+        <li><strong>Health</strong> — "How many steps did I take this week?"</li>
+        <li><strong>Calendar</strong> — "What's on my schedule tomorrow?"</li>
+        <li><strong>Reminders</strong> — "Remind me to call the dentist at 3pm."</li>
+        <li><strong>HomeKit</strong> — "Turn off the living room lights."</li>
+        <li><strong>Contacts</strong> — "Find John's phone number."</li>
+        <li><strong>Bluetooth</strong> — "Scan for nearby devices."</li>
+        <li><strong>Clipboard</strong> — "Read what I just copied."</li>
+        <li><strong>Media</strong> — "Read this article aloud."</li>
+        <li><strong>Alarms</strong> — "Set an alarm for 7am."</li>
+        <li><strong>Device</strong> — "What's my battery level?"</li>
+    </ul>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="mailto:dev@openminis.me">Contact</a>
+        <a href="https://apps.apple.com/us/app/open-minis/id6759188481">App Store</a>
+    </div>
+    <p style="margin-top: 12px;">&copy; 2025 Open Minis. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
