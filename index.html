@@ -24,8 +24,44 @@
         .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 12px; }
         .hero .subtitle { font-size: 21px; color: #6e6e73; margin-bottom: 32px; }
         .hero .desc { font-size: 17px; max-width: 600px; margin: 0 auto 36px; color: #1d1d1f; }
-        .badge { display: inline-block; }
-        .badge img { height: 54px; }
+        .badges { display: inline-flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: center; }
+        .badge { display: inline-block; width: 161px; height: 54px; }
+        .badge img { width: 161px; height: 54px; display: block; }
+
+        /* Android download badge */
+        .badge-android {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #000;
+            color: #fff;
+            border-radius: 10px;
+            padding: 0 16px;
+            width: 161px;
+            height: 54px;
+            text-decoration: none;
+            border: 1px solid #a6a6a6;
+            position: relative;
+            transition: opacity 0.15s;
+            box-sizing: border-box;
+        }
+        .badge-android:hover { opacity: 0.82; text-decoration: none; }
+        .badge-android .ba-icon { flex-shrink: 0; }
+        .badge-android .ba-text { display: flex; flex-direction: column; line-height: 1.15; }
+        .badge-android .ba-label { font-size: 10px; font-weight: 400; color: #ccc; letter-spacing: 0.03em; }
+        .badge-android .ba-title { font-size: 18px; font-weight: 600; color: #fff; white-space: nowrap; }
+        .badge-android .ba-preview {
+            position: absolute;
+            top: -8px; right: -8px;
+            background: #FF6B00;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            padding: 2px 6px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
 
         /* Sections */
         section { padding: 48px 0; }
@@ -131,9 +167,21 @@
         An on-device AI agent that goes beyond chat. It takes action — browsing the web, accessing your health data,
         managing your schedule, controlling your smart home, and automating complex tasks. All privately on your device.
     </p>
+    <div class="badges">
     <a class="badge" href="https://apps.apple.com/app/id6759188481">
         <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
     </a>
+    <a class="badge-android" href="https://github.com/OpenMinis/OpenMinis/releases" target="_blank" rel="noopener">
+        <span class="ba-preview">Preview</span>
+        <svg class="ba-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.523 15.341a.738.738 0 0 1-.738-.738.738.738 0 0 1 .738-.737.738.738 0 0 1 .737.737.738.738 0 0 1-.737.738m-11.046 0a.738.738 0 0 1-.737-.738.738.738 0 0 1 .737-.737.738.738 0 0 1 .738.737.738.738 0 0 1-.738.738m11.404-6.17l1.474-2.553a.307.307 0 0 0-.113-.42.307.307 0 0 0-.42.114L17.34 8.87C16.068 8.273 14.63 7.94 13 7.94c-1.63 0-3.068.333-4.34.93L7.178 6.312a.307.307 0 0 0-.42-.114.307.307 0 0 0-.113.42l1.474 2.553C5.405 10.545 3.72 12.836 3.72 15.5h16.56c0-2.664-1.685-4.955-3.4-6.329" fill="#3DDC84"/>
+        </svg>
+        <span class="ba-text">
+            <span class="ba-label">Download for</span>
+            <span class="ba-title">Android</span>
+        </span>
+    </a>
+    </div>
 </div>
 
 <!-- Features -->
