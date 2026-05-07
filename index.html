@@ -16,6 +16,15 @@
         a:hover { text-decoration: underline; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
 
+        /* App Icon */
+        .app-icon { display: block; width: 96px; height: 96px; margin: 0 auto 24px; border-radius: 21px; }
+        .app-icon-light { display: block; }
+        .app-icon-dark  { display: none;  }
+        @media (prefers-color-scheme: dark) {
+            .app-icon-light { display: none;  }
+            .app-icon-dark  { display: block; }
+        }
+
         /* Hero */
         .hero {
             text-align: center;
@@ -161,6 +170,8 @@
 
 <!-- Hero -->
 <div class="hero">
+    <img class="app-icon app-icon-light" src="icon-light.png" alt="Open Minis">
+    <img class="app-icon app-icon-dark"  src="icon-dark.png"  alt="Open Minis">
     <h1>Open Minis</h1>
     <p class="subtitle">Your Private On-Device AI Agent</p>
     <p class="desc">
