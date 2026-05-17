@@ -16,6 +16,25 @@
         a:hover { text-decoration: underline; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
 
+        /* Lang bar */
+        .lang-bar {
+            position: sticky; top: 0; z-index: 100;
+            display: flex; justify-content: flex-end; align-items: center;
+            padding: 8px 24px; gap: 4px;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .lang-btn {
+            background: none; border: 1px solid transparent;
+            border-radius: 6px; padding: 4px 10px;
+            font-size: 13px; color: #6e6e73; cursor: pointer;
+            transition: all 0.15s;
+        }
+        .lang-btn:hover { background: #f5f5f7; color: #1d1d1f; }
+        .lang-btn.active { border-color: #0066cc; color: #0066cc; background: #f0f6ff; font-weight: 600; }
+
         /* App Icon */
         .app-icon { display: block; width: 96px; height: 96px; margin: 0 auto 24px; border-radius: 21px; }
         .app-icon-light { display: block; }
@@ -26,10 +45,7 @@
         }
 
         /* Hero */
-        .hero {
-            text-align: center;
-            padding: 80px 24px 48px;
-        }
+        .hero { text-align: center; padding: 80px 24px 48px; }
         .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 12px; }
         .hero .subtitle { font-size: 21px; color: #6e6e73; margin-bottom: 32px; }
         .hero .desc { font-size: 17px; max-width: 600px; margin: 0 auto 36px; color: #1d1d1f; }
@@ -39,20 +55,11 @@
 
         /* Android download badge */
         .badge-android {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #000;
-            color: #fff;
-            border-radius: 10px;
-            padding: 0 16px;
-            width: 161px;
-            height: 54px;
-            text-decoration: none;
-            border: 1px solid #a6a6a6;
-            position: relative;
-            transition: opacity 0.15s;
-            box-sizing: border-box;
+            display: inline-flex; align-items: center; gap: 10px;
+            background: #000; color: #fff; border-radius: 10px;
+            padding: 0 16px; width: 161px; height: 54px;
+            text-decoration: none; border: 1px solid #a6a6a6;
+            position: relative; transition: opacity 0.15s; box-sizing: border-box;
         }
         .badge-android:hover { opacity: 0.82; text-decoration: none; }
         .badge-android .ba-icon { flex-shrink: 0; }
@@ -60,17 +67,21 @@
         .badge-android .ba-label { font-size: 10px; font-weight: 400; color: #ccc; letter-spacing: 0.03em; }
         .badge-android .ba-title { font-size: 18px; font-weight: 600; color: #fff; white-space: nowrap; }
         .badge-android .ba-preview {
-            position: absolute;
-            top: -8px; right: -8px;
-            background: #FF6B00;
-            color: #fff;
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            padding: 2px 6px;
-            border-radius: 20px;
-            text-transform: uppercase;
+            position: absolute; top: -8px; right: -8px;
+            background: #FF6B00; color: #fff; font-size: 9px; font-weight: 700;
+            letter-spacing: 0.05em; padding: 2px 6px; border-radius: 20px; text-transform: uppercase;
         }
+
+        /* Awesome Minis banner */
+        .awesome-banner-outer { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+        .awesome-banner {
+            display: flex; align-items: center; gap: 12px;
+            background: #f5f5f7; border-radius: 12px;
+            padding: 14px 20px; margin: 32px 0 32px;
+        }
+        .awesome-banner .awesome-icon { font-size: 20px; flex-shrink: 0; line-height: 1; }
+        .awesome-banner p { font-size: 15px; color: #1d1d1f; margin: 0; }
+        .awesome-banner a { color: #0066cc; font-weight: 600; white-space: nowrap; }
 
         /* Sections */
         section { padding: 48px 0; }
@@ -86,12 +97,11 @@
         .feature-card h3 { margin-top: 0; font-size: 18px; }
         .feature-card p { font-size: 15px; color: #6e6e73; }
 
-        /* Getting started steps */
+        /* Steps */
         .steps { counter-reset: step; margin-top: 16px; }
         .step { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
         .step-num {
-            counter-increment: step;
-            flex-shrink: 0; width: 32px; height: 32px;
+            counter-increment: step; flex-shrink: 0; width: 32px; height: 32px;
             background: #0066cc; color: #fff; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             font-weight: 700; font-size: 15px;
@@ -99,29 +109,43 @@
         .step-content h3 { margin: 0 0 4px; font-size: 17px; }
         .step-content p { font-size: 15px; color: #6e6e73; }
 
-        /* Provider table */
+        /* Table */
         table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
         th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e5e5e5; }
         th { font-weight: 600; background: #f5f5f7; }
 
-        /* Code block */
+        /* Code */
         code { background: #f5f5f7; padding: 2px 6px; border-radius: 4px; font-size: 14px; }
         pre { background: #f5f5f7; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 12px 0; }
         pre code { background: none; padding: 0; }
 
         /* Footer */
-        footer {
-            text-align: center; padding: 32px 24px;
-            font-size: 14px; color: #6e6e73;
-            border-top: 1px solid #e5e5e5;
-        }
+        footer { text-align: center; padding: 32px 24px; font-size: 14px; color: #6e6e73; border-top: 1px solid #e5e5e5; }
         footer a { color: #6e6e73; margin: 0 12px; }
         footer a:hover { color: #0066cc; }
+
+        /* FAQ */
+        .faq { margin-top: 24px; }
+        .faq-category { margin-bottom: 32px; }
+        .faq-category h3 { font-size: 20px; margin-bottom: 16px; border-bottom: 1px solid #e5e5e5; padding-bottom: 8px; }
+        .faq-item { margin-bottom: 20px; }
+        .faq-item summary { font-size: 16px; font-weight: 600; cursor: pointer; padding: 12px 0; list-style: none; }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::before { content: "+ "; color: #0066cc; font-weight: 700; margin-right: 4px; }
+        .faq-item[open] summary::before { content: "- "; }
+        .faq-item .answer { padding: 0 0 12px 20px; font-size: 15px; color: #6e6e73; }
+        .faq-item .answer p { margin-bottom: 8px; font-size: 15px; color: inherit; }
+        .faq-item .answer ul { padding-left: 20px; margin-bottom: 8px; }
+        .faq-item .answer li { font-size: 15px; color: inherit; margin-bottom: 4px; }
+        .faq-item .answer table { font-size: 14px; }
 
         /* Dark mode */
         @media (prefers-color-scheme: dark) {
             body { background: #1c1c1e; color: #f5f5f7; }
             a { color: #2997ff; }
+            .lang-bar { background: rgba(28,28,30,0.85); border-color: #3a3a3c; }
+            .lang-btn:hover { background: #2c2c2e; color: #f5f5f7; }
+            .lang-btn.active { border-color: #2997ff; color: #2997ff; background: #1a2535; }
             .hero .desc, section p, section li { color: #f5f5f7; }
             .hero .subtitle { color: #a1a1a6; }
             .feature-card { background: #2c2c2e; }
@@ -134,478 +158,643 @@
             footer { border-color: #3a3a3c; color: #a1a1a6; }
             footer a { color: #a1a1a6; }
             footer a:hover { color: #2997ff; }
-        }
-
-        /* FAQ */
-        .faq { margin-top: 24px; }
-        .faq-category { margin-bottom: 32px; }
-        .faq-category h3 { font-size: 20px; margin-bottom: 16px; border-bottom: 1px solid #e5e5e5; padding-bottom: 8px; }
-        .faq-item { margin-bottom: 20px; }
-        .faq-item summary {
-            font-size: 16px; font-weight: 600; cursor: pointer;
-            padding: 12px 0; list-style: none;
-        }
-        .faq-item summary::-webkit-details-marker { display: none; }
-        .faq-item summary::before { content: "+ "; color: #0066cc; font-weight: 700; margin-right: 4px; }
-        .faq-item[open] summary::before { content: "- "; }
-        .faq-item .answer { padding: 0 0 12px 20px; font-size: 15px; color: #6e6e73; }
-        .faq-item .answer p { margin-bottom: 8px; font-size: 15px; color: inherit; }
-        .faq-item .answer ul { padding-left: 20px; margin-bottom: 8px; }
-        .faq-item .answer li { font-size: 15px; color: inherit; margin-bottom: 4px; }
-        .faq-item .answer table { font-size: 14px; }
-
-        @media (prefers-color-scheme: dark) {
             .faq-category h3 { border-color: #3a3a3c; }
             .faq-item summary::before { color: #2997ff; }
             .faq-item .answer { color: #a1a1a6; }
+            .awesome-banner { background: #1c1c1e; }
+            .awesome-banner p { color: #f5f5f7; }
         }
 
         @media (max-width: 600px) {
             .hero h1 { font-size: 36px; }
             .features { grid-template-columns: 1fr; }
+            .awesome-banner { padding-left: 20px; padding-right: 20px; }
         }
     </style>
 </head>
 <body>
+
+<!-- Language Bar -->
+<div class="lang-bar">
+    <button class="lang-btn" data-lang="en">English</button>
+    <button class="lang-btn" data-lang="zh-Hans">简体中文</button>
+    <button class="lang-btn" data-lang="zh-Hant">繁體中文</button>
+    <button class="lang-btn" data-lang="ja">日本語</button>
+    <button class="lang-btn" data-lang="ko">한국어</button>
+</div>
 
 <!-- Hero -->
 <div class="hero">
     <img class="app-icon app-icon-light" src="icon-light.png" alt="Open Minis">
     <img class="app-icon app-icon-dark"  src="icon-dark.png"  alt="Open Minis">
     <h1>Open Minis</h1>
-    <p class="subtitle">Your Private On-Device AI Agent</p>
-    <p class="desc">
-        An on-device AI agent that goes beyond chat. It takes action — browsing the web, accessing your health data,
-        managing your schedule, controlling your smart home, and automating complex tasks. All privately on your device.
-    </p>
+    <p class="subtitle" data-i18n="subtitle"></p>
+    <p class="desc" data-i18n="desc"></p>
     <div class="badges">
-    <a class="badge" href="https://apps.apple.com/app/id6759188481">
-        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
-    </a>
-    <a class="badge-android" href="https://github.com/OpenMinis/OpenMinis/releases" target="_blank" rel="noopener">
-        <span class="ba-preview">Preview</span>
-        <svg class="ba-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.523 15.341a.738.738 0 0 1-.738-.738.738.738 0 0 1 .738-.737.738.738 0 0 1 .737.737.738.738 0 0 1-.737.738m-11.046 0a.738.738 0 0 1-.737-.738.738.738 0 0 1 .737-.737.738.738 0 0 1 .738.737.738.738 0 0 1-.738.738m11.404-6.17l1.474-2.553a.307.307 0 0 0-.113-.42.307.307 0 0 0-.42.114L17.34 8.87C16.068 8.273 14.63 7.94 13 7.94c-1.63 0-3.068.333-4.34.93L7.178 6.312a.307.307 0 0 0-.42-.114.307.307 0 0 0-.113.42l1.474 2.553C5.405 10.545 3.72 12.836 3.72 15.5h16.56c0-2.664-1.685-4.955-3.4-6.329" fill="#3DDC84"/>
-        </svg>
-        <span class="ba-text">
-            <span class="ba-label">Download for</span>
-            <span class="ba-title">Android</span>
-        </span>
-    </a>
+        <a class="badge" href="https://apps.apple.com/app/id6759188481">
+            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+        </a>
+        <a class="badge-android" href="https://github.com/OpenMinis/OpenMinis/releases" target="_blank" rel="noopener">
+            <span class="ba-preview" data-i18n="androidPreview"></span>
+            <svg class="ba-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.523 15.341a.738.738 0 0 1-.738-.738.738.738 0 0 1 .738-.737.738.738 0 0 1 .737.737.738.738 0 0 1-.737.738m-11.046 0a.738.738 0 0 1-.737-.738.738.738 0 0 1 .737-.737.738.738 0 0 1 .738.737.738.738 0 0 1-.738.738m11.404-6.17l1.474-2.553a.307.307 0 0 0-.113-.42.307.307 0 0 0-.42.114L17.34 8.87C16.068 8.273 14.63 7.94 13 7.94c-1.63 0-3.068.333-4.34.93L7.178 6.312a.307.307 0 0 0-.42-.114.307.307 0 0 0-.113.42l1.474 2.553C5.405 10.545 3.72 12.836 3.72 15.5h16.56c0-2.664-1.685-4.955-3.4-6.329" fill="#3DDC84"/>
+            </svg>
+            <span class="ba-text">
+                <span class="ba-label" data-i18n="androidLabel"></span>
+                <span class="ba-title">Android</span>
+            </span>
+        </a>
     </div>
 </div>
 
 <!-- Features -->
 <section class="container">
-    <h2>Features</h2>
+    <h2 data-i18n="featuresTitle"></h2>
     <div class="features">
-        <div class="feature-card">
-            <h3>Multi-Model AI</h3>
-            <p>Connect to Anthropic Claude, OpenAI GPT, Google Gemini, OpenRouter, or any OpenAI-compatible endpoint. Switch models per conversation.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Built-in Linux Shell</h3>
-            <p>A full Alpine Linux environment runs on-device. The agent writes and executes scripts, installs packages, and processes data — no server needed.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Deep iOS Integration</h3>
-            <p>Native access to HealthKit, Calendar, Reminders, HomeKit, Contacts, Bluetooth, Location, Photos, Speech, and more.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Web Browser</h3>
-            <p>The agent browses the web, fills forms, extracts content, and takes screenshots — all within the app.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Custom Skills</h3>
-            <p>Import or create AI skills to extend the agent's capabilities. Compatible with SKILL.md format.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Privacy by Design</h3>
-            <p>API keys stay in your device Keychain. No data collected. No third-party analytics. Your conversations are yours.</p>
-        </div>
+        <div class="feature-card"><h3 data-i18n="f1title"></h3><p data-i18n="f1desc"></p></div>
+        <div class="feature-card"><h3 data-i18n="f2title"></h3><p data-i18n="f2desc"></p></div>
+        <div class="feature-card"><h3 data-i18n="f3title"></h3><p data-i18n="f3desc"></p></div>
+        <div class="feature-card"><h3 data-i18n="f4title"></h3><p data-i18n="f4desc"></p></div>
+        <div class="feature-card"><h3 data-i18n="f5title"></h3><p data-i18n="f5desc"></p></div>
+        <div class="feature-card"><h3 data-i18n="f6title"></h3><p data-i18n="f6desc"></p></div>
     </div>
 </section>
+
+<!-- Awesome Minis -->
+<div class="awesome-banner-outer">
+<div class="awesome-banner">
+    <span class="awesome-icon">✨</span>
+    <p data-i18n="awesomeBanner"></p>
+</div>
+</div>
 
 <!-- Getting Started -->
 <section class="container">
-    <h2>Getting Started</h2>
-
+    <h2 data-i18n="gettingStartedTitle"></h2>
     <div class="steps">
-        <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-content">
-                <h3>Download & Install</h3>
-                <p>Get Open Minis from the <a href="https://apps.apple.com/app/id6759188481">App Store</a>. Requires iOS 16+, iPadOS 16+, macOS 13+ (Apple Silicon), or visionOS 1.0+.</p>
-            </div>
-        </div>
-        <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-content">
-                <h3>Add an AI Provider</h3>
-                <p>On first launch, you'll be guided to add your AI provider. Choose from the supported providers below and enter your API key.</p>
-            </div>
-        </div>
-        <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-content">
-                <h3>Select a Model</h3>
-                <p>Pick a model from your provider. You can add multiple providers and switch models per conversation.</p>
-            </div>
-        </div>
-        <div class="step">
-            <div class="step-num">4</div>
-            <div class="step-content">
-                <h3>Start a Conversation</h3>
-                <p>Create a new session and start chatting. The agent can execute commands, browse the web, read your calendar, and much more.</p>
-            </div>
-        </div>
+        <div class="step"><div class="step-num">1</div><div class="step-content"><h3 data-i18n="s1title"></h3><p data-i18n="s1desc"></p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><h3 data-i18n="s2title"></h3><p data-i18n="s2desc"></p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><h3 data-i18n="s3title"></h3><p data-i18n="s3desc"></p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><h3 data-i18n="s4title"></h3><p data-i18n="s4desc"></p></div></div>
     </div>
 </section>
 
-<!-- Provider Configuration -->
+<!-- Supported AI Providers -->
 <section class="container">
-    <h2>Supported AI Providers</h2>
-    <p>Open Minis supports multiple AI providers. You need at least one API key to get started.</p>
-
+    <h2 data-i18n="providersTitle"></h2>
+    <p data-i18n="providersDesc"></p>
     <table>
-        <thead>
-            <tr>
-                <th>Provider</th>
-                <th>Models</th>
-                <th>Get API Key</th>
-            </tr>
-        </thead>
+        <thead><tr><th data-i18n="thProvider"></th><th data-i18n="thModels"></th><th data-i18n="thKey"></th></tr></thead>
         <tbody>
-            <tr>
-                <td>Anthropic</td>
-                <td>Claude Opus 4.6, Sonnet 4.6, Haiku 4.5</td>
-                <td><a href="https://console.anthropic.com/">console.anthropic.com</a></td>
-            </tr>
-            <tr>
-                <td>OpenAI</td>
-                <td>GPT-4o, o-series</td>
-                <td><a href="https://platform.openai.com/api-keys">platform.openai.com</a></td>
-            </tr>
-            <tr>
-                <td>Google Gemini</td>
-                <td>Gemini 2.5 Pro/Flash, 3 Pro/Flash</td>
-                <td><a href="https://aistudio.google.com/apikey">aistudio.google.com</a></td>
-            </tr>
-            <tr>
-                <td>OpenRouter</td>
-                <td>Multi-provider routing</td>
-                <td><a href="https://openrouter.ai/keys">openrouter.ai</a></td>
-            </tr>
-            <tr>
-                <td>Custom</td>
-                <td>Any OpenAI-compatible API</td>
-                <td>Your provider's dashboard</td>
-            </tr>
+            <tr><td>Anthropic</td><td>Claude Opus 4.6, Sonnet 4.6, Haiku 4.5</td><td><a href="https://console.anthropic.com/">console.anthropic.com</a></td></tr>
+            <tr><td>OpenAI</td><td>GPT-4o, o-series</td><td><a href="https://platform.openai.com/api-keys">platform.openai.com</a></td></tr>
+            <tr><td>Google Gemini</td><td>Gemini 2.5 Pro/Flash, 3 Pro/Flash</td><td><a href="https://aistudio.google.com/apikey">aistudio.google.com</a></td></tr>
+            <tr><td>OpenRouter</td><td data-i18n="orDesc"></td><td><a href="https://openrouter.ai/keys">openrouter.ai</a></td></tr>
+            <tr><td data-i18n="customProvider"></td><td data-i18n="customDesc"></td><td data-i18n="customKey"></td></tr>
         </tbody>
     </table>
 </section>
 
 <!-- Advanced Configuration -->
 <section class="container">
-    <h2>Advanced Configuration</h2>
-
-    <h3>Model Groups</h3>
-    <p>Group multiple models together with routing strategies:</p>
+    <h2 data-i18n="advancedTitle"></h2>
+    <h3 data-i18n="advModelGroupsTitle"></h3>
+    <p data-i18n="advModelGroupsDesc"></p>
     <ul>
-        <li><strong>Fallback</strong> — tries models in order; if one fails, the next is used automatically.</li>
-        <li><strong>Load Balance</strong> — distributes conversations across models evenly.</li>
+        <li data-i18n="advMgFallback"></li>
+        <li data-i18n="advMgBalance"></li>
     </ul>
-
-    <h3>Agent Loop Models</h3>
-    <p>Configure a separate pool of models that the AI agent can use when it needs to delegate sub-tasks or reason through complex operations.</p>
-
-    <h3>Skills</h3>
-    <p>Extend the agent with custom skills. Import a <code>SKILL.md</code> file from a URL or your file system, or let the agent create one during a conversation. Skills can be enabled or disabled per session.</p>
-
-    <h3>Session File System</h3>
-    <p>Each conversation session has an isolated file system mounted at <code>/var/minis/</code> inside the Linux environment. Files are organized into namespaces:</p>
+    <h3 data-i18n="advAgentLoopTitle"></h3>
+    <p data-i18n="advAgentLoopDesc"></p>
+    <h3 data-i18n="advSkillsTitle"></h3>
+    <p data-i18n="advSkillsDesc"></p>
+    <h3 data-i18n="advFsTitle"></h3>
+    <p data-i18n="advFsDesc"></p>
     <ul>
-        <li><code>minis://workspace/</code> — working files, scripts, data</li>
-        <li><code>minis://attachments/</code> — images, audio, video</li>
-        <li><code>minis://browser/</code> — browser screenshots and extracts</li>
-        <li><code>minis://offloads/</code> — large tool outputs</li>
+        <li><code>minis://workspace/</code> — <span data-i18n="advFsWorkspace"></span></li>
+        <li><code>minis://attachments/</code> — <span data-i18n="advFsAttachments"></span></li>
+        <li><code>minis://browser/</code> — <span data-i18n="advFsBrowser"></span></li>
+        <li><code>minis://offloads/</code> — <span data-i18n="advFsOffloads"></span></li>
     </ul>
 </section>
 
 <!-- Native Capabilities -->
 <section class="container">
-    <h2>Native iOS Capabilities</h2>
-    <p>The agent has access to iOS frameworks through native offloads. Just ask naturally:</p>
+    <h2 data-i18n="nativeTitle"></h2>
+    <p data-i18n="nativeDesc"></p>
     <ul>
-        <li><strong>Health</strong> — "How many steps did I take this week?"</li>
-        <li><strong>Calendar</strong> — "What's on my schedule tomorrow?"</li>
-        <li><strong>Reminders</strong> — "Remind me to call the dentist at 3pm."</li>
-        <li><strong>HomeKit</strong> — "Turn off the living room lights."</li>
-        <li><strong>Contacts</strong> — "Find John's phone number."</li>
-        <li><strong>Bluetooth</strong> — "Scan for nearby devices."</li>
-        <li><strong>Clipboard</strong> — "Read what I just copied."</li>
-        <li><strong>Media</strong> — "Read this article aloud."</li>
-        <li><strong>Alarms</strong> — "Set an alarm for 7am."</li>
-        <li><strong>Device</strong> — "What's my battery level?"</li>
+        <li><strong>Health</strong> — <span data-i18n="nHealth"></span></li>
+        <li><strong>Calendar</strong> — <span data-i18n="nCalendar"></span></li>
+        <li><strong>Reminders</strong> — <span data-i18n="nReminders"></span></li>
+        <li><strong>HomeKit</strong> — <span data-i18n="nHomeKit"></span></li>
+        <li><strong>Contacts</strong> — <span data-i18n="nContacts"></span></li>
+        <li><strong>Bluetooth</strong> — <span data-i18n="nBluetooth"></span></li>
+        <li><strong>Clipboard</strong> — <span data-i18n="nClipboard"></span></li>
+        <li><strong>Media</strong> — <span data-i18n="nMedia"></span></li>
+        <li><strong>Alarms</strong> — <span data-i18n="nAlarms"></span></li>
+        <li><strong>Device</strong> — <span data-i18n="nDevice"></span></li>
     </ul>
 </section>
 
 <!-- FAQ -->
 <section class="container">
-    <h2>FAQ</h2>
+    <h2 data-i18n="faqTitle"></h2>
     <div class="faq">
-
-        <!-- API & Network -->
         <div class="faq-category">
-            <h3>API Configuration & Network</h3>
-
-            <details class="faq-item">
-                <summary>Why does my API key show "Invalid" or fail to authenticate?</summary>
-                <div class="answer">
-                    <ul>
-                        <li><strong>Google Gemini OAuth</strong> has strict third-party restrictions and may block access. We strongly recommend using an <strong>API Key</strong> instead of OAuth for Gemini.</li>
-                        <li><strong>Check your balance</strong> — make sure your API account has credits or is within the free tier quota.</li>
-                        <li><strong>Network stability</strong> — Agent mode requires a stable connection. If you use a proxy or VPN, assign a fixed node for Open Minis traffic to avoid IP changes that trigger rate limits.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>How do I add OpenAI-compatible providers (e.g. Qwen, MiniMax, DeepSeek)?</summary>
-                <div class="answer">
-                    <p>Most third-party models support OpenAI-compatible endpoints. In Provider settings, choose <strong>Custom (OpenAI-compatible)</strong>, enter the base URL (without the trailing <code>/v1/...</code> path) and your API key. If the model list doesn't auto-populate, manually type the model ID (e.g. <code>qwen-turbo</code>, <code>deepseek-chat</code>).</p>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>How do I configure a third-party API proxy / relay?</summary>
-                <div class="answer">
-                    <ul>
-                        <li>Check your relay's documentation to determine if it's OpenAI-compatible or Anthropic-compatible.</li>
-                        <li>In Provider settings, select the matching type, enter the <strong>base URL only</strong> (strip any trailing path like <code>/v1/chat/completions</code>) and your API key.</li>
-                        <li>If models don't appear automatically, enter the model ID manually.</li>
-                    </ul>
-                </div>
-            </details>
+            <h3 data-i18n="faqCat1"></h3>
+            <details class="faq-item"><summary data-i18n="faq1q"></summary><div class="answer" data-i18n="faq1a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq2q"></summary><div class="answer" data-i18n="faq2a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq3q"></summary><div class="answer" data-i18n="faq3a"></div></details>
         </div>
-
-        <!-- Model Selection -->
         <div class="faq-category">
-            <h3>Model Selection & Usage</h3>
-
-            <details class="faq-item">
-                <summary>Which AI model works best for agent tasks?</summary>
-                <div class="answer">
-                    <table>
-                        <tr><th>Use Case</th><th>Recommended</th></tr>
-                        <tr><td>General agent tasks</td><td><strong>Claude Sonnet / Opus</strong> (most stable tool calling)</td></tr>
-                        <tr><td>Long conversation stability</td><td><strong>GPT-5.4 / Codex</strong></td></tr>
-                        <tr><td>Budget-friendly / backup</td><td><strong>Kimi-k2.5, MiniMax, Qwen3.5</strong></td></tr>
-                    </table>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>What is "Enhanced Cache" and when should I enable it?</summary>
-                <div class="answer">
-                    <p>This feature currently works with <strong>Anthropic (Claude) models only</strong>:</p>
-                    <ul>
-                        <li>It activates a 1-hour prompt cache — cached input tokens cost <strong>1/10</strong> of the standard price.</li>
-                        <li>Best for long, multi-turn complex tasks where you'll reuse the same context.</li>
-                        <li>The first request costs <strong>2x</strong> the standard input price (to create the cache), so short sessions may cost more with it enabled.</li>
-                        <li>The default 5-13 minute cache already covers 90%+ of typical agent tasks.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Why is the model stuck on "thinking" for a long time?</summary>
-                <div class="answer">
-                    <p>Some models (e.g. DeepSeek R1) have extended reasoning modes that can take a while. Open Minis doesn't currently override model-level thinking behavior. If you prefer faster responses, switch to a non-reasoning model like Claude Sonnet or GPT-4o.</p>
-                </div>
-            </details>
+            <h3 data-i18n="faqCat2"></h3>
+            <details class="faq-item"><summary data-i18n="faq4q"></summary><div class="answer" data-i18n="faq4a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq5q"></summary><div class="answer" data-i18n="faq5a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq6q"></summary><div class="answer" data-i18n="faq6a"></div></details>
         </div>
-
-        <!-- Skills -->
         <div class="faq-category">
-            <h3>Skills</h3>
-
-            <details class="faq-item">
-                <summary>How do I install new skills?</summary>
-                <div class="answer">
-                    <ul>
-                        <li><strong>Browse & install</strong> — go to Settings and browse the official skill repository.</li>
-                        <li><strong>Send a link</strong> — paste a GitHub URL of a SKILL.md file into a conversation, and the agent will install it.</li>
-                        <li><strong>Let the agent create one</strong> — describe what you need in plain language, and a capable model (e.g. Claude) can write and install a skill for you.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>I installed a skill but its script files are missing?</summary>
-                <div class="answer">
-                    <p>Installing from a GitHub URL currently downloads only the <code>SKILL.md</code> file. If the skill depends on additional scripts (e.g. a <code>scripts/</code> directory), ask the agent to download the full repository, or have it regenerate the scripts based on the SKILL.md description.</p>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>A skill I just created doesn't appear in Settings?</summary>
-                <div class="answer">
-                    <p>Skills created during a conversation may not immediately appear in the Settings page. Try leaving and re-entering the Settings screen to refresh.</p>
-                </div>
-            </details>
+            <h3 data-i18n="faqCat3"></h3>
+            <details class="faq-item"><summary data-i18n="faq7q"></summary><div class="answer" data-i18n="faq7a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq8q"></summary><div class="answer" data-i18n="faq8a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq9q"></summary><div class="answer" data-i18n="faq9a"></div></details>
         </div>
-
-        <!-- Files & Storage -->
         <div class="faq-category">
-            <h3>Files & Storage</h3>
-
-            <details class="faq-item">
-                <summary>Are files isolated between conversations? How do I share files across sessions?</summary>
-                <div class="answer">
-                    <ul>
-                        <li><code>/var/minis/workspace/</code> — <strong>per-session</strong>, isolated between conversations.</li>
-                        <li><code>/var/minis/memory/</code> — <strong>shared</strong> across all conversations.</li>
-                        <li><code>/var/minis/skills/</code> — <strong>shared</strong> globally.</li>
-                    </ul>
-                    <p>To share data between sessions, ask the agent to save it to the Memory or Skills directory.</p>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>How do I import files from the iOS Files app into a session?</summary>
-                <div class="answer">
-                    <p>Due to iOS sandboxing, the app's internal directories aren't visible in the Files app. Workarounds:</p>
-                    <ul>
-                        <li>Paste file content into a conversation and ask the agent to save it.</li>
-                        <li>Upload to iCloud Drive first, then ask the agent to read from the iCloud path.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Does "Clear Chat" delete workspace files?</summary>
-                <div class="answer">
-                    <p>Yes. Clearing a chat also removes that session's workspace files. If you have important files, ask the agent to copy them to the Memory or Skills directory before clearing.</p>
-                </div>
-            </details>
+            <h3 data-i18n="faqCat4"></h3>
+            <details class="faq-item"><summary data-i18n="faq10q"></summary><div class="answer" data-i18n="faq10a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq11q"></summary><div class="answer" data-i18n="faq11a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq12q"></summary><div class="answer" data-i18n="faq12a"></div></details>
         </div>
-
-        <!-- Terminal -->
         <div class="faq-category">
-            <h3>Terminal & Linux Environment</h3>
-
-            <details class="faq-item">
-                <summary>What languages and tools does the built-in terminal support?</summary>
-                <div class="answer">
-                    <table>
-                        <tr><th>Environment</th><th>Status</th></tr>
-                        <tr><td>Python</td><td>Fully supported. Use <code>uv</code> for dependency management.</td></tr>
-                        <tr><td>Node.js</td><td>Partially supported. Small packages work fine; large packages may have issues.</td></tr>
-                        <tr><td>Go / Rust</td><td>Supported.</td></tr>
-                        <tr><td>FFmpeg</td><td>Built-in with hardware acceleration.</td></tr>
-                    </table>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Do installed packages persist across conversations?</summary>
-                <div class="answer">
-                    <p>Yes. Packages installed via <code>apk</code> or <code>pip</code> persist in the Alpine Linux filesystem across all conversations, as long as you don't perform a <strong>Reset Rootfs</strong>.</p>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>The <code>tar</code> command hangs / GitHub CLI (<code>gh</code>) crashes?</summary>
-                <div class="answer">
-                    <ul>
-                        <li><strong>tar hanging</strong> — the bundled BusyBox tar has a known issue. Run <code>apk add tar</code> to install the standalone version.</li>
-                        <li><strong>gh CLI</strong> — has compatibility issues under iSH. Use the GitHub API with a <code>GITHUB_TOKEN</code> environment variable as a workaround.</li>
-                    </ul>
-                </div>
-            </details>
+            <h3 data-i18n="faqCat5"></h3>
+            <details class="faq-item"><summary data-i18n="faq13q"></summary><div class="answer" data-i18n="faq13a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq14q"></summary><div class="answer" data-i18n="faq14a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq15q"></summary><div class="answer" data-i18n="faq15a"></div></details>
         </div>
-
-        <!-- Automation -->
         <div class="faq-category">
-            <h3>Automation & Background Tasks</h3>
-
-            <details class="faq-item">
-                <summary>How do I keep the agent running in the background?</summary>
-                <div class="answer">
-                    <p>Enable <strong>"Background Audio Keep-Alive"</strong> in Settings. This plays silent audio to prevent iOS from suspending the app. It stops automatically when the task finishes and doesn't interfere with other audio playback.</p>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Can I set up scheduled / automated tasks?</summary>
-                <div class="answer">
-                    <p>Yes, via <strong>iOS Shortcuts</strong>. Open Minis provides Shortcuts actions — create an automation in the Shortcuts app and set it to run on a schedule. Note: <code>cron</code> inside the Linux environment won't persist due to iOS sandbox restrictions.</p>
-                </div>
-            </details>
+            <h3 data-i18n="faqCat6"></h3>
+            <details class="faq-item"><summary data-i18n="faq16q"></summary><div class="answer" data-i18n="faq16a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq17q"></summary><div class="answer" data-i18n="faq17a"></div></details>
         </div>
-
-        <!-- Data & Privacy -->
         <div class="faq-category">
-            <h3>Data & Privacy</h3>
-
-            <details class="faq-item">
-                <summary>Where is my chat history stored?</summary>
-                <div class="answer">
-                    <p>All chat history is stored <strong>locally on your device</strong>. Nothing is uploaded to any cloud service. Switching your Apple ID does not affect local data.</p>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Is multi-device sync supported?</summary>
-                <div class="answer">
-                    <p>Not yet. Conversations and workspace files are local only. iCloud sync is under development for future releases.</p>
-                </div>
-            </details>
+            <h3 data-i18n="faqCat7"></h3>
+            <details class="faq-item"><summary data-i18n="faq18q"></summary><div class="answer" data-i18n="faq18a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq19q"></summary><div class="answer" data-i18n="faq19a"></div></details>
+            <details class="faq-item"><summary data-i18n="faq20q"></summary><div class="answer" data-i18n="faq20a"></div></details>
         </div>
-
-        <!-- Other -->
-        <div class="faq-category">
-            <h3>Other</h3>
-
-            <details class="faq-item">
-                <summary>How do I handle long conversations that become slow?</summary>
-                <div class="answer">
-                    <p>When context exceeds ~80k tokens (especially with images or large documents), rendering may lag. Solutions:</p>
-                    <ul>
-                        <li>Ask the agent to <strong>summarize the conversation into a memory file</strong>.</li>
-                        <li>Start a new session and instruct it to read the summary file to continue.</li>
-                    </ul>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Where do I find alarms I created through the agent?</summary>
-                <div class="answer">
-                    <p>Alarms created via the agent won't appear in the iOS Clock app (system API limitation). View them by tapping the <strong>alarm icon</strong> on the Open Minis home screen, or ask the agent to list your alarms.</p>
-                </div>
-            </details>
-
-            <details class="faq-item">
-                <summary>Can the agent open other iOS apps?</summary>
-                <div class="answer">
-                    <p>The agent can open apps that support <strong>URL Schemes</strong> (e.g. Maps, Settings, Safari). However, it cannot control or interact with other apps' UI due to iOS sandboxing.</p>
-                </div>
-            </details>
-        </div>
-
     </div>
 </section>
 
 <!-- Footer -->
 <footer>
     <div>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="mailto:dev@openminis.me">Contact</a>
+        <a href="/privacy-policy.html" data-i18n="footerPrivacy"></a>
+        <a href="mailto:dev@openminis.me" data-i18n="footerContact"></a>
         <a href="https://apps.apple.com/app/id6759188481">App Store</a>
     </div>
-    <p style="margin-top: 12px;">&copy; 2026 OpenMinis. All rights reserved.</p>
+    <p style="margin-top: 12px;" data-i18n="footerCopy"></p>
 </footer>
 
+<script>
+const I18N = {
+  en: {
+    subtitle: "Your Private On-Device AI Agent",
+    desc: "An on-device AI agent that goes beyond chat. It takes action — browsing the web, accessing your health data, managing your schedule, controlling your smart home, and automating complex tasks. All privately on your device.",
+    androidPreview: "Preview",
+    androidLabel: "Download for",
+    featuresTitle: "Features",
+    f1title: "Multi-Model AI", f1desc: "Connect to Anthropic Claude, OpenAI GPT, Google Gemini, OpenRouter, or any OpenAI-compatible endpoint. Switch models per conversation.",
+    f2title: "Built-in Linux Shell", f2desc: "A full Alpine Linux environment runs on-device. The agent writes and executes scripts, installs packages, and processes data — no server needed.",
+    f3title: "Deep iOS Integration", f3desc: "Native access to HealthKit, Calendar, Reminders, HomeKit, Contacts, Bluetooth, Location, Photos, Speech, and more.",
+    f4title: "Web Browser", f4desc: "The agent browses the web, fills forms, extracts content, and takes screenshots — all within the app.",
+    f5title: "Custom Skills", f5desc: "Import or create AI skills to extend the agent's capabilities. Compatible with SKILL.md format.",
+    f6title: "Privacy by Design", f6desc: "API keys stay in your device Keychain. No data collected. No third-party analytics. Your conversations are yours.",
+    awesomeBanner: 'Want to discover more Minis use cases and creative workflows? Check out the community-curated collection <a href="https://github.com/OpenMinis/AwesomeMinis" target="_blank" rel="noopener">Awesome Minis →</a>',
+    gettingStartedTitle: "Getting Started",
+    s1title: "Download & Install", s1desc: 'Get Open Minis from the <a href="https://apps.apple.com/app/id6759188481">App Store</a>. Requires iOS 16+, iPadOS 16+, macOS 13+ (Apple Silicon), or visionOS 1.0+.',
+    s2title: "Add an AI Provider", s2desc: "On first launch, you'll be guided to add your AI provider. Choose from the supported providers below and enter your API key.",
+    s3title: "Select a Model", s3desc: "Pick a model from your provider. You can add multiple providers and switch models per conversation.",
+    s4title: "Start a Conversation", s4desc: "Create a new session and start chatting. The agent can execute commands, browse the web, read your calendar, and much more.",
+    providersTitle: "Supported AI Providers", providersDesc: "Open Minis supports multiple AI providers. You need at least one API key to get started.",
+    thProvider: "Provider", thModels: "Models", thKey: "Get API Key",
+    orDesc: "Multi-provider routing", customProvider: "Custom", customDesc: "Any OpenAI-compatible API", customKey: "Your provider's dashboard",
+    advancedTitle: "Advanced Configuration",
+    advModelGroupsTitle: "Model Groups", advModelGroupsDesc: "Group multiple models together with routing strategies:",
+    advMgFallback: "<strong>Fallback</strong> — tries models in order; if one fails, the next is used automatically.",
+    advMgBalance: "<strong>Load Balance</strong> — distributes conversations across models evenly.",
+    advAgentLoopTitle: "Agent Loop Models", advAgentLoopDesc: "Configure a separate pool of models that the AI agent can use when it needs to delegate sub-tasks or reason through complex operations.",
+    advSkillsTitle: "Skills", advSkillsDesc: "Extend the agent with custom skills. Import a <code>SKILL.md</code> file from a URL or your file system, or let the agent create one during a conversation. Skills can be enabled or disabled per session.",
+    advFsTitle: "Session File System", advFsDesc: "Each conversation session has an isolated file system mounted at <code>/var/minis/</code>. Files are organized into namespaces:",
+    advFsWorkspace: "working files, scripts, data", advFsAttachments: "images, audio, video", advFsBrowser: "browser screenshots and extracts", advFsOffloads: "large tool outputs",
+    nativeTitle: "Native iOS Capabilities", nativeDesc: "The agent has access to iOS frameworks through native tools. Just ask naturally:",
+    nHealth: '"How many steps did I take this week?"', nCalendar: '"What\'s on my schedule tomorrow?"', nReminders: '"Remind me to call the dentist at 3pm."',
+    nHomeKit: '"Turn off the living room lights."', nContacts: '"Find John\'s phone number."', nBluetooth: '"Scan for nearby devices."',
+    nClipboard: '"Read what I just copied."', nMedia: '"Read this article aloud."', nAlarms: '"Set an alarm for 7am."', nDevice: '"What\'s my battery level?"',
+    faqTitle: "FAQ",
+    faqCat1: "API Configuration & Network",
+    faq1q: "Why does my API key show \"Invalid\" or fail to authenticate?",
+    faq1a: '<ul><li><strong>Google Gemini OAuth</strong> has strict third-party restrictions. Use an <strong>API Key</strong> instead.</li><li><strong>Check your balance</strong> — make sure your account has credits or is within free tier quota.</li><li><strong>Network stability</strong> — Agent mode requires a stable connection. If you use a proxy or VPN, assign a fixed node for Open Minis.</li></ul>',
+    faq2q: "How do I add OpenAI-compatible providers (e.g. Qwen, DeepSeek)?",
+    faq2a: '<p>Choose <strong>Custom (OpenAI-compatible)</strong>, enter the base URL (without trailing <code>/v1/...</code> path) and your API key. If the model list doesn\'t auto-populate, manually type the model ID.</p>',
+    faq3q: "How do I configure a third-party API proxy / relay?",
+    faq3a: '<ul><li>Check if it\'s OpenAI-compatible or Anthropic-compatible.</li><li>Enter the <strong>base URL only</strong> (strip any trailing path) and your API key.</li><li>If models don\'t appear, enter the model ID manually.</li></ul>',
+    faqCat2: "Model Selection & Usage",
+    faq4q: "Which AI model works best for agent tasks?",
+    faq4a: '<table><tr><th>Use Case</th><th>Recommended</th></tr><tr><td>General agent tasks</td><td><strong>Claude Sonnet / Opus</strong></td></tr><tr><td>Long conversation stability</td><td><strong>GPT-4o / GPT-5</strong></td></tr><tr><td>Budget-friendly</td><td><strong>Kimi, MiniMax, Qwen</strong></td></tr></table>',
+    faq5q: "What is \"Enhanced Cache\" and when should I enable it?",
+    faq5a: '<p>Works with <strong>Anthropic (Claude) models only</strong>. Activates a 1-hour prompt cache — cached input tokens cost <strong>1/10</strong> of the standard price. Best for long multi-turn tasks. The first request costs <strong>2×</strong> to create the cache.</p>',
+    faq6q: "Why is the model stuck on \"thinking\" for a long time?",
+    faq6a: '<p>Some models (e.g. DeepSeek R1) have extended reasoning modes. Switch to a non-reasoning model like Claude Sonnet or GPT-4o for faster responses.</p>',
+    faqCat3: "Skills",
+    faq7q: "How do I install new skills?",
+    faq7a: '<ul><li><strong>Browse & install</strong> — go to Settings and browse the official skill repository.</li><li><strong>Send a link</strong> — paste a GitHub URL of a SKILL.md into a conversation.</li><li><strong>Let the agent create one</strong> — describe what you need in plain language.</li></ul>',
+    faq8q: "I installed a skill but its script files are missing?",
+    faq8a: '<p>Installing from a GitHub URL downloads only the <code>SKILL.md</code> file. Ask the agent to download the full repository or regenerate scripts based on the SKILL.md description.</p>',
+    faq9q: "A skill I just created doesn't appear in Settings?",
+    faq9a: '<p>Skills created during a conversation may not immediately appear. Try leaving and re-entering the Settings screen to refresh.</p>',
+    faqCat4: "Files & Storage",
+    faq10q: "Are files isolated between conversations? How do I share files across sessions?",
+    faq10a: '<ul><li><code>/var/minis/workspace/</code> — <strong>per-session</strong>, isolated between conversations.</li><li><code>/var/minis/memory/</code> — <strong>shared</strong> across all conversations.</li><li><code>/var/minis/skills/</code> — <strong>shared</strong> globally.</li></ul>',
+    faq11q: "How do I import files from the iOS Files app into a session?",
+    faq11a: '<p>Due to iOS sandboxing, workarounds include: paste file content into a conversation, or upload to iCloud Drive first and ask the agent to read from the iCloud path.</p>',
+    faq12q: "Does \"Clear Chat\" delete workspace files?",
+    faq12a: '<p>Yes. Clearing a chat removes that session\'s workspace files. Copy important files to the Memory or Skills directory before clearing.</p>',
+    faqCat5: "Terminal & Linux Environment",
+    faq13q: "What languages and tools does the built-in terminal support?",
+    faq13a: '<table><tr><th>Environment</th><th>Status</th></tr><tr><td>Python</td><td>Fully supported. Use <code>uv</code> for dependencies.</td></tr><tr><td>Node.js</td><td>Partially supported.</td></tr><tr><td>Go / Rust</td><td>Supported.</td></tr><tr><td>FFmpeg</td><td>Built-in with hardware acceleration.</td></tr></table>',
+    faq14q: "Do installed packages persist across conversations?",
+    faq14a: '<p>Yes. Packages installed via <code>apk</code> or <code>pip</code> persist across all conversations, unless you perform a <strong>Reset Rootfs</strong>.</p>',
+    faq15q: "The tar command hangs / GitHub CLI (gh) crashes?",
+    faq15a: '<ul><li><strong>tar hanging</strong> — run <code>apk add tar</code> to install the standalone version.</li><li><strong>gh CLI</strong> — use the GitHub API with a <code>GITHUB_TOKEN</code> environment variable instead.</li></ul>',
+    faqCat6: "Automation & Background Tasks",
+    faq16q: "How do I keep the agent running in the background?",
+    faq16a: '<p>Enable <strong>"Background Audio Keep-Alive"</strong> in Settings. This plays silent audio to prevent iOS from suspending the app.</p>',
+    faq17q: "Can I set up scheduled / automated tasks?",
+    faq17a: '<p>Yes, via <strong>iOS Shortcuts</strong>. Open Minis provides Shortcuts actions — create an automation in the Shortcuts app and set it to run on a schedule.</p>',
+    faqCat7: "Other",
+    faq18q: "How do I handle long conversations that become slow?",
+    faq18a: '<p>When context exceeds ~80k tokens, rendering may lag. Ask the agent to <strong>summarize the conversation into a memory file</strong>, then start a new session.</p>',
+    faq19q: "Where do I find alarms I created through the agent?",
+    faq19a: '<p>Tap the <strong>alarm icon</strong> on the Open Minis home screen, or ask the agent to list your alarms. They won\'t appear in the iOS Clock app.</p>',
+    faq20q: "Can the agent open other iOS apps?",
+    faq20a: '<p>The agent can open apps that support <strong>URL Schemes</strong> (e.g. Maps, Settings, Safari). It cannot control other apps\' UI due to iOS sandboxing.</p>',
+    footerPrivacy: "Privacy Policy", footerContact: "Contact", footerCopy: "© 2026 OpenMinis. All rights reserved.",
+  },
+
+  "zh-Hans": {
+    subtitle: "你的私有设备端 AI 智能体",
+    desc: "一款超越对话框的设备端 AI 智能体。它能自主行动——浏览网页、读取健康数据、管理日程、控制智能家居、自动化复杂任务。一切都在你的设备上私密完成。",
+    androidPreview: "预览版",
+    androidLabel: "下载",
+    featuresTitle: "功能特性",
+    f1title: "多模型 AI", f1desc: "接入 Anthropic Claude、OpenAI GPT、Google Gemini、OpenRouter 或任意 OpenAI 兼容接口，每次对话可自由切换模型。",
+    f2title: "内置 Linux Shell", f2desc: "设备本地运行完整 Alpine Linux 环境。智能体可编写并执行脚本、安装软件包、处理数据——无需任何服务器。",
+    f3title: "深度 iOS 集成", f3desc: "原生访问 HealthKit、日历、提醒事项、HomeKit、通讯录、蓝牙、定位、照片、语音等系统框架。",
+    f4title: "内置浏览器", f4desc: "智能体可浏览网页、填写表单、提取内容、截图——全程在应用内完成。",
+    f5title: "自定义技能", f5desc: "导入或创建 AI 技能以扩展智能体能力，兼容 SKILL.md 格式。",
+    f6title: "隐私优先设计", f6desc: "API 密钥存储在设备 Keychain 中。不收集数据，无第三方分析，对话内容完全属于你。",
+    awesomeBanner: '想了解更多 Minis 的使用场景和创意玩法？查看社区精选案例集 <a href="https://github.com/OpenMinis/AwesomeMinis" target="_blank" rel="noopener">Awesome Minis →</a>',
+    gettingStartedTitle: "快速开始",
+    s1title: "下载安装", s1desc: '从 <a href="https://apps.apple.com/app/id6759188481">App Store</a> 下载 Open Minis。需要 iOS 16+、iPadOS 16+、macOS 13+（Apple Silicon）或 visionOS 1.0+。',
+    s2title: "添加 AI 提供商", s2desc: "首次启动时，系统将引导你添加 AI 提供商，选择下方支持的服务商并输入 API 密钥。",
+    s3title: "选择模型", s3desc: "从你的提供商中选择模型。可添加多个提供商，并在每次对话中切换模型。",
+    s4title: "开始对话", s4desc: "创建新会话，开始聊天。智能体可执行命令、浏览网页、读取日历，以及更多操作。",
+    providersTitle: "支持的 AI 提供商", providersDesc: "Open Minis 支持多种 AI 提供商，至少需要一个 API 密钥才能开始使用。",
+    thProvider: "提供商", thModels: "模型", thKey: "获取 API 密钥",
+    orDesc: "多提供商路由", customProvider: "自定义", customDesc: "任意 OpenAI 兼容 API", customKey: "提供商控制台",
+    advancedTitle: "高级配置",
+    advModelGroupsTitle: "模型组", advModelGroupsDesc: "将多个模型组合，配置路由策略：",
+    advMgFallback: "<strong>故障转移</strong> — 按顺序尝试，若某个失败则自动切换下一个。",
+    advMgBalance: "<strong>负载均衡</strong> — 将对话均匀分配到各模型。",
+    advAgentLoopTitle: "智能体循环模型", advAgentLoopDesc: "配置独立模型池，供 AI 智能体在委派子任务或推理复杂操作时使用。",
+    advSkillsTitle: "技能", advSkillsDesc: "通过自定义技能扩展智能体。从 URL 或文件系统导入 <code>SKILL.md</code> 文件，或让智能体在对话中创建。技能可按会话启用或禁用。",
+    advFsTitle: "会话文件系统", advFsDesc: "每个会话拥有独立的文件系统，挂载在 Linux 环境的 <code>/var/minis/</code> 下，按命名空间组织：",
+    advFsWorkspace: "工作文件、脚本、数据", advFsAttachments: "图片、音频、视频", advFsBrowser: "浏览器截图和提取内容", advFsOffloads: "大型工具输出",
+    nativeTitle: "原生 iOS 能力", nativeDesc: "智能体通过原生工具访问 iOS 系统框架，自然语言描述即可：",
+    nHealth: '"我这周走了多少步？"', nCalendar: '"我明天有什么安排？"', nReminders: '"下午 3 点提醒我打牙医电话。"',
+    nHomeKit: '"关掉客厅的灯。"', nContacts: '"找一下 John 的电话号码。"', nBluetooth: '"扫描附近的蓝牙设备。"',
+    nClipboard: '"读一下我刚复制的内容。"', nMedia: '"朗读这篇文章。"', nAlarms: '"设置一个早上 7 点的闹钟。"', nDevice: '"我的电池还有多少电？"',
+    faqTitle: "常见问题",
+    faqCat1: "API 配置与网络",
+    faq1q: "为什么我的 API 密钥显示「无效」或认证失败？",
+    faq1a: '<ul><li><strong>Google Gemini OAuth</strong> 有严格的第三方限制，建议改用 <strong>API Key</strong>。</li><li><strong>检查余额</strong> — 确认账户有足够额度或在免费配额内。</li><li><strong>网络稳定性</strong> — 智能体模式需要稳定连接。如使用代理或 VPN，请为 Open Minis 分配固定节点。</li></ul>',
+    faq2q: "如何添加 OpenAI 兼容提供商（如 Qwen、DeepSeek）？",
+    faq2a: '<p>选择 <strong>自定义（OpenAI 兼容）</strong>，输入基础 URL（不含末尾的 <code>/v1/...</code> 路径）和 API 密钥。若模型列表未自动加载，手动输入模型 ID 即可。</p>',
+    faq3q: "如何配置第三方 API 代理/中转？",
+    faq3a: '<ul><li>确认是 OpenAI 兼容还是 Anthropic 兼容。</li><li>仅输入<strong>基础 URL</strong>（去掉末尾路径）和 API 密钥。</li><li>若模型未自动出现，手动输入模型 ID。</li></ul>',
+    faqCat2: "模型选择与使用",
+    faq4q: "哪个模型最适合智能体任务？",
+    faq4a: '<table><tr><th>场景</th><th>推荐</th></tr><tr><td>通用智能体任务</td><td><strong>Claude Sonnet / Opus</strong></td></tr><tr><td>长对话稳定性</td><td><strong>GPT-4o / GPT-5</strong></td></tr><tr><td>经济实惠</td><td><strong>Kimi、MiniMax、Qwen</strong></td></tr></table>',
+    faq5q: "什么是「增强缓存」，什么时候应该开启？",
+    faq5a: '<p>仅适用于 <strong>Anthropic（Claude）模型</strong>。开启后激活 1 小时提示词缓存，缓存的输入 Token 费用仅为标准价的 <strong>1/10</strong>。适合长时间多轮复杂任务。首次请求费用为标准价的 <strong>2 倍</strong>（用于创建缓存）。</p>',
+    faq6q: "为什么模型长时间停在「思考中」？",
+    faq6a: '<p>部分模型（如 DeepSeek R1）具有扩展推理模式，耗时较长。如需更快响应，切换为 Claude Sonnet 或 GPT-4o 等非推理模型。</p>',
+    faqCat3: "技能",
+    faq7q: "如何安装新技能？",
+    faq7a: '<ul><li><strong>浏览安装</strong> — 进入设置，浏览官方技能库。</li><li><strong>发送链接</strong> — 将 SKILL.md 的 GitHub URL 粘贴到对话中，智能体会自动安装。</li><li><strong>让智能体创建</strong> — 用自然语言描述需求，功能强大的模型（如 Claude）可为你编写并安装技能。</li></ul>',
+    faq8q: "安装的技能缺少脚本文件？",
+    faq8a: '<p>通过 GitHub URL 安装目前仅下载 <code>SKILL.md</code> 文件。若技能依赖额外脚本，请让智能体下载完整仓库或根据 SKILL.md 重新生成脚本。</p>',
+    faq9q: "刚创建的技能没有出现在设置中？",
+    faq9a: '<p>对话中创建的技能可能不会立即显示。离开设置页再重新进入即可刷新。</p>',
+    faqCat4: "文件与存储",
+    faq10q: "会话间的文件是否隔离？如何跨会话共享文件？",
+    faq10a: '<ul><li><code>/var/minis/workspace/</code> — <strong>会话独立</strong>，互相隔离。</li><li><code>/var/minis/memory/</code> — <strong>所有会话共享</strong>。</li><li><code>/var/minis/skills/</code> — <strong>全局共享</strong>。</li></ul>',
+    faq11q: "如何将 iOS 文件 App 中的文件导入会话？",
+    faq11a: '<p>由于 iOS 沙盒限制，可将文件内容粘贴到对话中，或先上传到 iCloud Drive，再让智能体从 iCloud 路径读取。</p>',
+    faq12q: "「清除聊天」会删除工作区文件吗？",
+    faq12a: '<p>是的。清除聊天会同时删除该会话的工作区文件。清除前请让智能体将重要文件复制到 Memory 或 Skills 目录。</p>',
+    faqCat5: "终端与 Linux 环境",
+    faq13q: "内置终端支持哪些语言和工具？",
+    faq13a: '<table><tr><th>环境</th><th>状态</th></tr><tr><td>Python</td><td>完全支持，推荐用 <code>uv</code> 管理依赖。</td></tr><tr><td>Node.js</td><td>部分支持。</td></tr><tr><td>Go / Rust</td><td>支持。</td></tr><tr><td>FFmpeg</td><td>内置，支持硬件加速。</td></tr></table>',
+    faq14q: "安装的软件包会在会话间持久化吗？",
+    faq14a: '<p>是的。通过 <code>apk</code> 或 <code>pip</code> 安装的软件包会持久保留在 Alpine Linux 文件系统中，除非执行 <strong>重置根文件系统</strong>。</p>',
+    faq15q: "tar 命令卡住 / GitHub CLI (gh) 崩溃？",
+    faq15a: '<ul><li><strong>tar 卡住</strong> — 运行 <code>apk add tar</code> 安装独立版本。</li><li><strong>gh CLI</strong> — 使用 <code>GITHUB_TOKEN</code> 环境变量通过 GitHub API 代替。</li></ul>',
+    faqCat6: "自动化与后台任务",
+    faq16q: "如何让智能体在后台持续运行？",
+    faq16a: '<p>在设置中开启 <strong>「后台音频保活」</strong>，通过播放静音音频防止 iOS 挂起应用，任务完成后自动停止。</p>',
+    faq17q: "能设置定时/自动化任务吗？",
+    faq17a: '<p>可以，通过 <strong>iOS 快捷指令</strong> 实现。Open Minis 提供快捷指令动作，在「快捷指令」App 中创建自动化并设置运行时间即可。</p>',
+    faqCat7: "其他",
+    faq18q: "长对话变慢了怎么办？",
+    faq18a: '<p>当上下文超过约 8 万 Token（尤其含图片或大文件时），渲染可能卡顿。让智能体<strong>将对话摘要存入记忆文件</strong>，再开启新会话继续。</p>',
+    faq19q: "在哪里查看通过智能体创建的闹钟？",
+    faq19a: '<p>点击 Open Minis 主页的<strong>闹钟图标</strong>，或让智能体列出你的闹钟。这些闹钟不会出现在 iOS 系统时钟 App 中。</p>',
+    faq20q: "智能体能打开其他 iOS App 吗？",
+    faq20a: '<p>智能体可以通过 <strong>URL Scheme</strong> 打开支持该方式的 App（如地图、设置、Safari），但由于 iOS 沙盒限制，无法控制其他 App 的界面。</p>',
+    footerPrivacy: "隐私政策", footerContact: "联系我们", footerCopy: "© 2026 OpenMinis. 保留所有权利。",
+  },
+
+  "zh-Hant": {
+    subtitle: "你的私有裝置端 AI 智能體",
+    desc: "一款超越對話框的裝置端 AI 智能體。它能自主行動——瀏覽網頁、讀取健康資料、管理行程、控制智慧家庭、自動化複雜任務。一切都在你的裝置上私密完成。",
+    androidPreview: "預覽版",
+    androidLabel: "下載",
+    featuresTitle: "功能特色",
+    f1title: "多模型 AI", f1desc: "接入 Anthropic Claude、OpenAI GPT、Google Gemini、OpenRouter 或任意 OpenAI 相容介面，每次對話可自由切換模型。",
+    f2title: "內建 Linux Shell", f2desc: "裝置本地運行完整 Alpine Linux 環境。智能體可編寫並執行腳本、安裝套件、處理資料——無需任何伺服器。",
+    f3title: "深度 iOS 整合", f3desc: "原生存取 HealthKit、行事曆、提醒事項、HomeKit、通訊錄、藍牙、定位、照片、語音等系統框架。",
+    f4title: "內建瀏覽器", f4desc: "智能體可瀏覽網頁、填寫表單、擷取內容、截圖——全程在應用程式內完成。",
+    f5title: "自訂技能", f5desc: "匯入或建立 AI 技能以擴充智能體能力，相容 SKILL.md 格式。",
+    f6title: "隱私優先設計", f6desc: "API 金鑰儲存於裝置 Keychain 中。不收集資料，無第三方分析，對話內容完全屬於你。",
+    awesomeBanner: '想瞭解更多 Minis 的使用場景和創意玩法？查看社群精選案例集 <a href="https://github.com/OpenMinis/AwesomeMinis" target="_blank" rel="noopener">Awesome Minis →</a>',
+    gettingStartedTitle: "快速開始",
+    s1title: "下載安裝", s1desc: '從 <a href="https://apps.apple.com/app/id6759188481">App Store</a> 下載 Open Minis。需要 iOS 16+、iPadOS 16+、macOS 13+（Apple Silicon）或 visionOS 1.0+。',
+    s2title: "新增 AI 提供商", s2desc: "首次啟動時，系統將引導你新增 AI 提供商，選擇下方支援的服務商並輸入 API 金鑰。",
+    s3title: "選擇模型", s3desc: "從你的提供商中選擇模型。可新增多個提供商，並在每次對話中切換模型。",
+    s4title: "開始對話", s4desc: "建立新工作階段，開始聊天。智能體可執行指令、瀏覽網頁、讀取行事曆，以及更多操作。",
+    providersTitle: "支援的 AI 提供商", providersDesc: "Open Minis 支援多種 AI 提供商，至少需要一個 API 金鑰才能開始使用。",
+    thProvider: "提供商", thModels: "模型", thKey: "取得 API 金鑰",
+    orDesc: "多提供商路由", customProvider: "自訂", customDesc: "任意 OpenAI 相容 API", customKey: "提供商控制台",
+    advancedTitle: "進階設定",
+    advModelGroupsTitle: "模型群組", advModelGroupsDesc: "將多個模型組合，設定路由策略：",
+    advMgFallback: "<strong>故障轉移</strong> — 依序嘗試，若某個失敗則自動切換下一個。",
+    advMgBalance: "<strong>負載平衡</strong> — 將對話均勻分配至各模型。",
+    advAgentLoopTitle: "智能體迴圈模型", advAgentLoopDesc: "設定獨立模型池，供 AI 智能體在委派子任務或推理複雜操作時使用。",
+    advSkillsTitle: "技能", advSkillsDesc: "透過自訂技能擴充智能體。從 URL 或檔案系統匯入 <code>SKILL.md</code>，或讓智能體在對話中建立。技能可按工作階段啟用或停用。",
+    advFsTitle: "工作階段檔案系統", advFsDesc: "每個工作階段擁有獨立的檔案系統，掛載在 Linux 環境的 <code>/var/minis/</code> 下：",
+    advFsWorkspace: "工作檔案、腳本、資料", advFsAttachments: "圖片、音訊、影片", advFsBrowser: "瀏覽器截圖與擷取內容", advFsOffloads: "大型工具輸出",
+    nativeTitle: "原生 iOS 能力", nativeDesc: "智能體透過原生工具存取 iOS 系統框架，用自然語言描述即可：",
+    nHealth: '"我這週走了多少步？"', nCalendar: '"我明天有什麼行程？"', nReminders: '"下午 3 點提醒我打牙醫電話。"',
+    nHomeKit: '"關掉客廳的燈。"', nContacts: '"找一下 John 的電話號碼。"', nBluetooth: '"掃描附近的藍牙裝置。"',
+    nClipboard: '"讀一下我剛複製的內容。"', nMedia: '"朗讀這篇文章。"', nAlarms: '"設定早上 7 點的鬧鐘。"', nDevice: '"我的電池還有多少電？"',
+    faqTitle: "常見問題",
+    faqCat1: "API 設定與網路",
+    faq1q: "為什麼我的 API 金鑰顯示「無效」或認證失敗？",
+    faq1a: '<ul><li><strong>Google Gemini OAuth</strong> 有嚴格的第三方限制，建議改用 <strong>API Key</strong>。</li><li><strong>檢查餘額</strong> — 確認帳戶有足夠額度或在免費配額內。</li><li><strong>網路穩定性</strong> — 智能體模式需要穩定連線。如使用代理或 VPN，請為 Open Minis 分配固定節點。</li></ul>',
+    faq2q: "如何新增 OpenAI 相容提供商（如 Qwen、DeepSeek）？",
+    faq2a: '<p>選擇 <strong>自訂（OpenAI 相容）</strong>，輸入基礎 URL（不含末尾的 <code>/v1/...</code> 路徑）和 API 金鑰。若模型清單未自動載入，手動輸入模型 ID 即可。</p>',
+    faq3q: "如何設定第三方 API 代理/中繼？",
+    faq3a: '<ul><li>確認是 OpenAI 相容還是 Anthropic 相容。</li><li>僅輸入<strong>基礎 URL</strong>（去掉末尾路徑）和 API 金鑰。</li><li>若模型未自動出現，手動輸入模型 ID。</li></ul>',
+    faqCat2: "模型選擇與使用", faq4q: "哪個模型最適合智能體任務？",
+    faq4a: '<table><tr><th>情境</th><th>推薦</th></tr><tr><td>通用智能體任務</td><td><strong>Claude Sonnet / Opus</strong></td></tr><tr><td>長對話穩定性</td><td><strong>GPT-4o / GPT-5</strong></td></tr><tr><td>經濟實惠</td><td><strong>Kimi、MiniMax、Qwen</strong></td></tr></table>',
+    faq5q: "什麼是「增強快取」，什麼時候應該開啟？",
+    faq5a: '<p>僅適用於 <strong>Anthropic（Claude）模型</strong>。開啟後啟用 1 小時提示詞快取，快取的輸入 Token 費用僅為標準價的 <strong>1/10</strong>。首次請求費用為 <strong>2 倍</strong>（用於建立快取）。</p>',
+    faq6q: "為什麼模型長時間停在「思考中」？",
+    faq6a: '<p>部分模型（如 DeepSeek R1）具有擴展推理模式。如需更快回應，切換為 Claude Sonnet 或 GPT-4o 等非推理模型。</p>',
+    faqCat3: "技能", faq7q: "如何安裝新技能？",
+    faq7a: '<ul><li><strong>瀏覽安裝</strong> — 進入設定，瀏覽官方技能庫。</li><li><strong>傳送連結</strong> — 將 SKILL.md 的 GitHub URL 貼到對話中。</li><li><strong>讓智能體建立</strong> — 用自然語言描述需求。</li></ul>',
+    faq8q: "安裝的技能缺少腳本檔案？",
+    faq8a: '<p>透過 GitHub URL 安裝目前僅下載 <code>SKILL.md</code>。請讓智能體下載完整儲存庫或根據 SKILL.md 重新生成腳本。</p>',
+    faq9q: "剛建立的技能沒有出現在設定中？",
+    faq9a: '<p>對話中建立的技能可能不會立即顯示。離開設定頁再重新進入即可重新整理。</p>',
+    faqCat4: "檔案與儲存", faq10q: "工作階段間的檔案是否隔離？如何跨工作階段共享檔案？",
+    faq10a: '<ul><li><code>/var/minis/workspace/</code> — <strong>工作階段獨立</strong>。</li><li><code>/var/minis/memory/</code> — <strong>所有工作階段共享</strong>。</li><li><code>/var/minis/skills/</code> — <strong>全域共享</strong>。</li></ul>',
+    faq11q: "如何將 iOS 檔案 App 中的檔案匯入工作階段？",
+    faq11a: '<p>由於 iOS 沙盒限制，可將檔案內容貼到對話中，或先上傳到 iCloud Drive，再讓智能體從 iCloud 路徑讀取。</p>',
+    faq12q: "「清除聊天」會刪除工作區檔案嗎？",
+    faq12a: '<p>是的。清除前請讓智能體將重要檔案複製到 Memory 或 Skills 目錄。</p>',
+    faqCat5: "終端機與 Linux 環境", faq13q: "內建終端機支援哪些語言和工具？",
+    faq13a: '<table><tr><th>環境</th><th>狀態</th></tr><tr><td>Python</td><td>完全支援，推薦用 <code>uv</code> 管理相依。</td></tr><tr><td>Node.js</td><td>部分支援。</td></tr><tr><td>Go / Rust</td><td>支援。</td></tr><tr><td>FFmpeg</td><td>內建，支援硬體加速。</td></tr></table>',
+    faq14q: "安裝的套件會在工作階段間持久化嗎？",
+    faq14a: '<p>是的，除非執行 <strong>重置根檔案系統</strong>。</p>',
+    faq15q: "tar 指令卡住 / GitHub CLI (gh) 崩潰？",
+    faq15a: '<ul><li><strong>tar 卡住</strong> — 執行 <code>apk add tar</code>。</li><li><strong>gh CLI</strong> — 使用 <code>GITHUB_TOKEN</code> 透過 GitHub API 代替。</li></ul>',
+    faqCat6: "自動化與背景任務", faq16q: "如何讓智能體在背景持續執行？",
+    faq16a: '<p>在設定中開啟 <strong>「背景音訊保活」</strong>。</p>',
+    faq17q: "能設定排程/自動化任務嗎？",
+    faq17a: '<p>可以，透過 <strong>iOS 捷徑</strong> 實現。在「捷徑」App 中建立自動化並設定執行時間即可。</p>',
+    faqCat7: "其他", faq18q: "長對話變慢了怎麼辦？",
+    faq18a: '<p>讓智能體<strong>將對話摘要存入記憶檔案</strong>，再開啟新工作階段繼續。</p>',
+    faq19q: "在哪裡查看透過智能體建立的鬧鐘？",
+    faq19a: '<p>點擊 Open Minis 主頁的<strong>鬧鐘圖示</strong>，或讓智能體列出你的鬧鐘。</p>',
+    faq20q: "智能體能開啟其他 iOS App 嗎？",
+    faq20a: '<p>可透過 <strong>URL Scheme</strong> 開啟支援的 App，但無法控制其他 App 的介面。</p>',
+    footerPrivacy: "隱私政策", footerContact: "聯絡我們", footerCopy: "© 2026 OpenMinis. 保留所有權利。",
+  },
+
+  ja: {
+    subtitle: "プライベートなオンデバイス AI エージェント",
+    desc: "会話を超えて行動するオンデバイス AI エージェント。ウェブの閲覧、健康データへのアクセス、スケジュール管理、スマートホームの操作、複雑なタスクの自動化——すべてデバイス上でプライベートに実行します。",
+    androidPreview: "プレビュー",
+    androidLabel: "ダウンロード",
+    featuresTitle: "機能",
+    f1title: "マルチモデル AI", f1desc: "Anthropic Claude、OpenAI GPT、Google Gemini、OpenRouter、または任意の OpenAI 互換エンドポイントに接続。会話ごとにモデルを切り替えられます。",
+    f2title: "内蔵 Linux シェル", f2desc: "完全な Alpine Linux 環境がデバイス上で動作。エージェントはスクリプトの作成・実行、パッケージのインストール、データ処理をサーバー不要で行います。",
+    f3title: "iOS との深い統合", f3desc: "HealthKit、カレンダー、リマインダー、HomeKit、連絡先、Bluetooth、位置情報、写真、音声などへのネイティブアクセス。",
+    f4title: "内蔵ブラウザ", f4desc: "エージェントはアプリ内でウェブを閲覧し、フォームの入力、コンテンツの抽出、スクリーンショットの撮影が可能です。",
+    f5title: "カスタムスキル", f5desc: "SKILL.md 形式に対応したカスタムスキルをインポートまたは作成して、エージェントの機能を拡張できます。",
+    f6title: "プライバシー優先設計", f6desc: "API キーはデバイスの Keychain に保存。データ収集なし、サードパーティ分析なし。会話はすべてあなたのものです。",
+    awesomeBanner: 'Minis のユースケースや活用アイデアをもっと知りたいですか？コミュニティ厳選コレクション <a href="https://github.com/OpenMinis/AwesomeMinis" target="_blank" rel="noopener">Awesome Minis →</a> をご覧ください。',
+    gettingStartedTitle: "はじめ方",
+    s1title: "ダウンロード＆インストール", s1desc: '<a href="https://apps.apple.com/app/id6759188481">App Store</a> から Open Minis をダウンロード。iOS 16+、iPadOS 16+、macOS 13+（Apple Silicon）、または visionOS 1.0+ が必要です。',
+    s2title: "AI プロバイダーの追加", s2desc: "初回起動時に AI プロバイダーの追加が案内されます。対応プロバイダーを選択し、API キーを入力してください。",
+    s3title: "モデルの選択", s3desc: "プロバイダーからモデルを選択します。複数のプロバイダーを追加し、会話ごとにモデルを切り替えられます。",
+    s4title: "会話を開始", s4desc: "新しいセッションを作成してチャットを開始。エージェントはコマンドの実行、ウェブ閲覧、カレンダーの確認など多岐にわたる操作が可能です。",
+    providersTitle: "対応 AI プロバイダー", providersDesc: "Open Minis は複数の AI プロバイダーに対応しています。開始には少なくとも 1 つの API キーが必要です。",
+    thProvider: "プロバイダー", thModels: "モデル", thKey: "API キーの取得",
+    orDesc: "マルチプロバイダールーティング", customProvider: "カスタム", customDesc: "OpenAI 互換 API 全般", customKey: "プロバイダーのダッシュボード",
+    advancedTitle: "高度な設定",
+    advModelGroupsTitle: "モデルグループ", advModelGroupsDesc: "複数のモデルをグループ化してルーティング戦略を設定できます：",
+    advMgFallback: "<strong>フォールバック</strong> — 順番に試行し、失敗した場合は次のモデルへ自動切替。",
+    advMgBalance: "<strong>ロードバランス</strong> — 会話をモデル間で均等に分散。",
+    advAgentLoopTitle: "エージェントループモデル", advAgentLoopDesc: "サブタスクの委任や複雑な推論時に使用する専用モデルプールを設定できます。",
+    advSkillsTitle: "スキル", advSkillsDesc: "カスタムスキルでエージェントを拡張。URL またはファイルシステムから <code>SKILL.md</code> をインポートするか、会話中にエージェントに作成させることも可能です。",
+    advFsTitle: "セッションファイルシステム", advFsDesc: "各会話セッションは Linux 環境の <code>/var/minis/</code> に独立したファイルシステムを持ちます：",
+    advFsWorkspace: "作業ファイル、スクリプト、データ", advFsAttachments: "画像、音声、動画", advFsBrowser: "ブラウザのスクリーンショットと抽出コンテンツ", advFsOffloads: "大容量ツール出力",
+    nativeTitle: "ネイティブ iOS 機能", nativeDesc: "エージェントはネイティブツールを通じて iOS フレームワークにアクセスします。自然な言葉で話しかけるだけ：",
+    nHealth: '"今週何歩歩きましたか？"', nCalendar: '"明日の予定は何ですか？"', nReminders: '"午後3時に歯医者に電話するよう教えて。"',
+    nHomeKit: '"リビングの電気を消して。"', nContacts: '"John の電話番号を調べて。"', nBluetooth: '"近くのデバイスをスキャンして。"',
+    nClipboard: '"さっきコピーした内容を読んで。"', nMedia: '"この記事を読み上げて。"', nAlarms: '"朝7時にアラームを設定して。"', nDevice: '"バッテリー残量は？"',
+    faqTitle: "よくある質問",
+    faqCat1: "API 設定とネットワーク",
+    faq1q: "API キーが「無効」と表示されるか、認証に失敗する理由は？",
+    faq1a: '<ul><li><strong>Google Gemini OAuth</strong> はサードパーティ制限が厳しいため、<strong>API Key</strong> の使用を推奨します。</li><li><strong>残高を確認</strong> — アカウントのクレジットが十分かを確認してください。</li><li><strong>ネットワークの安定性</strong> — エージェントモードは安定した接続が必要です。プロキシや VPN を使用する場合、Open Minis 専用の固定ノードを設定してください。</li></ul>',
+    faq2q: "OpenAI 互換プロバイダー（Qwen、DeepSeek など）の追加方法は？",
+    faq2a: '<p><strong>カスタム（OpenAI 互換）</strong>を選択し、ベース URL（末尾の <code>/v1/...</code> パスは不要）と API キーを入力。モデルリストが自動表示されない場合はモデル ID を手動入力してください。</p>',
+    faq3q: "サードパーティ API プロキシ／リレーの設定方法は？",
+    faq3a: '<ul><li>OpenAI 互換か Anthropic 互換かを確認。</li><li><strong>ベース URL のみ</strong>（末尾パスを除く）と API キーを入力。</li><li>モデルが表示されない場合はモデル ID を手動入力。</li></ul>',
+    faqCat2: "モデルの選択と使用",
+    faq4q: "エージェントタスクに最適なモデルは？",
+    faq4a: '<table><tr><th>用途</th><th>推奨</th></tr><tr><td>汎用エージェントタスク</td><td><strong>Claude Sonnet / Opus</strong></td></tr><tr><td>長い会話の安定性</td><td><strong>GPT-4o / GPT-5</strong></td></tr><tr><td>コスト重視</td><td><strong>Kimi、MiniMax、Qwen</strong></td></tr></table>',
+    faq5q: "「拡張キャッシュ」とは何ですか？",
+    faq5a: '<p><strong>Anthropic（Claude）モデルのみ</strong>対応。1 時間のプロンプトキャッシュを有効化し、キャッシュされた入力トークンのコストが標準の <strong>1/10</strong> になります。初回リクエストは <strong>2 倍</strong>のコストがかかります。</p>',
+    faq6q: "モデルが長時間「思考中」のままになる理由は？",
+    faq6a: '<p>一部のモデル（DeepSeek R1 など）は拡張推論モードを持ちます。高速応答が必要な場合は Claude Sonnet や GPT-4o に切り替えてください。</p>',
+    faqCat3: "スキル", faq7q: "新しいスキルをインストールするには？",
+    faq7a: '<ul><li><strong>ブラウズ＆インストール</strong> — 設定から公式スキルリポジトリを閲覧。</li><li><strong>リンクを送信</strong> — SKILL.md の GitHub URL を会話に貼り付ける。</li><li><strong>エージェントに作成させる</strong> — 必要な機能を自然言語で説明する。</li></ul>',
+    faq8q: "インストールしたスキルのスクリプトファイルが見つからない？",
+    faq8a: '<p>GitHub URL からのインストールは <code>SKILL.md</code> のみをダウンロードします。エージェントにリポジトリ全体をダウンロードさせるか、SKILL.md に基づいてスクリプトを再生成させてください。</p>',
+    faq9q: "作成したスキルが設定に表示されない？",
+    faq9a: '<p>設定画面を離れて再度開くと反映されます。</p>',
+    faqCat4: "ファイルとストレージ", faq10q: "セッション間でファイルは分離されますか？",
+    faq10a: '<ul><li><code>/var/minis/workspace/</code> — <strong>セッションごとに分離</strong>。</li><li><code>/var/minis/memory/</code> — <strong>全セッション共有</strong>。</li><li><code>/var/minis/skills/</code> — <strong>グローバル共有</strong>。</li></ul>',
+    faq11q: "iOS ファイル App からファイルをインポートするには？",
+    faq11a: '<p>iOS のサンドボックス制限により、ファイルの内容を会話に貼り付けるか、iCloud Drive にアップロードしてエージェントに読み込ませてください。</p>',
+    faq12q: "「チャットをクリア」するとワークスペースファイルも削除されますか？",
+    faq12a: '<p>はい。クリア前に重要なファイルを Memory または Skills ディレクトリにコピーしてください。</p>',
+    faqCat5: "ターミナルと Linux 環境", faq13q: "内蔵ターミナルで使用できる言語とツールは？",
+    faq13a: '<table><tr><th>環境</th><th>状況</th></tr><tr><td>Python</td><td>完全対応。依存管理には <code>uv</code> を推奨。</td></tr><tr><td>Node.js</td><td>部分的に対応。</td></tr><tr><td>Go / Rust</td><td>対応。</td></tr><tr><td>FFmpeg</td><td>内蔵、ハードウェアアクセラレーション対応。</td></tr></table>',
+    faq14q: "インストールしたパッケージはセッションをまたいで保持されますか？",
+    faq14a: '<p>はい。<strong>ルートファイルシステムのリセット</strong>を行わない限り保持されます。</p>',
+    faq15q: "tar コマンドがハング / GitHub CLI (gh) がクラッシュする？",
+    faq15a: '<ul><li><strong>tar のハング</strong> — <code>apk add tar</code> でスタンドアロン版をインストール。</li><li><strong>gh CLI</strong> — <code>GITHUB_TOKEN</code> 環境変数を使って GitHub API 経由で代替。</li></ul>',
+    faqCat6: "自動化とバックグラウンドタスク", faq16q: "エージェントをバックグラウンドで動作させ続けるには？",
+    faq16a: '<p>設定で <strong>「バックグラウンド音声キープアライブ」</strong> を有効にしてください。</p>',
+    faq17q: "スケジュール実行や自動化タスクを設定できますか？",
+    faq17a: '<p><strong>iOS ショートカット</strong> 経由で可能です。ショートカット App で自動化を作成し、実行時刻を設定してください。</p>',
+    faqCat7: "その他", faq18q: "長い会話が遅くなった場合は？",
+    faq18a: '<p>エージェントに<strong>会話をメモリファイルに要約させ</strong>、新しいセッションで続きを開始してください。</p>',
+    faq19q: "エージェントが作成したアラームはどこで確認できますか？",
+    faq19a: '<p>Open Minis ホーム画面の<strong>アラームアイコン</strong>をタップするか、エージェントにアラームの一覧を聞いてください。</p>',
+    faq20q: "エージェントは他の iOS アプリを開けますか？",
+    faq20a: '<p><strong>URL スキーム</strong>に対応したアプリ（マップ、設定、Safari など）を開くことができます。iOS のサンドボックス制限により、他のアプリの UI は操作できません。</p>',
+    footerPrivacy: "プライバシーポリシー", footerContact: "お問い合わせ", footerCopy: "© 2026 OpenMinis. All rights reserved.",
+  },
+
+  ko: {
+    subtitle: "나만의 프라이빗 온디바이스 AI 에이전트",
+    desc: "단순한 대화를 넘어 행동하는 온디바이스 AI 에이전트. 웹 검색, 건강 데이터 접근, 일정 관리, 스마트홈 제어, 복잡한 작업 자동화까지 — 모든 것이 내 기기에서 비공개로 실행됩니다.",
+    androidPreview: "미리보기",
+    androidLabel: "다운로드",
+    featuresTitle: "기능",
+    f1title: "멀티모델 AI", f1desc: "Anthropic Claude, OpenAI GPT, Google Gemini, OpenRouter 또는 OpenAI 호환 엔드포인트에 연결하고, 대화마다 모델을 자유롭게 전환할 수 있습니다.",
+    f2title: "내장 Linux 셸", f2desc: "완전한 Alpine Linux 환경이 기기에서 직접 실행됩니다. 에이전트가 스크립트를 작성·실행하고, 패키지를 설치하고, 데이터를 처리합니다 — 서버 없이.",
+    f3title: "iOS 깊은 통합", f3desc: "HealthKit, 캘린더, 미리 알림, HomeKit, 연락처, 블루투스, 위치, 사진, 음성 등 iOS 프레임워크에 네이티브로 접근합니다.",
+    f4title: "내장 브라우저", f4desc: "에이전트가 앱 내에서 웹을 탐색하고, 양식을 작성하고, 콘텐츠를 추출하고, 스크린샷을 찍습니다.",
+    f5title: "커스텀 스킬", f5desc: "SKILL.md 형식과 호환되는 AI 스킬을 가져오거나 직접 만들어 에이전트의 기능을 확장하세요.",
+    f6title: "프라이버시 우선 설계", f6desc: "API 키는 기기의 Keychain에 저장됩니다. 데이터 수집 없음, 서드파티 분석 없음. 대화는 온전히 당신의 것입니다.",
+    awesomeBanner: 'Minis의 다양한 활용 사례와 창의적인 워크플로우를 더 알고 싶으신가요? 커뮤니티 큐레이션 컬렉션 <a href="https://github.com/OpenMinis/AwesomeMinis" target="_blank" rel="noopener">Awesome Minis →</a>를 확인해 보세요.',
+    gettingStartedTitle: "시작하기",
+    s1title: "다운로드 & 설치", s1desc: '<a href="https://apps.apple.com/app/id6759188481">App Store</a>에서 Open Minis를 다운로드하세요. iOS 16+, iPadOS 16+, macOS 13+ (Apple Silicon), 또는 visionOS 1.0+가 필요합니다.',
+    s2title: "AI 공급자 추가", s2desc: "첫 실행 시 AI 공급자를 추가하도록 안내됩니다. 지원되는 공급자를 선택하고 API 키를 입력하세요.",
+    s3title: "모델 선택", s3desc: "공급자에서 모델을 선택하세요. 여러 공급자를 추가하고 대화마다 모델을 전환할 수 있습니다.",
+    s4title: "대화 시작", s4desc: "새 세션을 만들고 채팅을 시작하세요. 에이전트는 명령 실행, 웹 탐색, 캘린더 확인 등 다양한 작업을 수행할 수 있습니다.",
+    providersTitle: "지원 AI 공급자", providersDesc: "Open Minis는 여러 AI 공급자를 지원합니다. 시작하려면 최소 하나의 API 키가 필요합니다.",
+    thProvider: "공급자", thModels: "모델", thKey: "API 키 받기",
+    orDesc: "멀티 공급자 라우팅", customProvider: "커스텀", customDesc: "OpenAI 호환 API", customKey: "공급자 대시보드",
+    advancedTitle: "고급 설정",
+    advModelGroupsTitle: "모델 그룹", advModelGroupsDesc: "여러 모델을 그룹화하여 라우팅 전략을 설정하세요:",
+    advMgFallback: "<strong>폴백</strong> — 순서대로 시도하며, 실패하면 다음 모델로 자동 전환.",
+    advMgBalance: "<strong>로드 밸런싱</strong> — 대화를 모델 간에 균등하게 분산.",
+    advAgentLoopTitle: "에이전트 루프 모델", advAgentLoopDesc: "서브태스크 위임이나 복잡한 추론 시 AI 에이전트가 사용할 전용 모델 풀을 설정합니다.",
+    advSkillsTitle: "스킬", advSkillsDesc: "커스텀 스킬로 에이전트를 확장하세요. URL 또는 파일 시스템에서 <code>SKILL.md</code>를 가져오거나, 대화 중 에이전트가 직접 생성하게 할 수도 있습니다.",
+    advFsTitle: "세션 파일 시스템", advFsDesc: "각 대화 세션은 Linux 환경의 <code>/var/minis/</code>에 독립적인 파일 시스템을 가집니다:",
+    advFsWorkspace: "작업 파일, 스크립트, 데이터", advFsAttachments: "이미지, 오디오, 비디오", advFsBrowser: "브라우저 스크린샷 및 추출 콘텐츠", advFsOffloads: "대용량 도구 출력",
+    nativeTitle: "네이티브 iOS 기능", nativeDesc: "에이전트는 네이티브 도구를 통해 iOS 프레임워크에 접근합니다. 자연어로 요청하기만 하면 됩니다:",
+    nHealth: '"이번 주에 몇 걸음 걸었어?"', nCalendar: '"내일 일정이 뭐야?"', nReminders: '"오후 3시에 치과 전화하라고 알려줘."',
+    nHomeKit: '"거실 조명 꺼줘."', nContacts: '"John 전화번호 찾아줘."', nBluetooth: '"근처 블루투스 기기 스캔해줘."',
+    nClipboard: '"방금 복사한 내용 읽어줘."', nMedia: '"이 기사 읽어줘."', nAlarms: '"오전 7시 알람 설정해줘."', nDevice: '"배터리 잔량이 얼마야?"',
+    faqTitle: "자주 묻는 질문",
+    faqCat1: "API 설정 & 네트워크",
+    faq1q: "API 키가 '유효하지 않음'으로 표시되거나 인증에 실패하는 이유는?",
+    faq1a: '<ul><li><strong>Google Gemini OAuth</strong>는 서드파티 제한이 엄격합니다. <strong>API Key</strong> 사용을 권장합니다.</li><li><strong>잔액 확인</strong> — 계정에 크레딧이 충분한지 확인하세요.</li><li><strong>네트워크 안정성</strong> — 에이전트 모드는 안정적인 연결이 필요합니다. 프록시나 VPN을 사용하는 경우 Open Minis 전용 고정 노드를 할당하세요.</li></ul>',
+    faq2q: "OpenAI 호환 공급자(Qwen, DeepSeek 등)는 어떻게 추가하나요?",
+    faq2a: '<p><strong>커스텀(OpenAI 호환)</strong>을 선택하고, 기본 URL(말미의 <code>/v1/...</code> 경로 제외)과 API 키를 입력하세요. 모델 목록이 자동으로 표시되지 않으면 모델 ID를 수동 입력하세요.</p>',
+    faq3q: "서드파티 API 프록시/릴레이 설정 방법은?",
+    faq3a: '<ul><li>OpenAI 호환인지 Anthropic 호환인지 확인하세요.</li><li><strong>기본 URL만</strong>(말미 경로 제외) 입력하세요.</li><li>모델이 자동 표시되지 않으면 모델 ID를 수동 입력하세요.</li></ul>',
+    faqCat2: "모델 선택 & 사용",
+    faq4q: "에이전트 작업에 가장 적합한 AI 모델은?",
+    faq4a: '<table><tr><th>용도</th><th>추천</th></tr><tr><td>일반 에이전트 작업</td><td><strong>Claude Sonnet / Opus</strong></td></tr><tr><td>긴 대화 안정성</td><td><strong>GPT-4o / GPT-5</strong></td></tr><tr><td>비용 절감</td><td><strong>Kimi, MiniMax, Qwen</strong></td></tr></table>',
+    faq5q: "\"향상된 캐시\"란 무엇인가요?",
+    faq5a: '<p><strong>Anthropic(Claude) 모델 전용</strong>. 1시간 프롬프트 캐시를 활성화하여 캐시된 입력 토큰 비용을 표준의 <strong>1/10</strong>으로 줄입니다. 첫 요청은 캐시 생성을 위해 <strong>2배</strong> 비용이 발생합니다.</p>',
+    faq6q: "모델이 오랫동안 '생각 중' 상태에 머무는 이유는?",
+    faq6a: '<p>일부 모델(DeepSeek R1 등)은 확장 추론 모드를 가집니다. 빠른 응답이 필요하면 Claude Sonnet이나 GPT-4o로 전환하세요.</p>',
+    faqCat3: "스킬", faq7q: "새 스킬을 설치하는 방법은?",
+    faq7a: '<ul><li><strong>찾아보기 & 설치</strong> — 설정에서 공식 스킬 저장소를 탐색하세요.</li><li><strong>링크 전송</strong> — 대화에 SKILL.md GitHub URL을 붙여넣으세요.</li><li><strong>에이전트에게 생성 요청</strong> — 자연어로 필요한 기능을 설명하세요.</li></ul>',
+    faq8q: "설치한 스킬의 스크립트 파일이 없습니다?",
+    faq8a: '<p>GitHub URL 설치는 <code>SKILL.md</code>만 다운로드합니다. 에이전트에게 전체 저장소를 다운로드하거나 SKILL.md를 기반으로 스크립트를 재생성하도록 요청하세요.</p>',
+    faq9q: "방금 만든 스킬이 설정에 나타나지 않습니다?",
+    faq9a: '<p>설정 화면을 나갔다가 다시 들어오면 새로고침됩니다.</p>',
+    faqCat4: "파일 & 저장소", faq10q: "세션 간 파일은 분리되나요? 세션을 넘어 파일을 공유하려면?",
+    faq10a: '<ul><li><code>/var/minis/workspace/</code> — <strong>세션별 분리</strong>.</li><li><code>/var/minis/memory/</code> — <strong>모든 세션 공유</strong>.</li><li><code>/var/minis/skills/</code> — <strong>전역 공유</strong>.</li></ul>',
+    faq11q: "iOS 파일 앱에서 파일을 세션으로 가져오는 방법은?",
+    faq11a: '<p>iOS 샌드박스 제한으로 인해, 파일 내용을 대화에 붙여넣거나 iCloud Drive에 먼저 업로드한 후 에이전트가 iCloud 경로에서 읽도록 하세요.</p>',
+    faq12q: "\"채팅 지우기\"를 하면 워크스페이스 파일도 삭제되나요?",
+    faq12a: '<p>네. 지우기 전에 중요한 파일을 Memory 또는 Skills 디렉터리에 복사해 두세요.</p>',
+    faqCat5: "터미널 & Linux 환경", faq13q: "내장 터미널에서 지원하는 언어와 도구는?",
+    faq13a: '<table><tr><th>환경</th><th>상태</th></tr><tr><td>Python</td><td>완전 지원. 의존성 관리는 <code>uv</code> 추천.</td></tr><tr><td>Node.js</td><td>부분 지원.</td></tr><tr><td>Go / Rust</td><td>지원.</td></tr><tr><td>FFmpeg</td><td>내장, 하드웨어 가속 지원.</td></tr></table>',
+    faq14q: "설치한 패키지는 세션 간에 유지되나요?",
+    faq14a: '<p>네. <strong>루트 파일시스템 초기화</strong>를 수행하지 않는 한 유지됩니다.</p>',
+    faq15q: "tar 명령이 멈추거나 GitHub CLI(gh)가 충돌합니다?",
+    faq15a: '<ul><li><strong>tar 멈춤</strong> — <code>apk add tar</code>로 독립 버전을 설치하세요.</li><li><strong>gh CLI</strong> — <code>GITHUB_TOKEN</code> 환경 변수를 사용해 GitHub API로 대체하세요.</li></ul>',
+    faqCat6: "자동화 & 백그라운드 작업", faq16q: "에이전트를 백그라운드에서 계속 실행하려면?",
+    faq16a: '<p>설정에서 <strong>\"백그라운드 오디오 킵얼라이브\"</strong>를 활성화하세요.</p>',
+    faq17q: "예약/자동화 작업을 설정할 수 있나요?",
+    faq17a: '<p>네, <strong>iOS 단축어</strong>를 통해 가능합니다. 단축어 앱에서 자동화를 만들고 실행 시간을 설정하세요.</p>',
+    faqCat7: "기타", faq18q: "긴 대화가 느려질 때는 어떻게 하나요?",
+    faq18a: '<p>에이전트에게 <strong>대화를 메모리 파일에 요약</strong>하게 한 다음 새 세션에서 이어가세요.</p>',
+    faq19q: "에이전트가 만든 알람은 어디서 확인하나요?",
+    faq19a: '<p>Open Minis 홈 화면의 <strong>알람 아이콘</strong>을 탭하거나, 에이전트에게 알람 목록을 물어보세요.</p>',
+    faq20q: "에이전트가 다른 iOS 앱을 열 수 있나요?",
+    faq20a: '<p><strong>URL Scheme</strong>을 지원하는 앱(지도, 설정, Safari 등)을 열 수 있습니다. iOS 샌드박스 제한으로 다른 앱의 UI는 제어할 수 없습니다.</p>',
+    footerPrivacy: "개인정보 처리방침", footerContact: "문의하기", footerCopy: "© 2026 OpenMinis. All rights reserved.",
+  }
+};
+
+function detectLang() {
+  const saved = localStorage.getItem('om_lang');
+  if (saved && I18N[saved]) return saved;
+  const navLangs = navigator.languages || [navigator.language];
+  for (const l of navLangs) {
+    const lc = l.toLowerCase();
+    if (lc.startsWith('zh-hant') || lc === 'zh-tw' || lc === 'zh-hk' || lc === 'zh-mo') return 'zh-Hant';
+    if (lc.startsWith('zh')) return 'zh-Hans';
+    if (lc.startsWith('ja')) return 'ja';
+    if (lc.startsWith('ko')) return 'ko';
+    if (lc.startsWith('en')) return 'en';
+  }
+  return 'en';
+}
+
+function applyLang(lang) {
+  const dict = I18N[lang];
+  if (!dict) return;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  document.documentElement.lang = lang === 'zh-Hans' ? 'zh-Hans' : lang === 'zh-Hant' ? 'zh-Hant' : lang;
+  localStorage.setItem('om_lang', lang);
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang')));
+});
+
+applyLang(detectLang());
+</script>
 </body>
 </html>
