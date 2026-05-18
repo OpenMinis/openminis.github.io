@@ -48,11 +48,12 @@ const BADGE_R = BADGE_D / 2;
 const LOGO_INSET = 3;
 
 // Glyph viewBox is 100x100 — every glyph below draws inside this box.
-// We then scale + translate it into the tile.
-const GLYPH_SCALE = 0.90; // 90/100 of tile width
-const GLYPH_SIZE = SIZE * GLYPH_SCALE * 0.62; // visual size ~62% of tile
-const GLYPH_X = (SIZE - GLYPH_SIZE) / 2 - 10;  // shift left to clear badge
-const GLYPH_Y = (SIZE - GLYPH_SIZE) / 2 - 14;  // shift up to clear badge
+// We then scale + translate it into the tile, centered. The bottom-
+// right Minis badge sits on top of the glyph; its drop shadow and
+// white fill keep the overlap visually clean.
+const GLYPH_SIZE = SIZE * 0.56; // visual size ~56% of tile
+const GLYPH_X = (SIZE - GLYPH_SIZE) / 2;
+const GLYPH_Y = (SIZE - GLYPH_SIZE) / 2;
 
 // Each glyph is a <g> with shared stroke styling. Inner paths inherit
 // stroke-width via the parent <g>; if a path needs a different weight,
