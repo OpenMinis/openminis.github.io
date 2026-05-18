@@ -22,168 +22,338 @@
                      (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
 
     if (standalone && session && path) {
-        var deep = 'minis://open?session=' + encodeURIComponent(session) +
-                   '&path=' + encodeURIComponent(path);
-        location.replace(deep);
+        location.replace('minis://open?session=' + encodeURIComponent(session) +
+                         '&path=' + encodeURIComponent(path));
         return;
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        var titleEl = document.getElementById('file-title');
-        if (titleEl && suggested) titleEl.textContent = suggested;
-
-        var missing = !session || !path;
-        if (missing) {
-            var warn = document.getElementById('warn-missing');
-            if (warn) warn.hidden = false;
-        }
-
-        var openBtn = document.getElementById('open-app');
-        if (openBtn && session && path) {
-            openBtn.addEventListener('click', function () {
-                var deep = 'minis://open?session=' + encodeURIComponent(session) +
-                           '&path=' + encodeURIComponent(path);
-                location.href = deep;
-            });
-        }
-    });
+    window.__minis = { session: session, path: path, suggested: suggested };
 })();
 </script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #fff;
+    --fg: #1d1d1f;
+    --muted: #6e6e73;
+    --card: #f5f5f7;
+    --card-hover: #ebebef;
+    --accent: #0066cc;
+    --border: #e5e5ea;
+    --warn-bg: #fff4e5;
+    --warn-fg: #8a4b00;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #000;
+        --fg: #f5f5f7;
+        --muted: #98989d;
+        --card: #1c1c1e;
+        --card-hover: #2c2c2e;
+        --accent: #2997ff;
+        --border: #2c2c2e;
+        --warn-bg: #3a2a00;
+        --warn-fg: #ffd9a0;
+    }
+}
 html, body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: #fff; color: #1d1d1f;
-    line-height: 1.5;
+    background: var(--bg); color: var(--fg);
+    line-height: 1.45;
     -webkit-font-smoothing: antialiased;
+    min-height: 100%;
 }
-.wrap { max-width: 560px; margin: 0 auto; padding: 40px 24px 80px; }
+.wrap { max-width: 640px; margin: 0 auto; padding: 24px 20px 60px; }
+
+.topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 32px;
+}
 .brand {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 15px; color: #6e6e73; margin-bottom: 32px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 15px; color: var(--muted);
 }
-.brand img { width: 28px; height: 28px; border-radius: 6px; }
-h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
-.file-title {
-    font-size: 17px; color: #1d1d1f; margin-bottom: 28px;
-    padding: 10px 14px; background: #f5f5f7; border-radius: 10px;
-    word-break: break-all;
-}
-.lead { font-size: 17px; color: #1d1d1f; margin-bottom: 24px; }
-.steps { list-style: none; counter-reset: step; margin-bottom: 32px; }
-.steps li {
-    counter-increment: step;
-    position: relative;
-    padding: 14px 16px 14px 52px;
-    background: #f5f5f7;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-.steps li::before {
-    content: counter(step);
-    position: absolute;
-    left: 14px; top: 50%; transform: translateY(-50%);
-    width: 26px; height: 26px;
-    background: #0066cc; color: #fff;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 600;
-}
-.steps b { font-weight: 600; }
-.guide-img {
-    display: block; max-width: 100%; height: auto;
-    margin: 8px 0 24px;
-    border-radius: 14px;
-    border: 1px solid #e5e5ea;
-    background: #f5f5f7;
-}
-.icon-share {
-    display: inline-block; width: 18px; height: 24px;
-    vertical-align: -6px; margin: 0 2px;
-}
-.btn-secondary {
-    display: inline-block;
-    padding: 10px 18px;
-    background: #f5f5f7; color: #0066cc;
+.brand img { width: 26px; height: 26px; border-radius: 6px; }
+.lang-wrap { position: relative; }
+.lang-toggle {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 12px;
+    background: var(--card); color: var(--fg);
     border: none; border-radius: 980px;
-    font-size: 15px; font-weight: 500;
+    font-size: 13px; font-weight: 500;
     cursor: pointer;
     -webkit-appearance: none;
 }
-.btn-secondary:active { background: #e8e8ed; }
+.lang-toggle:active { background: var(--card-hover); }
+.lang-toggle svg { width: 10px; height: 10px; opacity: 0.5; }
+.lang-menu {
+    position: absolute; top: calc(100% + 6px); right: 0;
+    background: var(--bg); color: var(--fg);
+    border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    min-width: 160px; padding: 6px;
+    z-index: 10;
+}
+.lang-menu[hidden] { display: none; }
+.lang-menu button {
+    display: block; width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    background: transparent; color: var(--fg);
+    border: none; border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+.lang-menu button:hover, .lang-menu button.active { background: var(--card); }
+.lang-menu button.active { color: var(--accent); font-weight: 600; }
+
+h1 {
+    font-size: 26px; font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+    word-break: break-word;
+}
+.lead {
+    font-size: 15px; color: var(--muted);
+    margin-bottom: 24px;
+}
+
 .warn {
-    padding: 14px 16px;
-    background: #fff4e5; color: #8a4b00;
-    border-radius: 12px;
+    padding: 12px 14px;
+    background: var(--warn-bg); color: var(--warn-fg);
+    border-radius: 10px;
     margin-bottom: 20px;
-    font-size: 15px;
+    font-size: 14px;
 }
-.foot {
-    margin-top: 40px; padding-top: 20px;
-    border-top: 1px solid #e5e5ea;
-    font-size: 13px; color: #86868b;
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+    list-style: none;
 }
-.foot a { color: #0066cc; text-decoration: none; }
-@media (prefers-color-scheme: dark) {
-    html, body { background: #000; color: #f5f5f7; }
-    .file-title, .steps li { background: #1c1c1e; color: #f5f5f7; }
-    .lead { color: #f5f5f7; }
-    .guide-img { background: #1c1c1e; border-color: #2c2c2e; }
-    .btn-secondary { background: #1c1c1e; color: #2997ff; }
-    .btn-secondary:active { background: #2c2c2e; }
-    .warn { background: #3a2a00; color: #ffd9a0; }
-    .foot { border-top-color: #2c2c2e; color: #8e8e93; }
-    .foot a { color: #2997ff; }
+.steps li {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    min-height: 132px;
 }
+.step-num {
+    width: 24px; height: 24px;
+    background: var(--accent); color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600;
+    flex-shrink: 0;
+}
+.step-text {
+    font-size: 14px; line-height: 1.4;
+}
+.step-text b { font-weight: 600; }
+.icon-inline {
+    display: inline-block;
+    width: 14px; height: 18px;
+    vertical-align: -4px;
+    margin: 0 1px;
+}
+@media (max-width: 480px) {
+    .steps { grid-template-columns: 1fr; gap: 8px; }
+    .steps li {
+        flex-direction: row;
+        align-items: center;
+        min-height: 0;
+        padding: 12px 14px;
+    }
+}
+
+.btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 16px;
+    background: var(--card); color: var(--accent);
+    border: none; border-radius: 980px;
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+    -webkit-appearance: none;
+    text-decoration: none;
+}
+.btn:active { background: var(--card-hover); }
 </style>
 </head>
 <body>
 <div class="wrap">
-    <div class="brand">
-        <img src="/icon-180.png" alt="">
-        <span>Open Minis</span>
+    <div class="topbar">
+        <div class="brand">
+            <img src="/icon-180.png" alt="">
+            <span>Open Minis</span>
+        </div>
+        <div class="lang-wrap">
+            <button class="lang-toggle" id="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                <span id="lang-current">English</span>
+                <svg viewBox="0 0 10 6" fill="currentColor" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="lang-menu" id="lang-menu" role="menu" hidden>
+                <button type="button" data-lang="en" role="menuitem">English</button>
+                <button type="button" data-lang="zh-Hans" role="menuitem">简体中文</button>
+                <button type="button" data-lang="zh-Hant" role="menuitem">繁體中文</button>
+                <button type="button" data-lang="ja" role="menuitem">日本語</button>
+                <button type="button" data-lang="ko" role="menuitem">한국어</button>
+            </div>
+        </div>
     </div>
 
-    <h1>Add to Home Screen</h1>
-    <div id="file-title" class="file-title">Open Minis file</div>
+    <h1 id="title" data-i18n="title">Add to Home Screen</h1>
+    <p class="lead" id="lead" data-i18n="lead">Save this file as a Home Screen shortcut to open it instantly in Open Minis.</p>
 
-    <div id="warn-missing" class="warn" hidden>
-        This link is missing the file reference. Please re-create the shortcut from inside Open Minis.
-    </div>
-
-    <p class="lead">
-        Add this file as a shortcut on your Home Screen so you can open it instantly, anytime.
-    </p>
+    <div class="warn" id="warn" data-i18n="warn" hidden>This link is missing a file reference. Please re-create the shortcut from inside Open Minis.</div>
 
     <ol class="steps">
-        <li>Tap the <b>Share</b> button
-            <svg class="icon-share" viewBox="0 0 24 32" fill="currentColor" aria-hidden="true">
-                <path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            at the bottom of Safari.
+        <li>
+            <span class="step-num">1</span>
+            <span class="step-text" data-i18n="s1">Tap the <b>Share</b> button
+                <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true">
+                    <path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                in Safari.</span>
         </li>
-        <li>Scroll down and choose <b>Add to Home Screen</b>.</li>
-        <li>Tap <b>Add</b> in the top-right corner.</li>
+        <li>
+            <span class="step-num">2</span>
+            <span class="step-text" data-i18n="s2">Choose <b>Add to Home Screen</b>.</span>
+        </li>
+        <li>
+            <span class="step-num">3</span>
+            <span class="step-text" data-i18n="s3">Tap <b>Add</b> to confirm.</span>
+        </li>
     </ol>
 
-    <img class="guide-img" src="/launch-guide.png"
-         alt="Safari share menu showing the Add to Home Screen option"
-         onerror="this.style.display='none'">
-
-    <p class="lead" style="font-size:15px;color:#6e6e73;">
-        Tapping the new icon will open the file directly in Open Minis.
-    </p>
-
-    <p style="margin-top:24px;">
-        <button id="open-app" class="btn-secondary" type="button">Open in Open Minis now</button>
-    </p>
-
-    <div class="foot">
-        <a href="/">openminis.app</a> &middot;
-        <a href="https://apps.apple.com/us/app/open-minis/id6759188481">App Store</a>
-    </div>
+    <button id="open-btn" class="btn" type="button" data-i18n="openNow">Open in Open Minis</button>
 </div>
+
+<script>
+const I18N = {
+  en: {
+    title: "Add to Home Screen",
+    lead: "Save this file as a Home Screen shortcut to open it instantly in Open Minis.",
+    warn: "This link is missing a file reference. Please re-create the shortcut from inside Open Minis.",
+    s1: 'Tap the <b>Share</b> button <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> in Safari.',
+    s2: "Choose <b>Add to Home Screen</b>.",
+    s3: "Tap <b>Add</b> to confirm.",
+    openNow: "Open in Open Minis",
+    langName: "English",
+  },
+  "zh-Hans": {
+    title: "添加到主屏幕",
+    lead: "把此文件保存为主屏幕快捷方式，下次一键直达 Open Minis。",
+    warn: "链接缺少文件信息，请回到 Open Minis 重新创建快捷方式。",
+    s1: '点击 Safari 的 <b>分享</b> 按钮 <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>。',
+    s2: "选择 <b>添加到主屏幕</b>。",
+    s3: "点击 <b>添加</b> 完成。",
+    openNow: "在 Open Minis 中打开",
+    langName: "简体中文",
+  },
+  "zh-Hant": {
+    title: "加入主畫面",
+    lead: "把此檔案儲存為主畫面捷徑，下次一鍵直達 Open Minis。",
+    warn: "連結缺少檔案資訊，請回到 Open Minis 重新建立捷徑。",
+    s1: '點擊 Safari 的 <b>分享</b> 按鈕 <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>。',
+    s2: "選擇 <b>加入主畫面</b>。",
+    s3: "點擊 <b>加入</b> 完成。",
+    openNow: "在 Open Minis 中開啟",
+    langName: "繁體中文",
+  },
+  ja: {
+    title: "ホーム画面に追加",
+    lead: "このファイルをホーム画面のショートカットとして保存し、Open Minis ですぐに開けるようにします。",
+    warn: "リンクにファイル情報がありません。Open Minis でショートカットを作成し直してください。",
+    s1: 'Safari の <b>共有</b> ボタン <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> をタップ。',
+    s2: "<b>ホーム画面に追加</b> を選択。",
+    s3: "<b>追加</b> をタップして完了。",
+    openNow: "Open Minis で開く",
+    langName: "日本語",
+  },
+  ko: {
+    title: "홈 화면에 추가",
+    lead: "이 파일을 홈 화면 단축아이콘으로 저장하여 Open Minis에서 바로 엽니다.",
+    warn: "링크에 파일 정보가 없습니다. Open Minis에서 단축아이콘을 다시 만들어 주세요.",
+    s1: 'Safari의 <b>공유</b> 버튼 <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>을 누르세요.',
+    s2: "<b>홈 화면에 추가</b>를 선택하세요.",
+    s3: "<b>추가</b>를 눌러 완료합니다.",
+    openNow: "Open Minis에서 열기",
+    langName: "한국어",
+  },
+};
+
+function detectLang() {
+  const saved = localStorage.getItem('om_lang');
+  if (saved && I18N[saved]) return saved;
+  const navLangs = navigator.languages || [navigator.language];
+  for (const l of navLangs) {
+    const lc = l.toLowerCase();
+    if (lc.startsWith('zh-hant') || lc === 'zh-tw' || lc === 'zh-hk' || lc === 'zh-mo') return 'zh-Hant';
+    if (lc.startsWith('zh')) return 'zh-Hans';
+    if (lc.startsWith('ja')) return 'ja';
+    if (lc.startsWith('ko')) return 'ko';
+    if (lc.startsWith('en')) return 'en';
+  }
+  return 'en';
+}
+
+function applyLang(lang) {
+  const dict = I18N[lang] || I18N.en;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  document.getElementById('lang-current').textContent = dict.langName;
+  document.querySelectorAll('#lang-menu button').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  document.documentElement.lang = lang;
+  localStorage.setItem('om_lang', lang);
+
+  const suggested = (window.__minis && window.__minis.suggested) || '';
+  if (suggested) {
+    document.getElementById('title').textContent = suggested;
+    document.getElementById('lead').textContent = dict.lead;
+  }
+}
+
+const toggle = document.getElementById('lang-toggle');
+const menu = document.getElementById('lang-menu');
+toggle.addEventListener('click', e => {
+  e.stopPropagation();
+  const open = !menu.hidden;
+  menu.hidden = open;
+  toggle.setAttribute('aria-expanded', String(!open));
+});
+document.addEventListener('click', () => { menu.hidden = true; toggle.setAttribute('aria-expanded', 'false'); });
+menu.addEventListener('click', e => e.stopPropagation());
+menu.querySelectorAll('button').forEach(b => {
+  b.addEventListener('click', () => {
+    applyLang(b.getAttribute('data-lang'));
+    menu.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+const ctx = window.__minis || {};
+if (!ctx.session || !ctx.path) {
+  document.getElementById('warn').hidden = false;
+  document.getElementById('open-btn').style.display = 'none';
+} else {
+  document.getElementById('open-btn').addEventListener('click', () => {
+    location.href = 'minis://open?session=' + encodeURIComponent(ctx.session) +
+                    '&path=' + encodeURIComponent(ctx.path);
+  });
+}
+
+applyLang(detectLang());
+</script>
 </body>
 </html>
