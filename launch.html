@@ -7,16 +7,28 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
 <title>Open Minis</title>
-<link rel="apple-touch-icon" href="/icon-180.png">
-<link rel="icon" href="/icon-180.png">
+<link id="apple-icon" rel="apple-touch-icon" href="/icon-180.png">
+<link id="fav-icon" rel="icon" href="/icon-180.png">
 <script>
 (function () {
+    var PALETTES = ['sunset','ocean','forest','grape','berry','midnight','aurora','peach'];
+    var ICON_RE = /^([A-Z0-9])-([a-z]+)$/;
+
     var params = new URLSearchParams(location.search);
     var session = params.get('session');
     var path = params.get('path');
+    var iconKey = params.get('icon') || '';
     var suggested = '';
     try { suggested = decodeURIComponent(location.hash.slice(1)); } catch (e) {}
     if (suggested) document.title = suggested;
+
+    var iconUrl = '/icon-180.png';
+    var m = iconKey.match(ICON_RE);
+    if (m && PALETTES.indexOf(m[2]) !== -1) {
+        iconUrl = '/icons/letter/' + m[1] + '-' + m[2] + '.png';
+    }
+    document.getElementById('apple-icon').href = iconUrl;
+    document.getElementById('fav-icon').href = iconUrl;
 
     var standalone = (window.navigator.standalone === true) ||
                      (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
@@ -27,7 +39,7 @@
         return;
     }
 
-    window.__minis = { session: session, path: path, suggested: suggested };
+    window.__minis = { session: session, path: path, suggested: suggested, iconUrl: iconUrl };
 })();
 </script>
 <style>
@@ -189,7 +201,7 @@ h1 {
 <div class="wrap">
     <div class="topbar">
         <div class="brand">
-            <img src="/icon-180.png" alt="">
+            <img id="brand-icon" src="/icon-180.png" alt="">
             <span>Open Minis</span>
         </div>
         <div class="lang-wrap">
@@ -343,6 +355,9 @@ menu.querySelectorAll('button').forEach(b => {
 });
 
 const ctx = window.__minis || {};
+if (ctx.iconUrl) {
+  document.getElementById('brand-icon').src = ctx.iconUrl;
+}
 if (!ctx.session || !ctx.path) {
   document.getElementById('warn').hidden = false;
   document.getElementById('open-btn').style.display = 'none';
