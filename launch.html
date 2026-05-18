@@ -11,8 +11,9 @@
 <link id="fav-icon" rel="icon" href="/icon-180.png">
 <script>
 (function () {
+    var TYPES = ['html','markdown','text','pdf','image','video','audio'];
     var PALETTES = ['sunset','ocean','forest','grape','berry','midnight','aurora','peach'];
-    var ICON_RE = /^([A-Z0-9])-([a-z]+)$/;
+    var ICON_RE = /^([a-z]+)-([a-z]+)$/;
 
     var params = new URLSearchParams(location.search);
     var session = params.get('session');
@@ -24,8 +25,8 @@
 
     var iconUrl = '/icon-180.png';
     var m = iconKey.match(ICON_RE);
-    if (m && PALETTES.indexOf(m[2]) !== -1) {
-        iconUrl = '/icons/letter/' + m[1] + '-' + m[2] + '.png';
+    if (m && TYPES.indexOf(m[1]) !== -1 && PALETTES.indexOf(m[2]) !== -1) {
+        iconUrl = '/icons/type/' + m[1] + '-' + m[2] + '.png';
     }
     document.getElementById('apple-icon').href = iconUrl;
     document.getElementById('fav-icon').href = iconUrl;
