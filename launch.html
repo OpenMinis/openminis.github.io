@@ -11,17 +11,11 @@
 <link id="fav-icon" rel="icon" href="/icon-180.png">
 <script>
 (function () {
-    // Canonical icon key — one of the 16 categories shown in the iOS
-    // Category picker. Matches /icons/category/<name>.png on this site.
+    // Icon key — one of the 16 categories shown in the iOS Category
+    // picker. Resolves to /icons/category/<name>.png on this site.
     var CATEGORIES = ['code','writing','research','analysis','creative','chat',
                       'math','translation','health','finance','travel','education',
                       'design','productivity','support','other'];
-    // Legacy icon key — <type>-<palette>. Still served from /icons/type/
-    // for existing pinned home-screen tiles created before the category
-    // switch. New tiles created from the iOS sheet now emit a category key.
-    var LEGACY_TYPES = ['html','markdown','text','pdf','image','video','audio'];
-    var LEGACY_PALETTES = ['sunset','ocean','forest','grape','berry','midnight','aurora','peach'];
-    var LEGACY_ICON_RE = /^([a-z]+)-([a-z]+)$/;
 
     var params = new URLSearchParams(location.search);
     var session = params.get('session');
@@ -34,11 +28,6 @@
     var iconUrl = '/icon-180.png';
     if (CATEGORIES.indexOf(iconKey) !== -1) {
         iconUrl = '/icons/category/' + iconKey + '.png';
-    } else {
-        var m = iconKey.match(LEGACY_ICON_RE);
-        if (m && LEGACY_TYPES.indexOf(m[1]) !== -1 && LEGACY_PALETTES.indexOf(m[2]) !== -1) {
-            iconUrl = '/icons/type/' + m[1] + '-' + m[2] + '.png';
-        }
     }
     document.getElementById('apple-icon').href = iconUrl;
     document.getElementById('fav-icon').href = iconUrl;
@@ -152,42 +141,60 @@ h1 {
     font-size: 14px;
 }
 
+/* Icon-led breadcrumb of the three taps. Single card, three steps
+   in one flowing row separated by chevrons. Collapses to stacked
+   chips on narrow screens. Replaces the older "1/2/3 IKEA manual"
+   layout per research into how Twitter / Instagram / Substack /
+   philfung's add-to-homescreen library frame this moment — terse,
+   icon-first, no numbered steps. */
 .steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 16px;
     list-style: none;
+    background: var(--card);
+    border-radius: 16px;
+    padding: 18px 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    flex: 0 0 auto;
 }
 .steps li {
-    background: var(--card);
-    border-radius: 14px;
-    padding: 16px 14px;
+    flex: 1 1 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    min-height: 132px;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    min-width: 0;
 }
-/* On mobile single-column layout, let the rows share remaining
-   vertical space evenly so the steps fill the viewport down to
-   the action button. */
-.steps-fill {
-    flex: 1 1 auto;
-    grid-auto-rows: 1fr;
-}
-.step-num {
-    width: 24px; height: 24px;
-    background: var(--accent); color: #fff;
-    border-radius: 50%;
+.step-glyph {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--accent);
     display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 600;
     flex-shrink: 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
 }
+.step-glyph svg { width: 20px; height: 20px; }
 .step-text {
-    font-size: 14px; line-height: 1.4;
+    font-size: 13px;
+    line-height: 1.35;
+    color: var(--fg);
 }
 .step-text b { font-weight: 600; }
+.step-divider {
+    color: var(--muted);
+    flex: 0 0 auto;
+    font-size: 16px;
+    line-height: 1;
+    opacity: 0.5;
+    align-self: center;
+    /* push the chevron up to vertically align with the glyph row,
+       not the centered glyph + caption block. */
+    margin-bottom: 28px;
+}
 .icon-inline {
     display: inline-block;
     width: 14px; height: 18px;
@@ -195,12 +202,26 @@ h1 {
     margin: 0 1px;
 }
 @media (max-width: 480px) {
-    .steps { grid-template-columns: 1fr; gap: 10px; }
+    .steps {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 14px;
+    }
     .steps li {
         flex-direction: row;
         align-items: center;
-        min-height: 0;
-        padding: 14px 16px;
+        gap: 14px;
+        text-align: left;
+        padding: 6px 4px;
+    }
+    .step-text { font-size: 14px; }
+    .step-divider {
+        align-self: center;
+        margin-bottom: 0;
+        transform: rotate(90deg);
+        opacity: 0.35;
+        padding: 2px 0;
     }
 }
 
@@ -314,96 +335,107 @@ h1 {
         </div>
     </div>
 
-    <h1 id="title" data-i18n="title">Add to Home Screen</h1>
-    <p class="lead" id="lead" data-i18n="lead">Save this file as a Home Screen shortcut to open it instantly in Open Minis.</p>
+    <h1 id="title" data-i18n="title">Pin it to your Home Screen</h1>
+    <p class="lead" id="lead" data-i18n="lead">One tap to jump back in — full-screen, no browser, no typing the URL.</p>
 
     <div class="warn" id="warn" data-i18n="warn" hidden>This link is missing a file reference. Please re-create the shortcut from inside Open Minis.</div>
 
-    <ol class="steps steps-fill">
+    <ol class="steps">
         <li>
-            <span class="step-num">1</span>
-            <span class="step-text" data-i18n="s1">Tap the <b>Share</b> button
-                <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true">
+            <span class="step-glyph" aria-hidden="true">
+                <svg viewBox="0 0 24 32">
                     <path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                in Safari.</span>
+            </span>
+            <span class="step-text" data-i18n="s1">Hit <b>Share</b></span>
         </li>
+        <span class="step-divider" aria-hidden="true">›</span>
         <li>
-            <span class="step-num">2</span>
-            <span class="step-text" data-i18n="s2">Choose <b>Add to Home Screen</b>.</span>
+            <span class="step-glyph" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            <span class="step-text" data-i18n="s2">Pick <b>Add to Home Screen</b></span>
         </li>
+        <span class="step-divider" aria-hidden="true">›</span>
         <li>
-            <span class="step-num">3</span>
-            <span class="step-text" data-i18n="s3">Tap <b>Add</b> to confirm.</span>
+            <span class="step-glyph" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="step-text" data-i18n="s3">Tap <b>Add</b></span>
         </li>
     </ol>
 
-    <button id="open-btn" class="btn" type="button" data-i18n="openNow">Open in Open Minis</button>
+    <button id="open-btn" class="btn" type="button" data-i18n="openNow">Open now</button>
 </div>
 
 <script>
 const I18N = {
   en: {
-    title: "Add to Home Screen",
-    lead: "Save this file as a Home Screen shortcut to open it instantly in Open Minis.",
+    title: "Pin it to your Home Screen",
+    titleWith: "Pin <b>{title}</b> to your Home Screen",
+    lead: "One tap to jump back in — full-screen, no browser, no typing the URL.",
     warn: "This link is missing a file reference. Please re-create the shortcut from inside Open Minis.",
-    s1: 'Tap the <b>Share</b> button <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> in Safari.',
-    s2: "Choose <b>Add to Home Screen</b>.",
-    s3: "Tap <b>Add</b> to confirm.",
-    openNow: "Open in Open Minis",
+    s1: "Hit <b>Share</b>",
+    s2: "Pick <b>Add to Home Screen</b>",
+    s3: "Tap <b>Add</b>",
+    openNow: "Open now",
     splashTitle: "Opening…",
     splashStatus: "Returning to Open Minis",
     splashRetry: "Tap to open",
     langName: "English",
   },
   "zh-Hans": {
-    title: "添加到主屏幕",
-    lead: "把此文件保存为主屏幕快捷方式，下次一键直达 Open Minis。",
+    title: "把它钉到主屏幕",
+    titleWith: "把 <b>{title}</b> 钉到主屏幕",
+    lead: "一键直达，全屏体验，不用浏览器，不用输网址。",
     warn: "链接缺少文件信息，请回到 Open Minis 重新创建快捷方式。",
-    s1: '点击 Safari 的 <b>分享</b> 按钮 <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>。',
-    s2: "选择 <b>添加到主屏幕</b>。",
-    s3: "点击 <b>添加</b> 完成。",
-    openNow: "在 Open Minis 中打开",
+    s1: "点击 <b>分享</b>",
+    s2: "选择 <b>添加到主屏幕</b>",
+    s3: "点击 <b>添加</b>",
+    openNow: "立即打开",
     splashTitle: "正在打开…",
     splashStatus: "正在返回 Open Minis",
     splashRetry: "点击打开",
     langName: "简体中文",
   },
   "zh-Hant": {
-    title: "加入主畫面",
-    lead: "把此檔案儲存為主畫面捷徑，下次一鍵直達 Open Minis。",
+    title: "把它釘到主畫面",
+    titleWith: "把 <b>{title}</b> 釘到主畫面",
+    lead: "一鍵直達，全螢幕體驗，不用瀏覽器，不用輸網址。",
     warn: "連結缺少檔案資訊，請回到 Open Minis 重新建立捷徑。",
-    s1: '點擊 Safari 的 <b>分享</b> 按鈕 <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>。',
-    s2: "選擇 <b>加入主畫面</b>。",
-    s3: "點擊 <b>加入</b> 完成。",
-    openNow: "在 Open Minis 中開啟",
+    s1: "點擊 <b>分享</b>",
+    s2: "選擇 <b>加入主畫面</b>",
+    s3: "點擊 <b>加入</b>",
+    openNow: "立即開啟",
     splashTitle: "正在開啟…",
     splashStatus: "正在返回 Open Minis",
     splashRetry: "點擊開啟",
     langName: "繁體中文",
   },
   ja: {
-    title: "ホーム画面に追加",
-    lead: "このファイルをホーム画面のショートカットとして保存し、Open Minis ですぐに開けるようにします。",
+    title: "ホーム画面に固定",
+    titleWith: "<b>{title}</b> をホーム画面に固定",
+    lead: "ワンタップで再開。フルスクリーン、ブラウザもURL入力も不要。",
     warn: "リンクにファイル情報がありません。Open Minis でショートカットを作成し直してください。",
-    s1: 'Safari の <b>共有</b> ボタン <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg> をタップ。',
-    s2: "<b>ホーム画面に追加</b> を選択。",
-    s3: "<b>追加</b> をタップして完了。",
-    openNow: "Open Minis で開く",
+    s1: "<b>共有</b> をタップ",
+    s2: "<b>ホーム画面に追加</b> を選択",
+    s3: "<b>追加</b> をタップ",
+    openNow: "今すぐ開く",
     splashTitle: "起動中…",
     splashStatus: "Open Minis に戻ります",
     splashRetry: "タップして開く",
     langName: "日本語",
   },
   ko: {
-    title: "홈 화면에 추가",
-    lead: "이 파일을 홈 화면 단축아이콘으로 저장하여 Open Minis에서 바로 엽니다.",
+    title: "홈 화면에 고정",
+    titleWith: "<b>{title}</b> 홈 화면에 고정",
+    lead: "한 번의 탭으로 다시 시작. 전체 화면, 브라우저나 주소 입력 없이.",
     warn: "링크에 파일 정보가 없습니다. Open Minis에서 단축아이콘을 다시 만들어 주세요.",
-    s1: 'Safari의 <b>공유</b> 버튼 <svg class="icon-inline" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 21V4M12 4l-5 5M12 4l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v13h14V14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>을 누르세요.',
-    s2: "<b>홈 화면에 추가</b>를 선택하세요.",
-    s3: "<b>추가</b>를 눌러 완료합니다.",
-    openNow: "Open Minis에서 열기",
+    s1: "<b>공유</b> 탭",
+    s2: "<b>홈 화면에 추가</b> 선택",
+    s3: "<b>추가</b> 탭",
+    openNow: "지금 열기",
     splashTitle: "여는 중…",
     splashStatus: "Open Minis로 돌아가기",
     splashRetry: "탭하여 열기",
@@ -439,14 +471,22 @@ function applyLang(lang) {
   document.documentElement.lang = lang;
   localStorage.setItem('om_lang', lang);
 
+  // Mix the user-supplied document title into the headline so the
+  // user sees what they're about to pin, without losing the inviting
+  // outcome-first copy. Falls back to the static dict.title when no
+  // suggested title was passed (e.g. the page was opened directly).
   const suggested = (window.__minis && window.__minis.suggested) || '';
-  if (suggested) {
-    document.getElementById('title').textContent = suggested;
-    document.getElementById('lead').textContent = dict.lead;
-    // Same treatment for the standalone splash — the user-supplied
-    // title is more useful than the generic "Opening…" string.
+  if (suggested && dict.titleWith) {
+    document.getElementById('title').innerHTML =
+      dict.titleWith.replace('{title}', escapeHtml(suggested));
     document.getElementById('splash-title').textContent = suggested;
   }
+}
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
 }
 
 const toggle = document.getElementById('lang-toggle');
