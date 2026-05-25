@@ -11,9 +11,17 @@
 <link id="fav-icon" rel="icon" href="/icon-180.png">
 <script>
 (function () {
-    var TYPES = ['html','markdown','text','pdf','image','video','audio'];
-    var PALETTES = ['sunset','ocean','forest','grape','berry','midnight','aurora','peach'];
-    var ICON_RE = /^([a-z]+)-([a-z]+)$/;
+    // Canonical icon key — one of the 16 categories shown in the iOS
+    // Category picker. Matches /icons/category/<name>.png on this site.
+    var CATEGORIES = ['code','writing','research','analysis','creative','chat',
+                      'math','translation','health','finance','travel','education',
+                      'design','productivity','support','other'];
+    // Legacy icon key — <type>-<palette>. Still served from /icons/type/
+    // for existing pinned home-screen tiles created before the category
+    // switch. New tiles created from the iOS sheet now emit a category key.
+    var LEGACY_TYPES = ['html','markdown','text','pdf','image','video','audio'];
+    var LEGACY_PALETTES = ['sunset','ocean','forest','grape','berry','midnight','aurora','peach'];
+    var LEGACY_ICON_RE = /^([a-z]+)-([a-z]+)$/;
 
     var params = new URLSearchParams(location.search);
     var session = params.get('session');
@@ -24,9 +32,13 @@
     if (suggested) document.title = suggested;
 
     var iconUrl = '/icon-180.png';
-    var m = iconKey.match(ICON_RE);
-    if (m && TYPES.indexOf(m[1]) !== -1 && PALETTES.indexOf(m[2]) !== -1) {
-        iconUrl = '/icons/type/' + m[1] + '-' + m[2] + '.png';
+    if (CATEGORIES.indexOf(iconKey) !== -1) {
+        iconUrl = '/icons/category/' + iconKey + '.png';
+    } else {
+        var m = iconKey.match(LEGACY_ICON_RE);
+        if (m && LEGACY_TYPES.indexOf(m[1]) !== -1 && LEGACY_PALETTES.indexOf(m[2]) !== -1) {
+            iconUrl = '/icons/type/' + m[1] + '-' + m[2] + '.png';
+        }
     }
     document.getElementById('apple-icon').href = iconUrl;
     document.getElementById('fav-icon').href = iconUrl;
