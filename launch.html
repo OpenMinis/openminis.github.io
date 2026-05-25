@@ -34,9 +34,10 @@
     var standalone = (window.navigator.standalone === true) ||
                      (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
 
-    if (standalone && session && path) {
-        location.replace('minis://open?session=' + encodeURIComponent(session) +
-                         '&path=' + encodeURIComponent(path));
+    if (standalone && path) {
+        var dl = 'minis://open?path=' + encodeURIComponent(path);
+        if (session) dl += '&session=' + encodeURIComponent(session);
+        location.replace(dl);
         return;
     }
 
@@ -379,13 +380,14 @@ const ctx = window.__minis || {};
 if (ctx.iconUrl) {
   document.getElementById('brand-icon').src = ctx.iconUrl;
 }
-if (!ctx.session || !ctx.path) {
+if (!ctx.path) {
   document.getElementById('warn').hidden = false;
   document.getElementById('open-btn').style.display = 'none';
 } else {
   document.getElementById('open-btn').addEventListener('click', () => {
-    location.href = 'minis://open?session=' + encodeURIComponent(ctx.session) +
-                    '&path=' + encodeURIComponent(ctx.path);
+    var dl = 'minis://open?path=' + encodeURIComponent(ctx.path);
+    if (ctx.session) dl += '&session=' + encodeURIComponent(ctx.session);
+    location.href = dl;
   });
 }
 
