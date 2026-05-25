@@ -31,16 +31,6 @@
     document.getElementById('apple-icon').href = iconUrl;
     document.getElementById('fav-icon').href = iconUrl;
 
-    var standalone = (window.navigator.standalone === true) ||
-                     (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
-
-    if (standalone && path) {
-        var dl = 'minis://open?path=' + encodeURIComponent(path);
-        if (session) dl += '&session=' + encodeURIComponent(session);
-        location.replace(dl);
-        return;
-    }
-
     window.__minis = { session: session, path: path, suggested: suggested, iconUrl: iconUrl };
 })();
 </script>
@@ -217,9 +207,80 @@ h1 {
     box-sizing: border-box;
 }
 .btn:active { background: var(--card-hover); }
+
+/* Standalone (Home Screen) splash. Covers the page while the deep
+   link fires so the user sees a meaningful loading state instead of
+   the wrap content flashing through. Toggled visible by JS only when
+   we have a path to deep-link to. */
+.splash {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    display: none;
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 0 24px;
+    z-index: 100;
+    text-align: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; user-select: none;
+}
+.splash.show { display: flex; }
+.splash-icon {
+    width: 96px; height: 96px;
+    border-radius: 22px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+    margin-bottom: 24px;
+    animation: splash-pulse 1.6s ease-in-out infinite;
+}
+.splash-title {
+    font-size: 20px; font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+    max-width: 320px;
+    word-break: break-word;
+}
+.splash-status {
+    font-size: 14px; color: var(--muted);
+    margin-bottom: 24px;
+}
+.splash-spinner {
+    width: 22px; height: 22px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: splash-spin 0.9s linear infinite;
+}
+.splash-retry {
+    margin-top: 28px;
+    background: transparent; color: var(--accent);
+    border: none;
+    font-size: 14px; font-weight: 500;
+    padding: 8px 16px;
+    cursor: pointer; -webkit-appearance: none;
+    display: none;
+}
+.splash-retry.show { display: inline-block; }
+@keyframes splash-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%      { transform: scale(0.96); opacity: 0.85; }
+}
+@keyframes splash-spin {
+    to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .splash-icon { animation: none; }
+    .splash-spinner { animation-duration: 1.6s; }
+}
 </style>
 </head>
 <body>
+<div class="splash" id="splash" aria-live="polite" aria-hidden="true">
+    <img class="splash-icon" id="splash-icon" src="/icon-180.png" alt="">
+    <div class="splash-title" id="splash-title" data-i18n="splashTitle">Opening…</div>
+    <div class="splash-status" id="splash-status" data-i18n="splashStatus">Returning to Open Minis</div>
+    <div class="splash-spinner" aria-hidden="true"></div>
+    <button class="splash-retry" id="splash-retry" type="button" data-i18n="splashRetry">Tap to open</button>
+</div>
 <div class="wrap">
     <div class="topbar">
         <div class="brand">
@@ -279,6 +340,9 @@ const I18N = {
     s2: "Choose <b>Add to Home Screen</b>.",
     s3: "Tap <b>Add</b> to confirm.",
     openNow: "Open in Open Minis",
+    splashTitle: "Opening…",
+    splashStatus: "Returning to Open Minis",
+    splashRetry: "Tap to open",
     langName: "English",
   },
   "zh-Hans": {
@@ -289,6 +353,9 @@ const I18N = {
     s2: "选择 <b>添加到主屏幕</b>。",
     s3: "点击 <b>添加</b> 完成。",
     openNow: "在 Open Minis 中打开",
+    splashTitle: "正在打开…",
+    splashStatus: "正在返回 Open Minis",
+    splashRetry: "点击打开",
     langName: "简体中文",
   },
   "zh-Hant": {
@@ -299,6 +366,9 @@ const I18N = {
     s2: "選擇 <b>加入主畫面</b>。",
     s3: "點擊 <b>加入</b> 完成。",
     openNow: "在 Open Minis 中開啟",
+    splashTitle: "正在開啟…",
+    splashStatus: "正在返回 Open Minis",
+    splashRetry: "點擊開啟",
     langName: "繁體中文",
   },
   ja: {
@@ -309,6 +379,9 @@ const I18N = {
     s2: "<b>ホーム画面に追加</b> を選択。",
     s3: "<b>追加</b> をタップして完了。",
     openNow: "Open Minis で開く",
+    splashTitle: "起動中…",
+    splashStatus: "Open Minis に戻ります",
+    splashRetry: "タップして開く",
     langName: "日本語",
   },
   ko: {
@@ -319,6 +392,9 @@ const I18N = {
     s2: "<b>홈 화면에 추가</b>를 선택하세요.",
     s3: "<b>추가</b>를 눌러 완료합니다.",
     openNow: "Open Minis에서 열기",
+    splashTitle: "여는 중…",
+    splashStatus: "Open Minis로 돌아가기",
+    splashRetry: "탭하여 열기",
     langName: "한국어",
   },
 };
@@ -355,6 +431,9 @@ function applyLang(lang) {
   if (suggested) {
     document.getElementById('title').textContent = suggested;
     document.getElementById('lead').textContent = dict.lead;
+    // Same treatment for the standalone splash — the user-supplied
+    // title is more useful than the generic "Opening…" string.
+    document.getElementById('splash-title').textContent = suggested;
   }
 }
 
@@ -379,16 +458,94 @@ menu.querySelectorAll('button').forEach(b => {
 const ctx = window.__minis || {};
 if (ctx.iconUrl) {
   document.getElementById('brand-icon').src = ctx.iconUrl;
+  document.getElementById('splash-icon').src = ctx.iconUrl;
 }
+if (ctx.suggested) {
+  document.getElementById('splash-title').textContent = ctx.suggested;
+}
+
+const isStandalone = (window.navigator.standalone === true) ||
+                     (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+
+function buildDeepLink() {
+  if (!ctx.path) return null;
+  var dl = 'minis://open?path=' + encodeURIComponent(ctx.path);
+  if (ctx.session) dl += '&session=' + encodeURIComponent(ctx.session);
+  return dl;
+}
+
+// Standalone re-entry behavior:
+//   First launch: head script populates ctx, body parses & we land here.
+//     showSplash() + triggerDeepLink() fire the minis:// URL on the first
+//     tick after paint so the user sees the splash before the page swap.
+//   Subsequent re-entries (user pulled down app switcher, opened the
+//     pinned tile again, or iOS bfcache restored the page): the document
+//     stays alive — pageshow / visibilitychange fire instead of a fresh
+//     load. We re-arm `triggered` and call triggerDeepLink() again.
+let triggered = false;
+function triggerDeepLink() {
+  if (triggered) return;
+  const dl = buildDeepLink();
+  if (!dl) return;
+  triggered = true;
+  // Show the retry button after a short delay so the user has an
+  // affordance if the system prompt was dismissed or the scheme failed.
+  setTimeout(() => {
+    document.getElementById('splash-retry').classList.add('show');
+  }, 1500);
+  // Use location.href (not replace) so the browser back stack keeps a
+  // launcher entry — important for the "swipe-down → switch back" flow
+  // where iOS may otherwise leave the page in a stuck post-replace state.
+  location.href = dl;
+}
+
+function showSplash() {
+  const sp = document.getElementById('splash');
+  sp.classList.add('show');
+  sp.setAttribute('aria-hidden', 'false');
+}
+
+function armReEntryTriggers() {
+  // Re-arm on every re-entry. visibilitychange fires when the tab/page
+  // becomes visible again after the user dismissed the system prompt
+  // (or switched apps and came back). pageshow with persisted=true is
+  // the iOS bfcache restore signal.
+  window.addEventListener('pageshow', (e) => {
+    if (!isStandalone || !ctx.path) return;
+    // Reset and retry so the second tap reliably re-opens the app.
+    triggered = false;
+    document.getElementById('splash-retry').classList.remove('show');
+    // Delay one frame so iOS finishes restoring the WebView state
+    // before we hand control back to the URL handler.
+    requestAnimationFrame(triggerDeepLink);
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+    if (!isStandalone || !ctx.path) return;
+    triggered = false;
+    document.getElementById('splash-retry').classList.remove('show');
+    requestAnimationFrame(triggerDeepLink);
+  });
+}
+
 if (!ctx.path) {
   document.getElementById('warn').hidden = false;
   document.getElementById('open-btn').style.display = 'none';
 } else {
   document.getElementById('open-btn').addEventListener('click', () => {
-    var dl = 'minis://open?path=' + encodeURIComponent(ctx.path);
-    if (ctx.session) dl += '&session=' + encodeURIComponent(ctx.session);
-    location.href = dl;
+    location.href = buildDeepLink();
   });
+  document.getElementById('splash-retry').addEventListener('click', () => {
+    triggered = false;
+    triggerDeepLink();
+  });
+  if (isStandalone) {
+    showSplash();
+    armReEntryTriggers();
+    // Defer the initial trigger one frame so the splash paints first —
+    // otherwise iOS swaps the page out before any DOM hits the screen.
+    requestAnimationFrame(triggerDeepLink);
+  }
 }
 
 applyLang(detectLang());
