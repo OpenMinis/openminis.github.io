@@ -165,6 +165,66 @@
             .awesome-banner p { color: #f5f5f7; }
         }
 
+        /* Press / Media coverage */
+        .press { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+        .press-quote {
+            border-left: 3px solid #0066cc;
+            padding: 14px 18px;
+            background: #f5f5f7;
+            border-radius: 0 10px 10px 0;
+        }
+        .press-quote blockquote {
+            margin: 0 0 8px;
+            font-size: 16px;
+            font-style: italic;
+            color: #1d1d1f;
+            line-height: 1.55;
+        }
+        .press-quote cite {
+            font-size: 13px;
+            color: #6e6e73;
+            font-style: normal;
+        }
+        .press-quote cite a { color: #0066cc; font-weight: 600; }
+        @media (prefers-color-scheme: dark) {
+            .press-quote { background: #2c2c2e; border-left-color: #2997ff; }
+            .press-quote blockquote { color: #f5f5f7; }
+            .press-quote cite { color: #a1a1a6; }
+            .press-quote cite a { color: #2997ff; }
+        }
+
+        /* Open source badge row */
+        .hero-meta {
+            display: flex; gap: 8px; flex-wrap: wrap;
+            justify-content: center; margin: 0 0 32px;
+        }
+        .hero-meta a {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 12px; font-weight: 600; color: #6e6e73;
+            background: #f5f5f7; border-radius: 20px;
+            padding: 4px 10px; text-decoration: none;
+            border: 1px solid #e5e5e5;
+            transition: background 0.15s;
+        }
+        .hero-meta a:hover { background: #e5e5e5; text-decoration: none; }
+        @media (prefers-color-scheme: dark) {
+            .hero-meta a { background: #2c2c2e; border-color: #3a3a3c; color: #a1a1a6; }
+            .hero-meta a:hover { background: #3a3a3c; }
+        }
+
+        /* TestFlight badge in hero */
+        .badge-tf {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #000; color: #fff; border-radius: 10px;
+            padding: 0 16px; width: 161px; height: 54px;
+            text-decoration: none; border: 1px solid #a6a6a6;
+            transition: opacity 0.15s; box-sizing: border-box;
+        }
+        .badge-tf:hover { opacity: 0.82; text-decoration: none; }
+        .badge-tf .tf-text { display: flex; flex-direction: column; line-height: 1.15; }
+        .badge-tf .tf-label { font-size: 10px; font-weight: 400; color: #ccc; letter-spacing: 0.03em; }
+        .badge-tf .tf-title { font-size: 15px; font-weight: 600; color: #fff; white-space: nowrap; }
+
         @media (max-width: 600px) {
             .hero h1 { font-size: 36px; }
             .features { grid-template-columns: 1fr; }
@@ -204,8 +264,19 @@
                 <span class="ba-title">Android</span>
             </span>
         </a>
+        <a class="badge-tf" href="https://testflight.apple.com/join/3BdkA5c3" target="_blank" rel="noopener">
+            <svg width="22" height="22" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="60" rx="13" fill="#1C86F2"/><path d="M18 30h24M30 18v24" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>
+            <span class="tf-text">
+                <span class="tf-label" data-i18n="tfLabel"></span>
+                <span class="tf-title">TestFlight</span>
+            </span>
+        </a>
     </div>
-</div>
+    <div class="hero-meta">
+        <a href="https://github.com/OpenMinis/OpenMinis" target="_blank" rel="noopener">⭐ Open Source</a>
+        <a href="https://github.com/OpenMinis/OpenMinis/blob/main/LICENSE" target="_blank" rel="noopener">GPL v3</a>
+        <a href="https://github.com/OpenMinis/OpenMinis" target="_blank" rel="noopener" data-i18n="heroMetaGithub">GitHub →</a>
+    </div>
 
 <!-- Features -->
 <section class="container">
@@ -218,6 +289,25 @@
         <div class="feature-card"><h3 data-i18n="f5title"></h3><p data-i18n="f5desc"></p></div>
         <div class="feature-card"><h3 data-i18n="f6title"></h3><p data-i18n="f6desc"></p></div>
         <div class="feature-card"><h3 data-i18n="f7title"></h3><p data-i18n="f7desc"></p></div>
+    </div>
+</section>
+
+<!-- Press -->
+<section class="container">
+    <h2 data-i18n="pressTitle"></h2>
+    <div class="press">
+        <div class="press-quote">
+            <blockquote data-i18n="press1quote"></blockquote>
+            <cite data-i18n="press1cite"></cite>
+        </div>
+        <div class="press-quote">
+            <blockquote data-i18n="press2quote"></blockquote>
+            <cite data-i18n="press2cite"></cite>
+        </div>
+        <div class="press-quote">
+            <blockquote data-i18n="press3quote"></blockquote>
+            <cite data-i18n="press3cite"></cite>
+        </div>
     </div>
 </section>
 
@@ -371,9 +461,11 @@
 const I18N = {
   en: {
     subtitle: "Your Private On-Device AI Agent",
-    desc: "An on-device AI agent that goes beyond chat. It takes action — browsing the web, accessing your health data, managing your schedule, controlling your smart home, and automating complex tasks. All privately on your device. Available on iOS, Android, macOS, and visionOS.",
+    desc: "An on-device AI agent that goes beyond chat. It gives the AI a real computer to work with — a Linux shell running on your device, browser automation, extensible skills, persistent memory, and deep system integrations. All privately on your device. Available on iOS, Android, macOS, and visionOS.",
     androidPreview: "Preview",
     androidLabel: "Download for",
+    tfLabel: "Beta",
+    heroMetaGithub: "GitHub →",
     featuresTitle: "Features",
     f1title: "Multi-Model AI", f1desc: "Connect to Anthropic Claude, OpenAI GPT, Google Gemini, OpenRouter, or any OpenAI-compatible endpoint. Switch models per conversation.",
     f2title: "Built-in Linux Shell", f2desc: "A full Alpine Linux environment runs on-device. The agent writes and executes scripts, installs packages, and processes data — no server needed.",
@@ -409,6 +501,13 @@ const I18N = {
     andf2title: "⚡ Shizuku Privileged Ops", andf2desc: "With Shizuku (or AXManager), the agent gains adb-level privileges: install/uninstall packages, grant/revoke permissions, manage app ops, control display settings, read system settings, and execute shell commands — all without a computer.",
     andf3title: "⏰ Scheduled Tasks", andf3desc: "Built-in task scheduler powered by AlarmManager. Create one-time or recurring AI tasks (daily, weekdays, custom days) that run prompts, follow up on existing sessions, or re-run past conversations — the Android counterpart of iOS Shortcuts.",
     andf4title: "🪟 Floating Overlay", andf4desc: "When the agent works in the background, a draggable floating capsule shows the current tool name and real-time status — so you always know what the agent is doing, even while using other apps.",
+    pressTitle: "Press",
+    press1quote: '"the most impressive indie app I\'ve seen in a while"',
+    press1cite: '— Federico Viticci, <a href="https://www.macstories.net/reviews/open-minis-is-the-ios-agent-i-wish-siri-ai-could-be/" target="_blank" rel="noopener"><strong>Open Minis Is the iOS Agent I Wish Siri AI Could Be</strong></a>, MacStories (July 2026)',
+    press2quote: '"在很大程度上实现甚至局部超越了 Apple Intelligence"',
+    press2cite: '— Ye Han, <a href="https://zhuanlan.zhihu.com/p/2045570157783807562" target="_blank" rel="noopener"><strong>这可能是 iPhone 最强 Agent 软件，没有之一｜Open Minis 入门指南</strong></a>, 知乎 / Zhihu (June 2026)',
+    press3quote: '"可能是 iOS 端最强 AI Agent"',
+    press3cite: '— <a href="https://www.appinn.com/open-minis/" target="_blank" rel="noopener"><strong>Open Minis：可能是 iOS 端最强 AI Agent</strong></a>, 小众软件 / Appinn (March 2026)',
     faqTitle: "FAQ",
     faqCat1: "API Configuration & Network",
     faq1q: "Why does my API key show \"Invalid\" or fail to authenticate?",
@@ -462,9 +561,11 @@ const I18N = {
 
   "zh-Hans": {
     subtitle: "你的私有设备端 AI 智能体",
-    desc: "一款超越对话框的设备端 AI 智能体。它能自主行动——浏览网页、读取健康数据、管理日程、控制智能家居、自动化复杂任务。一切都在你的设备上私密完成。支持 iOS、Android、macOS 和 visionOS。",
+    desc: "一款超越对话框的设备端 AI 智能体。它给 AI 配备了一台真实的电脑——运行在你设备上的 Linux Shell、浏览器自动化、可扩展技能、持久记忆和深度系统集成。一切都在你的设备上私密完成。支持 iOS、Android、macOS 和 visionOS。",
     androidPreview: "预览版",
     androidLabel: "下载",
+    tfLabel: "公测版",
+    heroMetaGithub: "GitHub →",
     featuresTitle: "功能特性",
     f1title: "多模型 AI", f1desc: "接入 Anthropic Claude、OpenAI GPT、Google Gemini、OpenRouter 或任意 OpenAI 兼容接口，每次对话可自由切换模型。",
     f2title: "内置 Linux Shell", f2desc: "设备本地运行完整 Alpine Linux 环境。智能体可编写并执行脚本、安装软件包、处理数据——无需任何服务器。",
@@ -500,6 +601,13 @@ const I18N = {
     andf2title: "⚡ Shizuku 特权操作", andf2desc: "通过 Shizuku（或 AXManager），智能体获得 adb 级别权限：安装/卸载应用、授予/撤销权限、管理应用权限、控制显示设置、读写系统设置、执行 Shell 命令——无需电脑。",
     andf3title: "⏰ 定时任务", andf3desc: "内置 AlarmManager 驱动的任务调度器。创建单次或重复的 AI 任务（每天、工作日、自定义周期），可运行新提示词、追加到已有会话或重跑历史对话——对标 iOS 快捷指令的自动化方案。",
     andf4title: "🪟 悬浮窗状态", andf4desc: "智能体在后台运行时，可拖拽的悬浮胶囊实时显示当前工具名称和执行状态——即使在使用其他 App，你也随时知道智能体在做什么。",
+    pressTitle: "媒体报道",
+    press1quote: '"the most impressive indie app I\'ve seen in a while"',
+    press1cite: '— Federico Viticci，<a href="https://www.macstories.net/reviews/open-minis-is-the-ios-agent-i-wish-siri-ai-could-be/" target="_blank" rel="noopener"><strong>Open Minis Is the iOS Agent I Wish Siri AI Could Be</strong></a>，MacStories（2026 年 7 月）',
+    press2quote: '"在很大程度上实现甚至局部超越了 Apple Intelligence"',
+    press2cite: '— 叶晗，<a href="https://zhuanlan.zhihu.com/p/2045570157783807562" target="_blank" rel="noopener"><strong>这可能是 iPhone 最强 Agent 软件，没有之一｜Open Minis 入门指南</strong></a>，知乎（2026 年 6 月）',
+    press3quote: '"可能是 iOS 端最强 AI Agent"',
+    press3cite: '— <a href="https://www.appinn.com/open-minis/" target="_blank" rel="noopener"><strong>Open Minis：可能是 iOS 端最强 AI Agent</strong></a>，小众软件 / Appinn（2026 年 3 月）',
     faqTitle: "常见问题",
     faqCat1: "API 配置与网络",
     faq1q: "为什么我的 API 密钥显示「无效」或认证失败？",
@@ -553,9 +661,11 @@ const I18N = {
 
   "zh-Hant": {
     subtitle: "你的私有裝置端 AI 智能體",
-    desc: "一款超越對話框的裝置端 AI 智能體。它能自主行動——瀏覽網頁、讀取健康資料、管理行程、控制智慧家庭、自動化複雜任務。一切都在你的裝置上私密完成。支援 iOS、Android、macOS 和 visionOS。",
+    desc: "一款超越對話框的裝置端 AI 智能體。它給 AI 配備了一台真實的電腦——運行在你裝置上的 Linux Shell、瀏覽器自動化、可擴充技能、持久記憶和深度系統整合。一切都在你的裝置上私密完成。支援 iOS、Android、macOS 和 visionOS。",
     androidPreview: "預覽版",
     androidLabel: "下載",
+    tfLabel: "公測版",
+    heroMetaGithub: "GitHub →",
     featuresTitle: "功能特色",
     f1title: "多模型 AI", f1desc: "接入 Anthropic Claude、OpenAI GPT、Google Gemini、OpenRouter 或任意 OpenAI 相容介面，每次對話可自由切換模型。",
     f2title: "內建 Linux Shell", f2desc: "裝置本地運行完整 Alpine Linux 環境。智能體可編寫並執行腳本、安裝套件、處理資料——無需任何伺服器。",
@@ -591,6 +701,13 @@ const I18N = {
     andf2title: "⚡ Shizuku 特權操作", andf2desc: "透過 Shizuku（或 AXManager），智能體取得 adb 層級權限：安裝/移除應用、授予/撤銷權限、管理應用權限、控制顯示設定、讀寫系統設定、執行 Shell 指令——無需電腦。",
     andf3title: "⏰ 排程任務", andf3desc: "內建 AlarmManager 驅動的任務排程器。建立單次或重複的 AI 任務（每天、工作日、自訂週期），可執行新提示詞、追加到既有對話或重跑歷史會話——對標 iOS 捷徑的自動化方案。",
     andf4title: "🪟 懸浮窗狀態", andf4desc: "智能體在背景執行時，可拖曳的懸浮膠囊即時顯示當前工具名稱和執行狀態——即使在使用其他 App，你也隨時知道智能體在做什麼。",
+    pressTitle: "媒體報道",
+    press1quote: '"the most impressive indie app I\'ve seen in a while"',
+    press1cite: '— Federico Viticci，<a href="https://www.macstories.net/reviews/open-minis-is-the-ios-agent-i-wish-siri-ai-could-be/" target="_blank" rel="noopener"><strong>Open Minis Is the iOS Agent I Wish Siri AI Could Be</strong></a>，MacStories（2026 年 7 月）',
+    press2quote: '"在很大程度上實現甚至局部超越了 Apple Intelligence"',
+    press2cite: '— 葉晗，<a href="https://zhuanlan.zhihu.com/p/2045570157783807562" target="_blank" rel="noopener"><strong>這可能是 iPhone 最強 Agent 軟體，沒有之一｜Open Minis 入門指南</strong></a>，知乎（2026 年 6 月）',
+    press3quote: '"可能是 iOS 端最強 AI Agent"',
+    press3cite: '— <a href="https://www.appinn.com/open-minis/" target="_blank" rel="noopener"><strong>Open Minis：可能是 iOS 端最強 AI Agent</strong></a>，小眾軟體 / Appinn（2026 年 3 月）',
     faqTitle: "常見問題",
     faqCat1: "API 設定與網路",
     faq1q: "為什麼我的 API 金鑰顯示「無效」或認證失敗？",
@@ -638,9 +755,11 @@ const I18N = {
 
   ja: {
     subtitle: "プライベートなオンデバイス AI エージェント",
-    desc: "会話を超えて行動するオンデバイス AI エージェント。ウェブの閲覧、健康データへのアクセス、スケジュール管理、スマートホームの操作、複雑なタスクの自動化——すべてデバイス上でプライベートに実行します。iOS、Android、macOS、visionOS に対応。",
+    desc: "会話を超えて行動するオンデバイス AI エージェント。AI に本物のコンピューターを与えます — デバイス上で動く Linux シェル、ブラウザ自動化、拡張スキル、永続メモリ、そして深いシステム統合。すべてデバイス上でプライベートに実行します。iOS、Android、macOS、visionOS に対応。",
     androidPreview: "プレビュー",
     androidLabel: "ダウンロード",
+    tfLabel: "ベータ",
+    heroMetaGithub: "GitHub →",
     featuresTitle: "機能",
     f1title: "マルチモデル AI", f1desc: "Anthropic Claude、OpenAI GPT、Google Gemini、OpenRouter、または任意の OpenAI 互換エンドポイントに接続。会話ごとにモデルを切り替えられます。",
     f2title: "内蔵 Linux シェル", f2desc: "完全な Alpine Linux 環境がデバイス上で動作。エージェントはスクリプトの作成・実行、パッケージのインストール、データ処理をサーバー不要で行います。",
@@ -676,6 +795,13 @@ const I18N = {
     andf2title: "⚡ Shizuku 特権操作", andf2desc: "Shizuku（または AXManager）により、adb レベルの特権を取得：アプリのインストール/アンインストール、権限の付与/取消、アプリ権限管理、ディスプレイ設定、システム設定の読み書き、シェルコマンドの実行 — PC 不要。",
     andf3title: "⏰ スケジュールタスク", andf3desc: "AlarmManager ベースの内蔵タスクスケジューラ。1回限り、毎日、平日、カスタム周期の AI タスクを作成。新しいプロンプトの実行、既存セッションへの追加、過去の会話の再実行に対応 — iOS ショートカットに相当する自動化。",
     andf4title: "🪟 フローティングオーバーレイ", andf4desc: "エージェントがバックグラウンドで動作中、ドラッグ可能なフローティングカプセルが現在のツール名とステータスをリアルタイム表示 — 他のアプリを使用中でもエージェントの動作を常に把握できます。",
+    pressTitle: "メディア掲載",
+    press1quote: '"the most impressive indie app I\'ve seen in a while"',
+    press1cite: '— Federico Viticci、<a href="https://www.macstories.net/reviews/open-minis-is-the-ios-agent-i-wish-siri-ai-could-be/" target="_blank" rel="noopener"><strong>Open Minis Is the iOS Agent I Wish Siri AI Could Be</strong></a>、MacStories（2026年7月）',
+    press2quote: '"在很大程度上实现甚至局部超越了 Apple Intelligence"（Apple Intelligence を大きく実現し、一部では超越している）',
+    press2cite: '— Ye Han、<a href="https://zhuanlan.zhihu.com/p/2045570157783807562" target="_blank" rel="noopener"><strong>これが iPhone 最強の Agent アプリかもしれない｜Open Minis 入門ガイド</strong></a>、知乎（2026年6月）',
+    press3quote: '"可能是 iOS 端最强 AI Agent"（iOS 最強の AI エージェントかもしれない）',
+    press3cite: '— <a href="https://www.appinn.com/open-minis/" target="_blank" rel="noopener"><strong>Open Minis：可能是 iOS 端最强 AI Agent</strong></a>、小众软件 / Appinn（2026年3月）',
     faqTitle: "よくある質問",
     faqCat1: "API 設定とネットワーク",
     faq1q: "API キーが「無効」と表示されるか、認証に失敗する理由は？",
@@ -724,9 +850,11 @@ const I18N = {
 
   ko: {
     subtitle: "나만의 프라이빗 온디바이스 AI 에이전트",
-    desc: "단순한 대화를 넘어 행동하는 온디바이스 AI 에이전트. 웹 검색, 건강 데이터 접근, 일정 관리, 스마트홈 제어, 복잡한 작업 자동화까지 — 모든 것이 내 기기에서 비공개로 실행됩니다. iOS, Android, macOS, visionOS를 지원합니다.",
+    desc: "단순한 대화를 넘어 행동하는 온디바이스 AI 에이전트. AI에게 진짜 컴퓨터를 줍니다 — 기기에서 실행되는 Linux 셸, 브라우저 자동화, 확장 가능한 스킬, 지속 메모리, 그리고 깊은 시스템 통합. 모든 것이 내 기기에서 비공개로 실행됩니다. iOS, Android, macOS, visionOS를 지원합니다.",
     androidPreview: "미리보기",
     androidLabel: "다운로드",
+    tfLabel: "베타",
+    heroMetaGithub: "GitHub →",
     featuresTitle: "기능",
     f1title: "멀티모델 AI", f1desc: "Anthropic Claude, OpenAI GPT, Google Gemini, OpenRouter 또는 OpenAI 호환 엔드포인트에 연결하고, 대화마다 모델을 자유롭게 전환할 수 있습니다.",
     f2title: "내장 Linux 셸", f2desc: "완전한 Alpine Linux 환경이 기기에서 직접 실행됩니다. 에이전트가 스크립트를 작성·실행하고, 패키지를 설치하고, 데이터를 처리합니다 — 서버 없이.",
@@ -762,6 +890,13 @@ const I18N = {
     andf2title: "⚡ Shizuku 특권 작업", andf2desc: "Shizuku(또는 AXManager)를 통해 adb 수준 권한 획득: 앱 설치/제거, 권한 부여/취소, 앱 권한 관리, 디스플레이 설정, 시스템 설정 읽기/쓰기, 셸 명령 실행 — PC 없이.",
     andf3title: "⏰ 예약 작업", andf3desc: "AlarmManager 기반 내장 작업 스케줄러. 일회성, 매일, 평일, 커스텀 주기의 AI 작업을 생성하여 새 프롬프트 실행, 기존 세션 추가, 과거 대화 재실행 가능 — iOS 단축어에 대응하는 자동화.",
     andf4title: "🪟 플로팅 오버레이", andf4desc: "에이전트가 백그라운드에서 작동할 때 드래그 가능한 플로팅 캡슐이 현재 도구 이름과 상태를 실시간으로 표시 — 다른 앱을 사용 중에도 에이전트가 무엇을 하는지 항상 파악할 수 있습니다.",
+    pressTitle: "언론 보도",
+    press1quote: '"the most impressive indie app I\'ve seen in a while"',
+    press1cite: '— Federico Viticci, <a href="https://www.macstories.net/reviews/open-minis-is-the-ios-agent-i-wish-siri-ai-could-be/" target="_blank" rel="noopener"><strong>Open Minis Is the iOS Agent I Wish Siri AI Could Be</strong></a>, MacStories (2026년 7월)',
+    press2quote: '"在很大程度上实现甚至局部超越了 Apple Intelligence" (Apple Intelligence를 상당 부분 실현하고 일부 초월했다)',
+    press2cite: '— Ye Han, <a href="https://zhuanlan.zhihu.com/p/2045570157783807562" target="_blank" rel="noopener"><strong>이것이 iPhone 최강 Agent 앱일지도｜Open Minis 입문 가이드</strong></a>, 知乎 (2026년 6월)',
+    press3quote: '"可能是 iOS 端最强 AI Agent" (iOS 최강 AI 에이전트일 수도)',
+    press3cite: '— <a href="https://www.appinn.com/open-minis/" target="_blank" rel="noopener"><strong>Open Minis：可能是 iOS 端最强 AI Agent</strong></a>, 小众软件 / Appinn (2026년 3월)',
     faqTitle: "자주 묻는 질문",
     faqCat1: "API 설정 & 네트워크",
     faq1q: "API 키가 '유효하지 않음'으로 표시되거나 인증에 실패하는 이유는?",
