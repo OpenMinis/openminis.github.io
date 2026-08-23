@@ -255,20 +255,12 @@
             <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
         </a>
         <a class="badge-android" href="https://github.com/OpenMinis/OpenMinis/releases" target="_blank" rel="noopener">
-            <span class="ba-preview" data-i18n="androidPreview"></span>
             <svg class="ba-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17.523 15.341a.738.738 0 0 1-.738-.738.738.738 0 0 1 .738-.737.738.738 0 0 1 .737.737.738.738 0 0 1-.737.738m-11.046 0a.738.738 0 0 1-.737-.738.738.738 0 0 1 .737-.737.738.738 0 0 1 .738.737.738.738 0 0 1-.738.738m11.404-6.17l1.474-2.553a.307.307 0 0 0-.113-.42.307.307 0 0 0-.42.114L17.34 8.87C16.068 8.273 14.63 7.94 13 7.94c-1.63 0-3.068.333-4.34.93L7.178 6.312a.307.307 0 0 0-.42-.114.307.307 0 0 0-.113.42l1.474 2.553C5.405 10.545 3.72 12.836 3.72 15.5h16.56c0-2.664-1.685-4.955-3.4-6.329" fill="#3DDC84"/>
             </svg>
             <span class="ba-text">
                 <span class="ba-label" data-i18n="androidLabel"></span>
                 <span class="ba-title">Android</span>
-            </span>
-        </a>
-        <a class="badge-tf" href="https://testflight.apple.com/join/3BdkA5c3" target="_blank" rel="noopener">
-            <svg width="22" height="22" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="60" rx="13" fill="#1C86F2"/><path d="M18 30h24M30 18v24" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>
-            <span class="tf-text">
-                <span class="tf-label" data-i18n="tfLabel"></span>
-                <span class="tf-title">TestFlight</span>
             </span>
         </a>
     </div>
@@ -337,11 +329,13 @@
     <table>
         <thead><tr><th data-i18n="thProvider"></th><th data-i18n="thModels"></th><th data-i18n="thKey"></th></tr></thead>
         <tbody>
-            <tr><td>Anthropic</td><td>Claude Opus 4.6, Sonnet 4.6, Haiku 4.5</td><td><a href="https://console.anthropic.com/">console.anthropic.com</a></td></tr>
-            <tr><td>OpenAI</td><td>GPT-4o, o-series</td><td><a href="https://platform.openai.com/api-keys">platform.openai.com</a></td></tr>
-            <tr><td>Google Gemini</td><td>Gemini 2.5 Pro/Flash, 3 Pro/Flash</td><td><a href="https://aistudio.google.com/apikey">aistudio.google.com</a></td></tr>
+            <tr><td>Anthropic</td><td data-i18n="tdAnthropicModels"></td><td><a href="https://console.anthropic.com/">console.anthropic.com</a></td></tr>
+            <tr><td>OpenAI</td><td data-i18n="tdOpenAIModels"></td><td><a href="https://platform.openai.com/api-keys">platform.openai.com</a></td></tr>
+            <tr><td>Google Gemini</td><td data-i18n="tdGeminiModels"></td><td><a href="https://aistudio.google.com/apikey">aistudio.google.com</a></td></tr>
+            <tr><td>xAI</td><td data-i18n="tdXAIModels"></td><td><a href="https://console.x.ai/">console.x.ai</a></td></tr>
             <tr><td>OpenRouter</td><td data-i18n="orDesc"></td><td><a href="https://openrouter.ai/keys">openrouter.ai</a></td></tr>
-            <tr><td data-i18n="customProvider"></td><td data-i18n="customDesc"></td><td data-i18n="customKey"></td></tr>
+            <tr><td data-i18n="customOAIProvider"></td><td data-i18n="customOAIDesc"></td><td data-i18n="customKey"></td></tr>
+            <tr><td data-i18n="customAnthProvider"></td><td data-i18n="customAnthDesc"></td><td data-i18n="customKey"></td></tr>
         </tbody>
     </table>
 </section>
@@ -462,9 +456,7 @@ const I18N = {
   en: {
     subtitle: "Your Private On-Device AI Agent",
     desc: "An on-device AI agent that goes beyond chat. It gives the AI a real computer to work with — a Linux shell running on your device, browser automation, extensible skills, persistent memory, and deep system integrations. All privately on your device. Available on iOS, Android, macOS, and visionOS.",
-    androidPreview: "Preview",
-    androidLabel: "Download for",
-    tfLabel: "Beta",
+    androidLabel: "Get it on",
     heroMetaGithub: "GitHub →",
     featuresTitle: "Features",
     f1title: "Multi-Model AI", f1desc: "Connect to Anthropic Claude, OpenAI GPT, Google Gemini, OpenRouter, or any OpenAI-compatible endpoint. Switch models per conversation.",
@@ -476,13 +468,20 @@ const I18N = {
     f7title: "MCP Integrations", f7desc: "Connect any MCP (Model Context Protocol) server to extend the agent with third-party tools. Supports HTTP and STDIO transports, Claude Desktop-compatible JSON import, per-session toggles, and secret injection via environment variables.",
     awesomeBanner: 'Want to discover more Minis use cases and creative workflows? Check out the community-curated collection <a href="https://github.com/OpenMinis/AwesomeMinis" target="_blank" rel="noopener">Awesome Minis →</a>',
     gettingStartedTitle: "Getting Started",
-    s1title: "Download & Install", s1desc: 'Get Open Minis from the <a href="https://apps.apple.com/app/id6759188481">App Store</a> (iOS 16+, iPadOS 16+, macOS 13+ Apple Silicon, visionOS 1.0+) or download the <a href="https://github.com/OpenMinis/OpenMinis/releases">Android APK</a> (Android 10+, Preview).',
+    s1title: "Download & Install", s1desc: 'Get Open Minis from the <a href="https://apps.apple.com/app/id6759188481">App Store</a> (iOS 16+, iPadOS 16+, macOS 13+ Apple Silicon, visionOS 1.0+) or download the <a href="https://github.com/OpenMinis/OpenMinis/releases">Android APK</a> (Android 10+).',
     s2title: "Add an AI Provider", s2desc: "On first launch, you'll be guided to add your AI provider. Choose from the supported providers below and enter your API key.",
     s3title: "Select a Model", s3desc: "Pick a model from your provider. You can add multiple providers and switch models per conversation.",
     s4title: "Start a Conversation", s4desc: "Create a new session and start chatting. The agent can execute commands, browse the web, read your calendar, and much more.",
     providersTitle: "Supported AI Providers", providersDesc: "Open Minis supports multiple AI providers. You need at least one API key to get started.",
     thProvider: "Provider", thModels: "Models", thKey: "Get API Key",
-    orDesc: "Multi-provider routing", customProvider: "Custom", customDesc: "Any OpenAI-compatible API", customKey: "Your provider's dashboard",
+    tdAnthropicModels: "Claude Opus 4, Sonnet 4.5 / 4, Haiku 4.5 / 3",
+    tdOpenAIModels: "GPT-5, GPT-4.1, GPT-4o, o3, o4-mini, Codex",
+    tdGeminiModels: "Gemini 2.5 Pro / Flash, 3 Pro / Flash",
+    tdXAIModels: "Grok 3, Grok 3 Mini",
+    orDesc: "GPT, Claude, Gemini, Llama and 300+ models via one key",
+    customOAIProvider: "OpenAI-compatible", customOAIDesc: "DeepSeek, Qwen / DashScope, Kimi / Moonshot, MiniMax, Mistral, Groq, SiliconFlow, Ollama, vLLM, and more",
+    customAnthProvider: "Anthropic-compatible", customAnthDesc: "Any service implementing the Anthropic Messages API (e.g. third-party Claude proxies)",
+    customKey: "Your provider's dashboard",
     advancedTitle: "Advanced Configuration",
     advModelGroupsTitle: "Model Groups", advModelGroupsDesc: "Group multiple models together with routing strategies:",
     advMgFallback: "<strong>Fallback</strong> — tries models in order; if one fails, the next is used automatically.",
@@ -562,9 +561,7 @@ const I18N = {
   "zh-Hans": {
     subtitle: "你的私有设备端 AI 智能体",
     desc: "一款超越对话框的设备端 AI 智能体。它给 AI 配备了一台真实的电脑——运行在你设备上的 Linux Shell、浏览器自动化、可扩展技能、持久记忆和深度系统集成。一切都在你的设备上私密完成。支持 iOS、Android、macOS 和 visionOS。",
-    androidPreview: "预览版",
     androidLabel: "下载",
-    tfLabel: "公测版",
     heroMetaGithub: "GitHub →",
     featuresTitle: "功能特性",
     f1title: "多模型 AI", f1desc: "接入 Anthropic Claude、OpenAI GPT、Google Gemini、OpenRouter 或任意 OpenAI 兼容接口，每次对话可自由切换模型。",
@@ -576,13 +573,20 @@ const I18N = {
     f7title: "MCP 集成", f7desc: "通过 MCP（模型上下文协议）连接任意第三方服务器，为智能体扩展工具能力。支持 HTTP 和 STDIO 两种传输方式、Claude Desktop 兼容的 JSON 导入、会话级开关，以及通过环境变量注入密钥。",
     awesomeBanner: '想了解更多 Minis 的使用场景和创意玩法？查看社区精选案例集 <a href="https://github.com/OpenMinis/AwesomeMinis" target="_blank" rel="noopener">Awesome Minis →</a>',
     gettingStartedTitle: "快速开始",
-    s1title: "下载安装", s1desc: '从 <a href="https://apps.apple.com/app/id6759188481">App Store</a> 下载（iOS 16+、iPadOS 16+、macOS 13+ Apple Silicon、visionOS 1.0+），或下载 <a href="https://github.com/OpenMinis/OpenMinis/releases">安卓 APK</a>（Android 10+，预览版）。',
+    s1title: "下载安装", s1desc: '从 <a href="https://apps.apple.com/app/id6759188481">App Store</a> 下载（iOS 16+、iPadOS 16+、macOS 13+ Apple Silicon、visionOS 1.0+），或下载 <a href="https://github.com/OpenMinis/OpenMinis/releases">安卓 APK</a>（Android 10+）。',
     s2title: "添加 AI 提供商", s2desc: "首次启动时，系统将引导你添加 AI 提供商，选择下方支持的服务商并输入 API 密钥。",
     s3title: "选择模型", s3desc: "从你的提供商中选择模型。可添加多个提供商，并在每次对话中切换模型。",
     s4title: "开始对话", s4desc: "创建新会话，开始聊天。智能体可执行命令、浏览网页、读取日历，以及更多操作。",
     providersTitle: "支持的 AI 提供商", providersDesc: "Open Minis 支持多种 AI 提供商，至少需要一个 API 密钥才能开始使用。",
     thProvider: "提供商", thModels: "模型", thKey: "获取 API 密钥",
-    orDesc: "多提供商路由", customProvider: "自定义", customDesc: "任意 OpenAI 兼容 API", customKey: "提供商控制台",
+    tdAnthropicModels: "Claude Opus 4、Sonnet 4.5 / 4、Haiku 4.5 / 3",
+    tdOpenAIModels: "GPT-5、GPT-4.1、GPT-4o、o3、o4-mini、Codex",
+    tdGeminiModels: "Gemini 2.5 Pro / Flash、3 Pro / Flash",
+    tdXAIModels: "Grok 3、Grok 3 Mini",
+    orDesc: "一个密钥接入 GPT、Claude、Gemini、Llama 等 300+ 模型",
+    customOAIProvider: "OpenAI 兼容", customOAIDesc: "DeepSeek、通义千问 / DashScope、Kimi / 月之暗面、MiniMax、Mistral、Groq、SiliconFlow、Ollama、vLLM 等",
+    customAnthProvider: "Anthropic 兼容", customAnthDesc: "任何实现了 Anthropic Messages API 的服务（如第三方 Claude 代理）",
+    customKey: "提供商控制台",
     advancedTitle: "高级配置",
     advModelGroupsTitle: "模型组", advModelGroupsDesc: "将多个模型组合，配置路由策略：",
     advMgFallback: "<strong>故障转移</strong> — 按顺序尝试，若某个失败则自动切换下一个。",
@@ -662,9 +666,7 @@ const I18N = {
   "zh-Hant": {
     subtitle: "你的私有裝置端 AI 智能體",
     desc: "一款超越對話框的裝置端 AI 智能體。它給 AI 配備了一台真實的電腦——運行在你裝置上的 Linux Shell、瀏覽器自動化、可擴充技能、持久記憶和深度系統整合。一切都在你的裝置上私密完成。支援 iOS、Android、macOS 和 visionOS。",
-    androidPreview: "預覽版",
     androidLabel: "下載",
-    tfLabel: "公測版",
     heroMetaGithub: "GitHub →",
     featuresTitle: "功能特色",
     f1title: "多模型 AI", f1desc: "接入 Anthropic Claude、OpenAI GPT、Google Gemini、OpenRouter 或任意 OpenAI 相容介面，每次對話可自由切換模型。",
@@ -676,13 +678,20 @@ const I18N = {
     f7title: "MCP 整合", f7desc: "透過 MCP（模型上下文協議）連接任意第三方伺服器，為智能體擴充工具能力。支援 HTTP 和 STDIO 兩種傳輸方式、Claude Desktop 相容的 JSON 匯入、工作階段級開關，以及透過環境變數注入密鑰。",
     awesomeBanner: '想瞭解更多 Minis 的使用場景和創意玩法？查看社群精選案例集 <a href="https://github.com/OpenMinis/AwesomeMinis" target="_blank" rel="noopener">Awesome Minis →</a>',
     gettingStartedTitle: "快速開始",
-    s1title: "下載安裝", s1desc: '從 <a href="https://apps.apple.com/app/id6759188481">App Store</a> 下載（iOS 16+、iPadOS 16+、macOS 13+ Apple Silicon、visionOS 1.0+），或下載 <a href="https://github.com/OpenMinis/OpenMinis/releases">Android APK</a>（Android 10+，預覽版）。',
+    s1title: "下載安裝", s1desc: '從 <a href="https://apps.apple.com/app/id6759188481">App Store</a> 下載（iOS 16+、iPadOS 16+、macOS 13+ Apple Silicon、visionOS 1.0+），或下載 <a href="https://github.com/OpenMinis/OpenMinis/releases">Android APK</a>（Android 10+）。',
     s2title: "新增 AI 提供商", s2desc: "首次啟動時，系統將引導你新增 AI 提供商，選擇下方支援的服務商並輸入 API 金鑰。",
     s3title: "選擇模型", s3desc: "從你的提供商中選擇模型。可新增多個提供商，並在每次對話中切換模型。",
     s4title: "開始對話", s4desc: "建立新工作階段，開始聊天。智能體可執行指令、瀏覽網頁、讀取行事曆，以及更多操作。",
     providersTitle: "支援的 AI 提供商", providersDesc: "Open Minis 支援多種 AI 提供商，至少需要一個 API 金鑰才能開始使用。",
     thProvider: "提供商", thModels: "模型", thKey: "取得 API 金鑰",
-    orDesc: "多提供商路由", customProvider: "自訂", customDesc: "任意 OpenAI 相容 API", customKey: "提供商控制台",
+    tdAnthropicModels: "Claude Opus 4、Sonnet 4.5 / 4、Haiku 4.5 / 3",
+    tdOpenAIModels: "GPT-5、GPT-4.1、GPT-4o、o3、o4-mini、Codex",
+    tdGeminiModels: "Gemini 2.5 Pro / Flash、3 Pro / Flash",
+    tdXAIModels: "Grok 3、Grok 3 Mini",
+    orDesc: "一個金鑰接入 GPT、Claude、Gemini、Llama 等 300+ 模型",
+    customOAIProvider: "OpenAI 相容", customOAIDesc: "DeepSeek、通義千問 / DashScope、Kimi / 月之暗面、MiniMax、Mistral、Groq、SiliconFlow、Ollama、vLLM 等",
+    customAnthProvider: "Anthropic 相容", customAnthDesc: "任何實作了 Anthropic Messages API 的服務（如第三方 Claude 代理）",
+    customKey: "提供商控制台",
     advancedTitle: "進階設定",
     advModelGroupsTitle: "模型群組", advModelGroupsDesc: "將多個模型組合，設定路由策略：",
     advMgFallback: "<strong>故障轉移</strong> — 依序嘗試，若某個失敗則自動切換下一個。",
@@ -756,9 +765,7 @@ const I18N = {
   ja: {
     subtitle: "プライベートなオンデバイス AI エージェント",
     desc: "会話を超えて行動するオンデバイス AI エージェント。AI に本物のコンピューターを与えます — デバイス上で動く Linux シェル、ブラウザ自動化、拡張スキル、永続メモリ、そして深いシステム統合。すべてデバイス上でプライベートに実行します。iOS、Android、macOS、visionOS に対応。",
-    androidPreview: "プレビュー",
     androidLabel: "ダウンロード",
-    tfLabel: "ベータ",
     heroMetaGithub: "GitHub →",
     featuresTitle: "機能",
     f1title: "マルチモデル AI", f1desc: "Anthropic Claude、OpenAI GPT、Google Gemini、OpenRouter、または任意の OpenAI 互換エンドポイントに接続。会話ごとにモデルを切り替えられます。",
@@ -770,13 +777,20 @@ const I18N = {
     f7title: "MCP 統合", f7desc: "MCP（モデルコンテキストプロトコル）でサードパーティサーバーに接続し、エージェントのツールを拡張。HTTP と STDIO の2つのトランスポート、Claude Desktop 互換 JSON インポート、セッションごとのトグル、環境変数によるシークレット注入をサポート。",
     awesomeBanner: 'Minis のユースケースや活用アイデアをもっと知りたいですか？コミュニティ厳選コレクション <a href="https://github.com/OpenMinis/AwesomeMinis" target="_blank" rel="noopener">Awesome Minis →</a> をご覧ください。',
     gettingStartedTitle: "はじめ方",
-    s1title: "ダウンロード＆インストール", s1desc: '<a href="https://apps.apple.com/app/id6759188481">App Store</a> から Open Minis をダウンロード（iOS 16+、iPadOS 16+、macOS 13+ Apple Silicon、visionOS 1.0+）、または <a href="https://github.com/OpenMinis/OpenMinis/releases">Android APK</a> をダウンロード（Android 10+、プレビュー版）。',
+    s1title: "ダウンロード＆インストール", s1desc: '<a href="https://apps.apple.com/app/id6759188481">App Store</a> から Open Minis をダウンロード（iOS 16+、iPadOS 16+、macOS 13+ Apple Silicon、visionOS 1.0+）、または <a href="https://github.com/OpenMinis/OpenMinis/releases">Android APK</a> をダウンロード（Android 10+）。',
     s2title: "AI プロバイダーの追加", s2desc: "初回起動時に AI プロバイダーの追加が案内されます。対応プロバイダーを選択し、API キーを入力してください。",
     s3title: "モデルの選択", s3desc: "プロバイダーからモデルを選択します。複数のプロバイダーを追加し、会話ごとにモデルを切り替えられます。",
     s4title: "会話を開始", s4desc: "新しいセッションを作成してチャットを開始。エージェントはコマンドの実行、ウェブ閲覧、カレンダーの確認など多岐にわたる操作が可能です。",
     providersTitle: "対応 AI プロバイダー", providersDesc: "Open Minis は複数の AI プロバイダーに対応しています。開始には少なくとも 1 つの API キーが必要です。",
     thProvider: "プロバイダー", thModels: "モデル", thKey: "API キーの取得",
-    orDesc: "マルチプロバイダールーティング", customProvider: "カスタム", customDesc: "OpenAI 互換 API 全般", customKey: "プロバイダーのダッシュボード",
+    tdAnthropicModels: "Claude Opus 4、Sonnet 4.5 / 4、Haiku 4.5 / 3",
+    tdOpenAIModels: "GPT-5、GPT-4.1、GPT-4o、o3、o4-mini、Codex",
+    tdGeminiModels: "Gemini 2.5 Pro / Flash、3 Pro / Flash",
+    tdXAIModels: "Grok 3、Grok 3 Mini",
+    orDesc: "GPT・Claude・Gemini・Llama など 300+ モデルを 1 つの API キーで",
+    customOAIProvider: "OpenAI 互換", customOAIDesc: "DeepSeek、Qwen / DashScope、Kimi / Moonshot、MiniMax、Mistral、Groq、SiliconFlow、Ollama、vLLM など",
+    customAnthProvider: "Anthropic 互換", customAnthDesc: "Anthropic Messages API を実装したサービス（サードパーティ Claude プロキシ等）",
+    customKey: "プロバイダーのダッシュボード",
     advancedTitle: "高度な設定",
     advModelGroupsTitle: "モデルグループ", advModelGroupsDesc: "複数のモデルをグループ化してルーティング戦略を設定できます：",
     advMgFallback: "<strong>フォールバック</strong> — 順番に試行し、失敗した場合は次のモデルへ自動切替。",
@@ -851,9 +865,7 @@ const I18N = {
   ko: {
     subtitle: "나만의 프라이빗 온디바이스 AI 에이전트",
     desc: "단순한 대화를 넘어 행동하는 온디바이스 AI 에이전트. AI에게 진짜 컴퓨터를 줍니다 — 기기에서 실행되는 Linux 셸, 브라우저 자동화, 확장 가능한 스킬, 지속 메모리, 그리고 깊은 시스템 통합. 모든 것이 내 기기에서 비공개로 실행됩니다. iOS, Android, macOS, visionOS를 지원합니다.",
-    androidPreview: "미리보기",
     androidLabel: "다운로드",
-    tfLabel: "베타",
     heroMetaGithub: "GitHub →",
     featuresTitle: "기능",
     f1title: "멀티모델 AI", f1desc: "Anthropic Claude, OpenAI GPT, Google Gemini, OpenRouter 또는 OpenAI 호환 엔드포인트에 연결하고, 대화마다 모델을 자유롭게 전환할 수 있습니다.",
@@ -865,13 +877,20 @@ const I18N = {
     f7title: "MCP 통합", f7desc: "MCP(모델 컨텍스트 프로토콜)로 서드파티 서버에 연결해 에이전트 도구를 확장하세요. HTTP와 STDIO 두 가지 전송 방식, Claude Desktop 호환 JSON 가져오기, 세션별 토글, 환경 변수를 통한 시크릿 주입을 지원합니다.",
     awesomeBanner: 'Minis의 다양한 활용 사례와 창의적인 워크플로우를 더 알고 싶으신가요? 커뮤니티 큐레이션 컬렉션 <a href="https://github.com/OpenMinis/AwesomeMinis" target="_blank" rel="noopener">Awesome Minis →</a>를 확인해 보세요.',
     gettingStartedTitle: "시작하기",
-    s1title: "다운로드 & 설치", s1desc: '<a href="https://apps.apple.com/app/id6759188481">App Store</a>에서 다운로드(iOS 16+, iPadOS 16+, macOS 13+ Apple Silicon, visionOS 1.0+), 또는 <a href="https://github.com/OpenMinis/OpenMinis/releases">Android APK</a> 다운로드(Android 10+, 미리보기).',
+    s1title: "다운로드 & 설치", s1desc: '<a href="https://apps.apple.com/app/id6759188481">App Store</a>에서 다운로드(iOS 16+, iPadOS 16+, macOS 13+ Apple Silicon, visionOS 1.0+), 또는 <a href="https://github.com/OpenMinis/OpenMinis/releases">Android APK</a> 다운로드(Android 10+).',
     s2title: "AI 공급자 추가", s2desc: "첫 실행 시 AI 공급자를 추가하도록 안내됩니다. 지원되는 공급자를 선택하고 API 키를 입력하세요.",
     s3title: "모델 선택", s3desc: "공급자에서 모델을 선택하세요. 여러 공급자를 추가하고 대화마다 모델을 전환할 수 있습니다.",
     s4title: "대화 시작", s4desc: "새 세션을 만들고 채팅을 시작하세요. 에이전트는 명령 실행, 웹 탐색, 캘린더 확인 등 다양한 작업을 수행할 수 있습니다.",
     providersTitle: "지원 AI 공급자", providersDesc: "Open Minis는 여러 AI 공급자를 지원합니다. 시작하려면 최소 하나의 API 키가 필요합니다.",
     thProvider: "공급자", thModels: "모델", thKey: "API 키 받기",
-    orDesc: "멀티 공급자 라우팅", customProvider: "커스텀", customDesc: "OpenAI 호환 API", customKey: "공급자 대시보드",
+    tdAnthropicModels: "Claude Opus 4, Sonnet 4.5 / 4, Haiku 4.5 / 3",
+    tdOpenAIModels: "GPT-5, GPT-4.1, GPT-4o, o3, o4-mini, Codex",
+    tdGeminiModels: "Gemini 2.5 Pro / Flash, 3 Pro / Flash",
+    tdXAIModels: "Grok 3, Grok 3 Mini",
+    orDesc: "GPT·Claude·Gemini·Llama 등 300+ 모델을 하나의 키로",
+    customOAIProvider: "OpenAI 호환", customOAIDesc: "DeepSeek, Qwen / DashScope, Kimi / Moonshot, MiniMax, Mistral, Groq, SiliconFlow, Ollama, vLLM 등",
+    customAnthProvider: "Anthropic 호환", customAnthDesc: "Anthropic Messages API를 구현한 서비스 (서드파티 Claude 프록시 등)",
+    customKey: "공급자 대시보드",
     advancedTitle: "고급 설정",
     advModelGroupsTitle: "모델 그룹", advModelGroupsDesc: "여러 모델을 그룹화하여 라우팅 전략을 설정하세요:",
     advMgFallback: "<strong>폴백</strong> — 순서대로 시도하며, 실패하면 다음 모델로 자동 전환.",
