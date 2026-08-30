@@ -1,0 +1,23 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": [
+          "U7Q977V688.com.openminis.app",
+          "U7Q977V688.com.openminis.local.weny"
+        ],
+        "components": [
+          {
+            "/": "/plaid/return",
+            "comment": "Plaid Hosted Link app-to-app return"
+          },
+          {
+            "/": "/plaid/return/*",
+            "comment": "Plaid Hosted Link app-to-app return paths"
+          }
+        ]
+      }
+    ]
+  }
+}
