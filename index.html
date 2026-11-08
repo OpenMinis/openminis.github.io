@@ -276,7 +276,7 @@ code {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    perspective: 1600px;
+    gap: 20px;
 }
 .showcase::before {
     content: "";
@@ -288,40 +288,33 @@ code {
 
 .phone {
     position: relative;
-    border-radius: 30px;
+    border-radius: 22px;
     overflow: hidden;
     background: #000;
-    -webkit-mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,0) 99%);
-    mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,0) 99%);
     box-shadow:
-        0 50px 100px -30px rgba(0,0,0,.85),
+        0 40px 80px -30px rgba(0,0,0,.85),
         0 0 0 1px rgba(255,255,255,.13),
         inset 0 0 0 1px rgba(255,255,255,.05);
     z-index: 2;
 }
-.phone img { width: 100%; display: block; }
+.phone img { width: 100%; height: auto; display: block; }
 @media (prefers-color-scheme: light) {
     .phone {
         box-shadow:
-            0 40px 80px -28px rgba(22,22,45,.30),
-            0 10px 26px -10px rgba(22,22,45,.16),
+            0 30px 60px -26px rgba(22,22,45,.28),
+            0 8px 20px -10px rgba(22,22,45,.14),
             0 0 0 1px rgba(0,0,0,.10);
     }
-    .phone.side { opacity: .94; filter: saturate(.96) brightness(.99); }
 }
 
-/* centre device */
-.phone.main { width: 300px; margin: 0 -16px; transform: translateZ(60px); z-index: 4; }
-/* side devices */
-.phone.side { width: 250px; opacity: .80; filter: saturate(.92) brightness(.94); }
-.phone.side.left  { transform: rotateY(14deg) translateX(-6px) translateZ(-50px); }
-.phone.side.right { transform: rotateY(-14deg) translateX(6px) translateZ(-50px); }
+/* flat, equal-width devices */
+.phone.main, .phone.side { width: 288px; }
 
 /* OS-integration caption under the showcase */
 .showcase-cap {
     display: flex; align-items: center; justify-content: center;
     gap: 10px; flex-wrap: wrap;
-    margin: -26px auto 34px;
+    margin: 20px auto 34px;
     position: relative; z-index: 7;
 }
 .showcase-cap .lbl {
@@ -341,9 +334,9 @@ code {
 
 @media (max-width: 900px) {
     .phone.side { display: none; }
-    .phone.main { width: min(74vw, 300px); margin: 0 auto; transform: none; }
+    .phone.main { width: min(76vw, 290px); margin: 0 auto; }
     .showcase::before { width: 92vw; height: 420px; }
-    .showcase-cap { margin-top: -18px; gap: 7px; }
+    .showcase-cap { margin-top: 18px; gap: 7px; }
 }
 
 /* ============================================================
@@ -720,7 +713,7 @@ footer {
 
     <div class="badges">
         <a class="badge" href="https://apps.apple.com/app/id6759188481">
-            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+            <img src="assets/badge-appstore.svg" alt="Download on the App Store">
         </a>
         <a class="badge-android" href="https://github.com/OpenMinis/OpenMinis/releases" target="_blank" rel="noopener">
             <svg class="ba-icon" width="23" height="23" viewBox="0 0 24 24" fill="none">
@@ -743,13 +736,13 @@ footer {
     <!-- Device showcase -->
     <div class="showcase">
         <div class="phone side left">
-            <img src="screens/shot6.webp" alt="Granular permissions — Health, Calendar, Reminders, Photos, Location" loading="lazy" width="620" height="1320">
+            <img src="screens/home.webp" alt="Open Minis home — recent sessions" loading="eager" width="620" height="1284">
         </div>
         <div class="phone main">
-            <img src="screens/shot4.webp" alt="Minis connected to Reminders, Health, Maps, Calendar and mounted app folders" loading="eager" width="620" height="1320">
+            <img src="screens/chat.webp" alt="Agent running tools inside a conversation" loading="eager" width="620" height="1284">
         </div>
         <div class="phone side right">
-            <img src="screens/shot2.webp" alt="Agent running tool calls in a conversation" loading="lazy" width="620" height="1320">
+            <img src="screens/integrations.webp" alt="Minis connected to Reminders, Health, Maps, Calendar and mounted app folders" loading="lazy" width="620" height="1284">
         </div>
     </div>
     <div class="showcase-cap">
