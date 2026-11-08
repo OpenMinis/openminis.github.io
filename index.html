@@ -288,9 +288,9 @@ code {
 
 .phone {
     position: relative;
-    border-radius: 22px;
+    border-radius: 48px;
     overflow: hidden;
-    background: #000;
+    background: transparent;
     box-shadow:
         0 40px 80px -30px rgba(0,0,0,.85),
         0 0 0 1px rgba(255,255,255,.13),
@@ -332,10 +332,41 @@ code {
     background: var(--green); opacity: .85;
 }
 
+.showcase-dots { display: none; }
 @media (max-width: 900px) {
-    .phone.side { display: none; }
-    .phone.main { width: min(76vw, 290px); margin: 0 auto; }
-    .showcase::before { width: 92vw; height: 420px; }
+    .showcase {
+        justify-content: flex-start;
+        gap: 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: calc((100% - min(76vw, 290px)) / 2);
+        padding: 8px calc((100% - min(76vw, 290px)) / 2) 20px;
+        scrollbar-width: none;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+    }
+    .showcase::-webkit-scrollbar { display: none; }
+    .showcase::before { display: none; }
+    .phone.main, .phone.side {
+        display: block;
+        flex: 0 0 min(76vw, 290px);
+        width: min(76vw, 290px);
+        margin: 0;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        box-shadow: 0 0 0 1px var(--border);
+    }
+    .showcase-dots { display: flex; justify-content: center; gap: 4px; margin: 0 0 8px; }
+    .showcase-dots button {
+        width: 32px; height: 32px; border: 0; border-radius: 50%;
+        background: transparent; cursor: pointer; display: grid; place-items: center;
+    }
+    .showcase-dots button::before {
+        content: ""; width: 7px; height: 7px; border-radius: 50%;
+        background: var(--fg-dim); opacity: .35;
+    }
+    .showcase-dots button[aria-current="true"]::before { background: var(--accent); opacity: 1; }
+    .showcase-dots button:focus-visible { outline: 2px solid var(--accent); }
     .showcase-cap { margin-top: 18px; gap: 7px; }
 }
 
@@ -733,8 +764,8 @@ footer {
         <a href="https://github.com/OpenMinis/OpenMinis" target="_blank" rel="noopener" data-i18n="heroMetaGithub"></a>
     </div>
 
-    <!-- Device showcase -->
-    <div class="showcase">
+    <!-- Device showcase: flat on desktop, swipeable on mobile -->
+    <div class="showcase" id="showcase" tabindex="0">
         <div class="phone side left">
             <img src="screens/home.webp" alt="Open Minis home — recent sessions" loading="eager" width="620" height="1284">
         </div>
@@ -744,6 +775,11 @@ footer {
         <div class="phone side right">
             <img src="screens/integrations.webp" alt="Minis connected to Reminders, Health, Maps, Calendar and mounted app folders" loading="lazy" width="620" height="1284">
         </div>
+    </div>
+    <div class="showcase-dots" role="group" aria-label="Screenshots">
+        <button type="button" aria-label="1 — Home" aria-controls="showcase" aria-current="true"></button>
+        <button type="button" aria-label="2 — Chat" aria-controls="showcase" aria-current="false"></button>
+        <button type="button" aria-label="3 — Integrations" aria-controls="showcase" aria-current="false"></button>
     </div>
     <div class="showcase-cap">
         <span class="lbl" data-i18n="heroOsLabel"></span>
@@ -1716,6 +1752,46 @@ document.querySelectorAll('.card').forEach(card => {
         card.style.setProperty('--my', (e.clientY - r.top) + 'px');
     });
 });
+
+/* ---------- screenshot carousel (no autoplay) ---------- */
+(function () {
+    const track = document.getElementById('showcase');
+    const slides = [...track.querySelectorAll('.phone')];
+    const dots = [...document.querySelectorAll('.showcase-dots button')];
+    const mobile = matchMedia('(max-width: 900px)');
+    let current = 0, pending = false;
+    function sync() {
+        const center = track.getBoundingClientRect().left + track.clientWidth / 2;
+        let best = Infinity;
+        slides.forEach((slide, i) => {
+            const r = slide.getBoundingClientRect();
+            const distance = Math.abs(r.left + r.width / 2 - center);
+            if (distance < best) { best = distance; current = i; }
+        });
+        dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
+        pending = false;
+    }
+    function go(i) {
+        if (!mobile.matches) return;
+        const r = slides[i].getBoundingClientRect();
+        const t = track.getBoundingClientRect();
+        track.scrollTo({
+            left: track.scrollLeft + r.left - t.left - (track.clientWidth - r.width) / 2,
+            behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+        });
+    }
+    dots.forEach((dot, i) => dot.addEventListener('click', () => go(i)));
+    track.addEventListener('scroll', () => {
+        if (!pending) { pending = true; requestAnimationFrame(sync); }
+    }, { passive: true });
+    track.addEventListener('keydown', e => {
+        if (!mobile.matches || !['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+        e.preventDefault();
+        go(Math.max(0, Math.min(slides.length - 1, current + (e.key === 'ArrowRight' ? 1 : -1))));
+    });
+    window.addEventListener('resize', sync);
+    sync();
+})();
 
 /* ---------- init ---------- */
 applyLang(detectLang());
